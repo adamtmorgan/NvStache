@@ -4,9 +4,7 @@ My personal nvim configuration based around lazy.nvim for package management. LS
 
 ## Usage Recommendations
 
----
-
-## I personally use iTerm on Mac with the following settings:
+I personally use iTerm on Mac with the following settings:
 
 - Window
   - Transparency: 4
