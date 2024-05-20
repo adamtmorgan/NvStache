@@ -1,12 +1,12 @@
-### NvAdam - My personal NeoVim configuration.
+# NvAdam - My personal NeoVim configuration.
 
 My personal nvim configuration based around lazy.nvim for package management. LSP, linting, and formatting must be managed separately via Mason.
 
-#### Usage Recommendations
+## Usage Recommendations
 
 ---
 
-##### I personally use iTerm on Mac with the following settings:
+## I personally use iTerm on Mac with the following settings:
 
 - Window
   - Transparency: 4
