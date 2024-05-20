@@ -1,6 +1,37 @@
 # NvAdam - My personal NeoVim configuration.
 
-My personal nvim configuration based around lazy.nvim for package management. LSP, linting, and formatting must be managed separately via Mason.
+## Setup
+
+First, make sure that the contents of this repo are stored in your home directory. On MacOS, this is in `~/.config/nvim`.
+
+LSP, linting, and formatting must be installed separately via Mason. Do this by opening the Mason interface inside of NeoVim by running `:Mason`. Follow the steps to install the following dependencies to support this config:
+
+- LSP
+  - bash-language-server
+  - css-lsp
+  - docker-compose-language-service
+  - dockerfile-language-server
+  - html-lsp
+  - json-lsp
+  - lua-language-server
+  - rust-analyzer
+  - sqlls
+  - tailwindcss-language-server
+  - taplo
+  - flint
+  - typescript-language-server
+  - vetur-vls
+- Linting
+  - eslint_d
+  - htmlhint
+  - ktlint
+  - sqlfluff
+  - stylelint
+  - tflint
+- Formatting
+  - ktlint
+  - prettierd
+  - stylua
 
 ## Usage Recommendations
 
