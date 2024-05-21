@@ -33,7 +33,7 @@ LSP, linting, and formatting must be installed separately via Mason. Do this by 
   - prettierd
   - stylua
 
-## Usage Recommendations
+## Terminal Recommendations
 
 I personally use iTerm on Mac with the following settings:
 
