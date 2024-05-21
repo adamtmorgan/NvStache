@@ -155,6 +155,8 @@ mods = "Command"
 decorations = "Buttonless"
 opacity = 0.94
 blur = true
+dimensions = { columns = 230, lines = 64 }
+dynamic_padding = true
 
 [colors.primary]
 background = "#1c2129"
