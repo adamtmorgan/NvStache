@@ -37,17 +37,21 @@ LSP, linting, and formatting must be installed separately via Mason. Do this by 
 
 I personally use iTerm on Mac with the following settings:
 
-- Window
+- Appearance > Panes
+  - Side Margins: 14
+  - Top & Bottom Margins: 12
+- Profiles > Window
   - Transparency: 4
   - Blur: 64
   - Use Transparency: true
-- Text
+- Profiles > Text
   - Cursor: Box
   - Font Family: JetBrainsMono Nerd Font Medium
   - Font Size: 11
   - Vertical Spacing: 100
   - Horizontal Spacing: 105
-- Colors
+  - Use ligatures: true
+- Profiles > Colors
   - Background: #1c2129
   - Foreground: #dddddd
   - Selection: #c1ddff
