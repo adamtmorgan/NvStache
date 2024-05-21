@@ -46,6 +46,9 @@ bold_italic = { family = "Hack Nerd Font", style = "Regular" }
 size = 12
 offset = { x = 0, y = 1 }
 
+[mouse]
+hide_when_typing = true
+
 [[keyboard.bindings]]
 chars = "\f"
 key = "K"
