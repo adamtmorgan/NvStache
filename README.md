@@ -66,13 +66,29 @@ are found in `vim.options.lua`.
 
 I personally use Alacritty on Mac with the following config:
 
-```toml
+````toml
 [font]
-normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
-bold = { family = "JetBrainsMono Nerd Font", style = "Bold" }
-italic = { family = "JetBrainsMono Nerd Font", style = "Italic" }
+# I use JetBrainsMono Nerd Font. Alacritty renders things quite
+# thin without font smoothing, so I prefer to beef things up by
+# using the bold version with font smoothing disabled.
+# After experimenting, I've found this is the best balance.
+normal = { family = "JetBrainsMono Nerd Font", style = "Bold" }
+bold = { family = "JetBrainsMono Nerd Font", style = "ExtraBold" }
+italic = { family = "JetBrainsMono Nerd Font", style = "Bold Italic" }
+bold_italic = { family = "JetBrainsMono Nerd Font", style = "ExtraBold Italic" }
 size = 12
 offset = { x = 0, y = 0 }
+
+# If font looks blurry in MacOS, font smoothing can be disabled by
+# running the following:
+# ```
+# defaults write org.alacritty AppleFontSmoothing -int 0
+# ```
+#
+# To re-enable, run the following:
+# ```
+# defaults delete org.alacritty AppleFontSmoothing
+# ```
 
 [mouse]
 hide_when_typing = true
@@ -203,4 +219,4 @@ background = "#1c2129"
 [window.padding]
 x = 11
 y = 11
-```
+````
