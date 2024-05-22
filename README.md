@@ -46,15 +46,17 @@ I personally use Alacritty on Mac with the following config:
 
 ```toml
 [font]
-normal = { family = "Hack Nerd Font", style = "Regular" }
-bold = { family = "Hack Nerd Font", style = "Bold" }
-italic = { family = "Hack Nerd Font", style = "Italic" }
-bold_italic = { family = "Hack Nerd Font", style = "Regular" }
+normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
+bold = { family = "JetBrainsMono Nerd Font", style = "Bold" }
+italic = { family = "JetBrainsMono Nerd Font", style = "Italic" }
 size = 12
-offset = { x = 0, y = 1 }
+offset = { x = 0, y = 0 }
 
 [mouse]
 hide_when_typing = true
+
+[terminal]
+osc52 = "CopyPaste"
 
 [[keyboard.bindings]]
 chars = "\f"
@@ -142,6 +144,11 @@ mods = "Command"
 [[keyboard.bindings]]
 action = "CreateNewWindow"
 key = "N"
+mods = "Command"
+
+[[keyboard.bindings]]
+action = "CreateNewTab"
+key = "T"
 mods = "Command"
 
 [[keyboard.bindings]]
