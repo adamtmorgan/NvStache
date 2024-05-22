@@ -89,9 +89,9 @@ return {
 			lspconfig.rust_analyzer.setup({
 				capabilities = capabilities,
 			})
-			lspconfig.terraform_ls.setup({
-				capabilities = capabilities,
-			})
+			--lspconfig.terraform_ls.setup({
+			--	capabilities = capabilities,
+			--})
 
 			-- Setup key bindings for lsp
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
