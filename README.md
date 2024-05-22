@@ -40,6 +40,21 @@ them by visiting the LSP section of the config found in
 disable parts in the Mason, nvim-lspconfig, linting, and formatting
 sections of that file.
 
+## Notable Custom Bindings (or default confirmations)
+
+Keybindings in this config are typically assigned
+alongside their plugin counterparts. Other generic bindings
+are found in `vim.options.lua`.
+
+Clear search - `<leader>/` aka `:noh<CR>`
+Toggle neo-tree - `<C>b`
+Find Files (telescope) - `<leader>ff`
+Find Grep (telescope) - `<leader>fg`
+Find Buffer (telescope) - `<leader>fb`
+Delete(remove) hovered buffer (in telescope Find Buffer results) - `<C>r`
+Telescope Next Result - `<C>j`
+Telescope Previous Result - `<C>k`
+
 ## Terminal Recommendations
 
 I personally use Alacritty on Mac with the following config:

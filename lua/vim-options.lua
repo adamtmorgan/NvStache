@@ -21,6 +21,9 @@ vim.opt.wildignore:append({ "*/node_modules/*" })
 -- Set leader key
 vim.g.mapleader = " "
 
+-- General key maps
+vim.keymap.set("n", "<leader>/", ":noh<CR>", {})
+
 -- Dynamic behavior
 vim.cmd("autocmd InsertEnter * :set norelativenumber")
 vim.cmd("autocmd InsertLeave * :set relativenumber")
