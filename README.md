@@ -7,31 +7,32 @@ First, make sure that the contents of this repo are stored in your home director
 LSP, linting, and formatting must be installed separately via Mason. Do this by opening the Mason interface inside of NeoVim by running `:Mason`. Follow the steps to install the following dependencies to support this config:
 
 - LSP
-  - bash-language-server
-  - css-lsp
-  - docker-compose-language-service
-  - dockerfile-language-server
-  - html-lsp
-  - json-lsp
-  - lua-language-server
-  - rust-analyzer
-  - sqlls
-  - tailwindcss-language-server
-  - taplo
-  - flint
-  - typescript-language-server
-  - vetur-vls
+  - bash-language-server (bash)
+  - css-lsp (css)
+  - docker-compose-language-service (docker-compose)
+  - dockerfile-language-server (dockerfile)
+  - html-lsp (html)
+  - json-lsp (json)
+  - lua-language-server (lua)
+  - pyright (python)
+  - sqlls (sql)
+  - tailwindcss-language-server (tailwind.css)
+  - taplo (toml)
+  - typescript-language-server (typescript)
+  - vetur-vls (vue.js)
 - Linting
-  - eslint_d
-  - htmlhint
-  - ktlint
-  - sqlfluff
-  - stylelint
-  - tflint
+  - eslint_d (javascript)
+  - htmlhint (html)
+  - sqlfluff (sql)
+  - stylelint (css)
+  - tflint (terraform)
 - Formatting
-  - ktlint
+  - ktlint (kotlin formatting)
   - prettierd
   - stylua
+- Hybrid (lsp/lint/format)
+  - rust-analyzer (rust)
+  - ktlint (kotlin linting)
 
 If you don't want to use some of these LSPs, you can disable
 them by visiting the LSP section of the config found in

@@ -19,20 +19,21 @@ return {
 		config = function()
 			require("mason-lspconfig").setup({
 				ensure_installed = {
-					"tsserver",
-					"lua_ls",
-					"rust_analyzer",
-					"cssls",
-					"html",
-					"jsonls",
-					"taplo",
-					"vuels",
-					"sqlls",
-					"dockerls",
-					"docker_compose_language_service",
-					"bashls",
-					"eslint_d",
-					"terraform_ls",
+					"lua_ls", -- lua
+					"tsserver", -- typescript
+					"eslint_d", -- javascript
+					"vuels", -- vue.js
+					"jsonls", -- json
+					"html", -- html
+					"cssls", -- css
+					"pyright", -- python
+					"rust_analyzer", -- rust
+					"taplo", -- toml
+					"sqlls", -- sql
+					"bashls", -- bash
+					"dockerls", -- docker
+					"docker_compose_language_service", -- docker compose
+					"terraform_ls", -- terraform
 				},
 			})
 		end,
@@ -89,6 +90,14 @@ return {
 			lspconfig.rust_analyzer.setup({
 				capabilities = capabilities,
 			})
+			lspconfig.pyright.setup({
+				capabilities = capabilities,
+			})
+
+			-- Terraform requires a separate config
+			-- that I don't have set up right now.
+			-- Check in on this later:
+
 			--lspconfig.terraform_ls.setup({
 			--	capabilities = capabilities,
 			--})
