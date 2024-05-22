@@ -32,6 +32,7 @@ return {
 					"docker_compose_language_service",
 					"bashls",
 					"eslint_d",
+					"terraform_ls",
 				},
 			})
 		end,
@@ -86,6 +87,9 @@ return {
 				capabilities = capabilities,
 			})
 			lspconfig.rust_analyzer.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.terraform_ls.setup({
 				capabilities = capabilities,
 			})
 

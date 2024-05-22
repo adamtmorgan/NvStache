@@ -1,4 +1,10 @@
 return {
+	-- Adds support for documentation generation for
+	-- a variety of languages.
+	-- use <Leader>d to gen docs for the current line.
+	{
+		"kkoomen/vim-doge",
+	},
 	-- Auto adds closing brackets, braces, etc.
 	{
 		"windwp/nvim-autopairs",

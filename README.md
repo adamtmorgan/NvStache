@@ -33,6 +33,12 @@ LSP, linting, and formatting must be installed separately via Mason. Do this by 
   - prettierd
   - stylua
 
+If you don't want to use some of these LSPs, you can disable
+them by visiting the LSP section of the config found in
+`lua/plugins/lsp-config.lua`. Keep in mind that you will need to
+disable parts in the Mason, nvim-lspconfig, linting, and formatting
+sections of that file.
+
 ## Terminal Recommendations
 
 I personally use Alacritty on Mac with the following config:
