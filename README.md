@@ -1,10 +1,10 @@
-# NvAdam - My personal NeoVim configuration.
+# NvAdam - My personal Neovim configuration.
 
 ## Setup
 
 First, make sure that the contents of this repo are stored in your home directory. On MacOS, this is in `~/.config/nvim`.
 
-LSP, linting, and formatting must be installed separately via Mason. Do this by opening the Mason interface inside of NeoVim by running `:Mason`. Follow the steps to install the following dependencies to support this config:
+LSP, linting, and formatting must be installed separately via Mason. Do this by opening the Mason interface inside of Neovim by running `:Mason`. Follow the steps to install the following dependencies to support this config:
 
 - LSP
   - bash-language-server (bash)
