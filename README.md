@@ -71,6 +71,10 @@ are found in `vim.options.lua`.
 I personally use Alacritty on Mac with the following config:
 
 ````toml
+# Adam's Alacritty config. Optimized for use in MacOS.
+
+# ~/.alacritty.toml
+
 [font]
 # I use JetBrainsMono Nerd Font. Alacritty renders things quite
 # thin without font smoothing, so I prefer to beef things up by
