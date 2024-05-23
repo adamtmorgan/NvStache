@@ -40,7 +40,7 @@ them by visiting the LSP section of the config found in
 disable parts in the Mason, nvim-lspconfig, linting, and formatting
 sections of that file.
 
-## Notable Custom Bindings (or default confirmations)
+## Notable Custom Bindings and Features
 
 Keybindings in this config are typically assigned
 alongside their plugin counterparts. Other generic bindings
@@ -61,6 +61,10 @@ are found in `vim.options.lua`.
 - Telescope Next Result - `<C>j`
 
 - Telescope Previous Result - `<C>k`
+
+- Preview `.md` files in browser - `:MarkdownPreview`
+
+- Stop Previewing `.md` files in browser - `:MarkdownPreviewStop`
 
 ## Terminal Recommendations
 
