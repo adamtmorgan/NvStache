@@ -35,6 +35,8 @@ return {
 					"docker_compose_language_service", -- docker compose
 					"terraform_ls", -- terraform
 					"graphql", -- graphql
+					"glsl_analyzer", -- webgl
+					"wgsl_analyzer", -- webgpu
 				},
 			})
 		end,
@@ -95,6 +97,12 @@ return {
 				capabilities = capabilities,
 			})
 			lspconfig.graphql.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.glsl_analyzer.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.wgsl_analyzer.setup({
 				capabilities = capabilities,
 			})
 
