@@ -46,21 +46,32 @@ Keybindings in this config are typically assigned
 alongside their plugin counterparts. Other generic bindings
 are found in `vim.options.lua`.
 
-- Clear search - `<leader>/` aka `:noh<CR>`
+Also note that ctag bindings are overwritten in this config.
+This is because this config relies on LSPs instead.
 
-- Toggle neo-tree - `<C>b`
+- New Tab - `<C-t>n` (normal mode)
 
-- Find Files (telescope) - `<leader>ff`
+- Delete Tab - `<C-t>d` (normal mode)
 
-- Find Grep (telescope) - `<leader>fg`
+- Next tab - `<C-]>` (normal mode)
 
-- Find Buffer (telescope) - `<leader>fb`
+- Previous tab - `<C-[>` (normal mode)
 
-- Delete(remove) hovered buffer (in telescope Find Buffer results) - `<C>r`
+- Clear search - `<leader>/` aka `:noh<CR>` (normal mode)
 
-- Telescope Next Result - `<C>j`
+- Toggle neo-tree - `<C-b>` (normal mode)
 
-- Telescope Previous Result - `<C>k`
+- Find Files (telescope) - `<leader>ff` (normal mode)
+
+- Find Grep (telescope) - `<leader>fg` (normal mode)
+
+- Find Buffer (telescope) - `<leader>fb` (normal mode)
+
+- Delete(remove) hovered buffer - `<C>r` (in telescope Find Buffer results)
+
+- Telescope Next Result - `<C-j>` (in telescope window)
+
+- Telescope Previous Result - `<C-k>` (in telescope window)
 
 - Preview `.md` files in browser - `:MarkdownPreview`
 
