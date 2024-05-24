@@ -34,6 +34,7 @@ return {
 					"dockerls", -- docker
 					"docker_compose_language_service", -- docker compose
 					"terraform_ls", -- terraform
+					"graphql", -- graphql
 				},
 			})
 		end,
@@ -91,6 +92,9 @@ return {
 				capabilities = capabilities,
 			})
 			lspconfig.pyright.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.graphql.setup({
 				capabilities = capabilities,
 			})
 
