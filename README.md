@@ -28,8 +28,8 @@ LSP, linting, and formatting must be installed separately via Mason. Do this by 
   - tflint (terraform)
 - Formatting
   - ktlint (kotlin formatting)
-  - prettierd
-  - stylua
+  - prettierd (formatting js, css, ts, and many others)
+  - stylua (lua formatting)
 - Hybrid (lsp/lint/format)
   - rust-analyzer (rust)
   - ktlint (kotlin linting)
@@ -73,9 +73,37 @@ This is because this config relies on LSPs instead.
 
 - Telescope Previous Result - `<C-k>` (in telescope window)
 
+- Git Blake Toggle - `:BlameToggle`
+
 - Preview `.md` files in browser - `:MarkdownPreview`
 
 - Stop Previewing `.md` files in browser - `:MarkdownPreviewStop`
+
+## A Note on Tmux
+
+Tmux is my preferred window management utility. I really use it mostly
+for managing tabs(windows) since Alacritty (more on that below) doesn't
+have that built in like some other terminals (iTerm, for example). It
+also has a plugin for saving and restoring sessions (tmux-resurrect), which is huge if
+you rely on multiple windows being open for your workfor and, for example
+have multiple projects open in Neovim. My workflow often times ends up
+having many windows open. For example:
+
+- Frontend dev server running
+
+- Backend server running
+
+- Frontend project open in Neovim
+
+- Backend project open in Neovim
+
+- Another one or two windows for general management
+
+Using Tmux alongside tmux-resurrect is a huge workflow enhancement for
+me since I can set up multiple windows, each named with their purpose
+that persist even through system restarts. See my other configuration
+repo, [workspace-configs](https://github.com/adamtmorgan/workspace-configs),
+for details on how I configure tmux, oh-my-zsh, Alacritty, and (maybe) more.
 
 ## Terminal Recommendations
 
