@@ -51,6 +51,8 @@ are found in `vim.options.lua`.
 Also note that ctag bindings are overwritten in this config.
 This is because this config relies on LSPs instead.
 
+- `<leader>` = `space`
+
 - New Tab - `<C-t>n` (normal mode)
 
 - Delete Tab - `<C-t>d` (normal mode)
