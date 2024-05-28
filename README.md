@@ -4,7 +4,14 @@
 
 ## Setup
 
-First, make sure that the contents of this repo are stored in your home directory. On MacOS, this is in `~/.config/nvim`.
+The contents of this repo will eventually live in your `~/.config/nvim` directory (or wherever you store your config). To start, I'd recommend cloning this repo into your `~/.config` directory, backing up your old config (if there is one), and then renaming the `NvAdam` directory to `nvim`. This way if you want to pull an update it's a simple `git pull` and you're good to go. This process might look something like this, depending on where you choose to store your config:
+
+```bash
+cd ~/.config
+git clone https://github.com/adamtmorgan/NvAdam.git
+mv nvim nvim_bak
+mv NvAdam nvim
+```
 
 LSP, linting, and formatting must be installed separately via Mason. Do this by opening the Mason interface inside of Neovim by running `:Mason`. Follow the steps to install the following dependencies to support this config:
 
