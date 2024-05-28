@@ -1,5 +1,7 @@
 # NvAdam - My personal Neovim configuration.
 
+![screenshot](screenshot.png)
+
 ## Setup
 
 First, make sure that the contents of this repo are stored in your home directory. On MacOS, this is in `~/.config/nvim`.
