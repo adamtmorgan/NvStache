@@ -1,6 +1,6 @@
 # NvAdam - My personal Neovim configuration.
 
-![screenshot](screenshot.png)
+![screenshot](screenshot0.png)
 
 ## Setup
 
