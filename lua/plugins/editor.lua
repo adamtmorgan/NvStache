@@ -1,4 +1,12 @@
 return {
+	-- Adds comment formatting features
+	{
+		"numToStr/Comment.nvim",
+		opts = {
+			-- add any options here
+		},
+		lazy = false,
+	},
 	-- Adds support for documentation generation for
 	-- a variety of languages.
 	-- use <Leader>d to gen docs for the current line.
