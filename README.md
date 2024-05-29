@@ -4,6 +4,35 @@
 
 ## Prerequisites
 
+LSP, linting, and formatting features in this config depend on Nodejs. I recommend installing Node via [NVM](https://github.com/nvm-sh/nvm).
+
+I use MacOS and Homebrew. If you're on another system, you will need to follow an alternate method of installation.
+
+```bash
+brew install nvm
+```
+
+Then add the following to your shell profile (most likely `~/.zshrc`):
+
+```bash
+  export NVM_DIR="$HOME/.nvm"
+    [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" # This loads nvm
+    [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
+```
+
+Then install the latest version of Node:
+
+```bash
+nvim install node
+```
+
+Confirm success by running:
+
+```bash
+node --version
+npm --version
+```
+
 ## Setup
 
 The contents of this repo will eventually live in your `~/.config/nvim` directory (or wherever you store your config). To start, I'd recommend cloning this repo into your `~/.config` directory, backing up your old config (if there is one), and then renaming the `NvAdam` directory to `nvim`. This way if you want to pull an update it's a simple `git pull` and you're good to go. This process might look something like this, depending on where you choose to store your config:
