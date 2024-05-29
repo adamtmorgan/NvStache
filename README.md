@@ -64,9 +64,9 @@ This is because this config relies on LSPs instead.
 
 - Delete Tab - `<C-t>d` (normal mode)
 
-- Next tab - `<C-]>` (normal mode)
+- Next tab - `<C-t>l` (normal mode)
 
-- Previous tab - `<C-[>` (normal mode)
+- Previous tab - `<C-t>h` (normal mode)
 
 - Clear search - `<leader>/` aka `:noh<CR>` (normal mode)
 
