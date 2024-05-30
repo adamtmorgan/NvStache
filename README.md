@@ -23,7 +23,7 @@ Then add the following to your shell profile (most likely `~/.zshrc`):
 Then install the latest version of Node:
 
 ```bash
-nvim install node
+nvm install node
 ```
 
 Confirm success by running:
