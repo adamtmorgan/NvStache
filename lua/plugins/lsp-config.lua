@@ -38,7 +38,6 @@ return {
 					"glsl_analyzer", -- webgl
 					"wgsl_analyzer", -- webgpu
 					"bashls", -- bash
-					"tflint", -- terraform
 				},
 			})
 		end,
