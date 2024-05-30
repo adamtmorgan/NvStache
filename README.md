@@ -64,7 +64,6 @@ You shouldn't have to manually install LSP, linting, and formatting thanks to `e
   - eslint_d (javascript)
   - htmlhint (html)
   - sqlfluff (sql)
-  - stylelint (css)
   - tflint (terraform)
 - Formatting
   - ktlint (kotlin formatting)

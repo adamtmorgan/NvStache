@@ -179,7 +179,6 @@ return {
 				kotlin = { "ktlint" },
 				terraform = { "tflint" },
 				html = { "htmlhint" },
-				css = { "stylelint" },
 				sql = { "sqlfluff" },
 			}
 
