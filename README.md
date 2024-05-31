@@ -2,7 +2,7 @@
 
 ![screenshot](screenshot0.jpg)
 
-## Prerequisites
+## External Dependencies
 
 ### Node
 
