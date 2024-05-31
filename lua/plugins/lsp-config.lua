@@ -33,7 +33,7 @@ return {
 					"bashls", -- bash
 					"dockerls", -- docker
 					"docker_compose_language_service", -- docker compose
-					"terraform_ls", -- terraform
+					"terraformls", -- terraform
 					"graphql", -- graphql
 					"glsl_analyzer", -- webgl
 					"wgsl_analyzer", -- webgpu
