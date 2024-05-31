@@ -46,6 +46,8 @@ brew install ripgrep
 
 ## Setup
 
+### Cloning and Moving Config
+
 The contents of this repo will eventually live in your `~/.config/nvim` directory (or wherever you store your config). To start, I'd recommend cloning this repo into your `~/.config` directory, backing up your old config (if there is one), and then renaming the `NvAdam` directory to `nvim`. This way if you want to pull an update it's a simple `git pull` and you're good to go. This process might look something like this, depending on where you choose to store your config:
 
 ```bash
@@ -54,6 +56,15 @@ git clone https://github.com/adamtmorgan/NvAdam.git
 mv nvim nvim_bak
 mv NvAdam nvim
 ```
+
+### One-Time Setups
+
+This config uses [vim-doge](https://github.com/kkoomen/vim-doge) for documentation generation in comments. The first time you run Neovim, you'll have to run the following to install it (per the vim-doge README):
+
+Open Neovim and run:
+`:call doge#install()`
+
+### LSP, Linting, and Formatting Servers
 
 You shouldn't have to manually install LSP, linting, and formatting thanks to `ensure-installed` in Mason, but just in case, I have listed the Mason dependencies here. You can manually manage these by opening the Mason interface inside of Neovim by running `:Mason`. The following are all supported in this config:
 
