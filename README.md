@@ -4,6 +4,8 @@
 
 ## Prerequisites
 
+### Node
+
 LSP, linting, and formatting features in this config depend on Nodejs. I recommend installing Node via [NVM](https://github.com/nvm-sh/nvm).
 
 I use MacOS and Homebrew. If you're on another system, you will need to follow an alternate method of installation.
@@ -31,6 +33,15 @@ Confirm success by running:
 ```bash
 node --version
 npm --version
+```
+
+### ripgrep
+
+[ripgrep](https://github.com/BurntSushi/ripgrep) is used for live-grep features (searches contents of files in the workspace path). For this feature to work
+properly in [telescope](https://github.com/nvim-telescope/telescope.nvim), it must be installed separately.
+
+```bash
+brew install ripgrep
 ```
 
 ## Setup
