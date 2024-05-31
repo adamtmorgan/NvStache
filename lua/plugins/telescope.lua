@@ -19,6 +19,11 @@ return {
 			require("telescope").setup({
 				-- Override some mappings
 				defaults = {
+					-- Ignore certain dirs
+					file_ignore_patterns = {
+						"node_modules",
+						".git",
+					},
 					-- Format the search results to display the file name first
 					-- followed by the full file path.
 					path_display = function(ops, path)
