@@ -19,6 +19,11 @@ return {
 			require("telescope").setup({
 				-- Override some mappings
 				defaults = {
+					layout_config = {
+						width = 0.88,
+						height = 0.88,
+						preview_width = 0.49,
+					},
 					-- Ignore certain dirs
 					file_ignore_patterns = {
 						"node_modules",
