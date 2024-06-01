@@ -1,4 +1,4 @@
-# NvAdam - My personal Neovim configuration.
+# NvStache - My personal Neovim configuration.
 
 ![screenshot](screenshot0.jpg)
 
@@ -48,13 +48,13 @@ brew install ripgrep
 
 ### Cloning and Moving Config
 
-The contents of this repo will eventually live in your `~/.config/nvim` directory (or wherever you store your config). To start, I'd recommend cloning this repo into your `~/.config` directory, backing up your old config (if there is one), and then renaming the `NvAdam` directory to `nvim`. This way if you want to pull an update it's a simple `git pull` and you're good to go. This process might look something like this, depending on where you choose to store your config:
+The contents of this repo will eventually live in your `~/.config/nvim` directory (or wherever you store your config). To start, I'd recommend cloning this repo into your `~/.config` directory, backing up your old config (if there is one), and then renaming the `NvStache` directory to `nvim`. This way if you want to pull an update it's a simple `git pull` and you're good to go. This process might look something like this, depending on where you choose to store your config:
 
 ```bash
 cd ~/.config
-git clone https://github.com/adamtmorgan/NvAdam.git
+git clone https://github.com/adamtmorgan/NvStache.git
 mv nvim nvim_bak
-mv NvAdam nvim
+mv NvStache nvim
 ```
 
 ### One-Time Setups
