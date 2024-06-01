@@ -1,6 +1,6 @@
 # NvStache - My personal Neovim configuration.
 
-![screenshot](screenshot0.jpg)
+![screenshot](screenshot.jpg)
 
 ## External Dependencies
 
