@@ -36,6 +36,11 @@ vim.keymap.set("n", "<C-t>c", ":tabclose<CR>", { noremap = true, silent = true }
 vim.keymap.set("n", "<C-t>l", ":+tabnext<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-t>h", ":-tabnext<CR>", { noremap = true, silent = true })
 
+-- Switch between buffers quickly
+vim.keymap.set("n", "<leader>l", ":bnext<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>h", ":bprevious<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>x", ":bdelete<CR>", { noremap = true, silent = true })
+
 ------------------------------------------
 -- Dynamic behavior (auto commands)
 ------------------------------------------

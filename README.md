@@ -120,6 +120,12 @@ This is because this config relies on LSPs instead.
 
 - Previous tab - `<C-t>h` (normal mode)
 
+- Next buffer - `<leader>l` (normal mode)
+
+- Previous buffer - `<leader>h` (normal mode)
+
+- Delete buffer - `<leader>x` (normal mode)
+
 - Clear search - `<leader>/` aka `:noh<CR>` (normal mode)
 
 - Toggle neo-tree - `<C-b>` (normal mode)
