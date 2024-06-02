@@ -31,13 +31,14 @@ return {
 						hide_filename_extension = false, -- Don't hide file extensions
 						show_modified_status = true, -- Show if the file is modified
 
-						mode = 0, -- 0: Shows buffer name
+						mode = 0,
+						-- 0: Shows buffer name
 						-- 1: Shows buffer index
 						-- 2: Shows buffer name + buffer index
 						-- 3: Shows buffer number
 						-- 4: Shows buffer name + buffer number
 
-						max_length = vim.o.columns * 2 / 3, -- Maximum width of buffers component
+						max_length = vim.o.columns * 2 / 3, -- Maximum width  buffers component
 						filetype_names = {
 							TelescopePrompt = "Telescope",
 							dashboard = "Dashboard",

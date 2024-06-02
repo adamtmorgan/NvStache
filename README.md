@@ -150,6 +150,8 @@ This is because this config relies on LSPs instead.
 
 - Comment line toggle - `gcc` in normal mode. `gc` in visual mode.
 
+- Uses default [leap.nvim](https://github.com/ggandor/leap.nvim) bindings for quick navigation in view.
+
 ## A Note on Workflow
 
 This Neovim config (for better or worse) has been optimized to work with a set of specific tools (notably Tmux and Alacritty, but others as well). To see details on how I've configured other pieces of my workflow, visit my [dotfiles](https://github.com/adamtmorgan/dotfiles) repository where you can see terminal enhancement configs, recommended MacOS apps to boost productivity, among other things.
