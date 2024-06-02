@@ -46,6 +46,29 @@ return {
 					{ name = "buffer" },
 				}),
 			})
+
+			-- Added to support cmp-cmdline
+			-- Use buffer source for `/` (search) and `?` (reverse search).
+			cmp.setup.cmdline({ "/", "?" }, {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = {
+					{ name = "buffer" },
+				},
+			})
+
+			-- Use cmdline & path source for ':' (command line).
+			cmp.setup.cmdline(":", {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = cmp.config.sources({
+					{ name = "path" },
+				}, {
+					{ name = "cmdline" },
+				}),
+			})
+
+			-- Add key bindings for command mode
+			vim.keymap.set("c", "<C-j>", cmp.mapping.select_next_item(), {})
+			vim.keymap.set("c", "<C-k>", cmp.mapping.select_prev_item(), {})
 		end,
 	},
 	--------------------------------------------------
@@ -63,5 +86,13 @@ return {
 			"saadparwaiz1/cmp_luasnip",
 			"rafamadriz/friendly-snippets",
 		},
+	},
+
+	--------------------------------------------------
+	-- Supplies command line and search completions
+	-- sources for nvim-cpm.
+	--------------------------------------------------
+	{
+		"hrsh7th/cmp-cmdline",
 	},
 }
