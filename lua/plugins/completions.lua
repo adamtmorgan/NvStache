@@ -66,7 +66,7 @@ return {
 				}),
 			})
 
-			-- Add key bindings for command mode
+			-- Add key bindings for navigation completions in command mode
 			vim.keymap.set("c", "<C-j>", cmp.mapping.select_next_item(), {})
 			vim.keymap.set("c", "<C-k>", cmp.mapping.select_prev_item(), {})
 		end,
