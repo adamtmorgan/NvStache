@@ -150,7 +150,7 @@ This is because this config relies on LSPs instead.
 
 - Comment line toggle - `gcc` in normal mode. `gc` in visual mode.
 
-- Uses default [leap.nvim](https://github.com/ggandor/leap.nvim) bindings for quick navigation in view.
+- Uses default [flash.nvim](https://github.com/folke/flash.nvim) bindings for quick navigation in view.
 
 ## A Note on Workflow
 
