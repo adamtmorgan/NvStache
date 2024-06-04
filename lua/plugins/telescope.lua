@@ -20,9 +20,9 @@ return {
 				-- Override some mappings
 				defaults = {
 					layout_config = {
-						width = 0.88,
-						height = 0.88,
-						preview_width = 0.49,
+						width = 0.85,
+						height = 0.85,
+						--preview_width = 0.5,
 					},
 					-- Ignore certain dirs
 					file_ignore_patterns = {
@@ -31,10 +31,10 @@ return {
 					},
 					-- Format the search results to display the file name first
 					-- followed by the full file path.
-					path_display = function(ops, path)
-						local tail = require("telescope.utils").path_tail(path)
-						return string.format("%s - %s", tail, path)
-					end,
+					-- path_display = function(ops, path)
+					-- 	local tail = require("telescope.utils").path_tail(path)
+					-- 	return string.format("%s - %s", tail, path)
+					-- end,
 					mappings = {
 						i = {
 							["<C-j>"] = actions.move_selection_next,
