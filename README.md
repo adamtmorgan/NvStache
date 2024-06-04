@@ -126,6 +126,8 @@ This is because this config relies on LSPs instead.
 
 - Delete buffer - `<leader>x` (normal mode)
 
+- Delete all buffers except current - `:Clean` or `<leader>!`
+
 - Clear search - `<leader>/` aka `:noh<CR>` (normal mode)
 
 - Toggle neo-tree - `<C-b>` (normal mode)
