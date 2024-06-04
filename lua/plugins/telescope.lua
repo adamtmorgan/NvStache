@@ -20,9 +20,19 @@ return {
 				-- Override some mappings
 				defaults = {
 					layout_config = {
-						width = 0.85,
-						height = 0.85,
-						--preview_width = 0.5,
+						horizontal = {
+							width = 0.85,
+							height = 0.85,
+							preview_width = 0.5,
+						},
+						vertical = {
+							width = 0.85,
+							height = 0.85,
+						},
+						center = {
+							width = 0.8,
+							height = 0.4,
+						},
 					},
 					-- Ignore certain dirs
 					file_ignore_patterns = {
@@ -35,6 +45,7 @@ return {
 					-- 	local tail = require("telescope.utils").path_tail(path)
 					-- 	return string.format("%s - %s", tail, path)
 					-- end,
+					path_display = { "smart" },
 					mappings = {
 						i = {
 							["<C-j>"] = actions.move_selection_next,
@@ -48,6 +59,11 @@ return {
 					file_previewer = require("telescope.previewers").vim_buffer_cat.new,
 					grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
 					qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
+				},
+				pickers = {
+					lsp_code_actions = {
+						theme = "cursor",
+					},
 				},
 				extensions = {
 					["ui-select"] = {
