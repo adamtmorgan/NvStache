@@ -12,6 +12,13 @@ vim.opt.cmdheight = 0
 vim.opt.scrolloff = 50
 
 ------------------------------------------
+-- Visual behavior
+------------------------------------------
+
+-- Makes it so status bar is shared across panes
+vim.opt.laststatus = 3
+
+------------------------------------------
 -- Ignore certain dirs in search
 ------------------------------------------
 
