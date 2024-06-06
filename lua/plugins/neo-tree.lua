@@ -9,18 +9,38 @@ return {
 	},
 	config = function()
 		require("neo-tree").setup({
+			sources = {
+				"filesystem",
+				"buffers",
+				"git_status",
+			},
 			default_component_configs = {
 				indent = {
 					with_markers = true,
+					expander_collapsed = "",
+					expander_expanded = "",
+				},
+				icon = {
+					folder_closed = "",
+					folder_open = "",
+					folder_empty = "󰜌",
+					-- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
+					-- then these will never be used.
+					default = "*",
+					highlight = "NeoTreeFileIcon",
 				},
 			},
 			filesystem = {
 				popup_border_style = "rounded",
 				enable_git_status = true,
+				enable_diagnostics = true,
 				filtered_items = {
 					visible = true,
 					hide_dotfiles = false,
 					hide_gitignored = true,
+					never_show = { -- remains hidden even if visible is toggled to true, this overrides always_show
+						".DS_Store",
+					},
 				},
 				window = {
 					mappings = {
