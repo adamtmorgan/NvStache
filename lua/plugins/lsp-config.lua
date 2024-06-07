@@ -21,7 +21,7 @@ return {
 				ensure_installed = {
 					"lua_ls", -- lua
 					"tsserver", -- typescript
-					"eslint_d", -- javascript
+					"eslint", -- javascript
 					"vuels", -- vue.js
 					"jsonls", -- json
 					"html", -- html
@@ -62,6 +62,9 @@ return {
 				capabilities = capabilities,
 			})
 			lspconfig.tsserver.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.eslint.setup({
 				capabilities = capabilities,
 			})
 			lspconfig.cssls.setup({
@@ -174,10 +177,7 @@ return {
 			local lint = require("lint")
 
 			lint.linters_by_ft = {
-				javascript = { "eslint_d" },
-				--typescript = { "eslint_d " },
-				javascriptreact = { "eslint_d" },
-				--typescriptreact = { "eslint_d" },
+				-- ESLint not needed since it's included as LSP.
 				kotlin = { "ktlint" },
 				terraform = { "tflint" },
 				html = { "htmlhint" },
