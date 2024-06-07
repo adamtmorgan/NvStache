@@ -26,6 +26,7 @@ return {
 					"jsonls", -- json
 					"html", -- html
 					"cssls", -- css
+					"intelephense", -- php
 					"pyright", -- python
 					"rust_analyzer", -- rust
 					"taplo", -- toml
@@ -71,6 +72,9 @@ return {
 				capabilities = capabilities,
 			})
 			lspconfig.html.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.intelephense.setup({
 				capabilities = capabilities,
 			})
 			lspconfig.jsonls.setup({
