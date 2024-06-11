@@ -35,13 +35,14 @@ node --version
 npm --version
 ```
 
-### ripgrep
+### ripgrep and fd
 
-[ripgrep](https://github.com/BurntSushi/ripgrep) is used for live-grep features (searches contents of files in the workspace path). For this feature to work
-properly in [telescope](https://github.com/nvim-telescope/telescope.nvim), it must be installed separately.
+This config relies on [ripgrep](https://github.com/BurntSushi/ripgrep) (for live-grep) and [fd](https://github.com/sharkdp/fd) (for file searching).
+They are cli search utilities that will DRASTICALLY increase performance inside of [telescope](https://github.com/nvim-telescope/telescope.nvim).
+Install them both separately:
 
 ```bash
-brew install ripgrep
+brew install ripgrep \ fd
 ```
 
 ## Setup

@@ -19,6 +19,22 @@ return {
 			require("telescope").setup({
 				-- Override some mappings
 				defaults = {
+					-- Use ripgrep (installed separately) as the live-grep source.
+					vimgrep_arguments = {
+						"rg",
+						"--color=never",
+						"--no-heading",
+						"--with-filename",
+						"--line-number",
+						"--column",
+						"--smart-case",
+					},
+					-- Use fd (installed separately) as the file finding source.
+					find_command = { "fd", "--type", "f", "--hidden", "--follow", "--exclude", ".git" },
+					-- Cache results to make things snappier
+					cache_picker = {
+						num_pickers = 10,
+					},
 					layout_config = {
 						horizontal = {
 							width = 0.85,
@@ -38,6 +54,8 @@ return {
 					file_ignore_patterns = {
 						"node_modules",
 						".git",
+						"dist",
+						"build",
 					},
 					-- Format the search results to display the file name first
 					-- followed by the full file path.
