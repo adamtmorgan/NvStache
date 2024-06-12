@@ -39,7 +39,7 @@ return {
 						horizontal = {
 							width = 0.85,
 							height = 0.85,
-							preview_width = 0.5,
+							preview_width = 0.4,
 						},
 						vertical = {
 							width = 0.85,
@@ -64,7 +64,10 @@ return {
 					-- 	local tail = require("telescope.utils").path_tail(path)
 					-- 	return string.format("%s - %s", tail, path)
 					-- end,
-					path_display = { "smart" },
+					--
+					-- NOTE: Disabled for now, as it had a huge impact on performance
+					-- in larger projects. Big sad... will stay this way for now.
+					-- path_display = { "smart" },
 					mappings = {
 						i = {
 							["<C-j>"] = actions.move_selection_next,
@@ -88,11 +91,18 @@ return {
 					},
 					find_files = {
 						-- find_command = { "fd", "--type", "f", "--hidden", "--follow", "--exclude", ".git" },
+						-- theme = "dropdown",
 						max_results = 50,
 						find_command = {
 							"fd",
 							"--type",
 							"f",
+							"--hidden",
+							"--follow",
+
+							-- Exclusions
+							"--exclude",
+							".git",
 							"--exclude",
 							"*.png",
 							"--exclude",
