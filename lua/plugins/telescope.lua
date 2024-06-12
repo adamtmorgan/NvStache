@@ -39,7 +39,7 @@ return {
 						horizontal = {
 							width = 0.85,
 							height = 0.85,
-							preview_width = 0.4,
+							preview_width = 0.45,
 						},
 						vertical = {
 							width = 0.85,
