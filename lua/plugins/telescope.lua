@@ -19,6 +19,7 @@ return {
 			require("telescope").setup({
 				-- Override some mappings
 				defaults = {
+					max_results = 50,
 					-- Use ripgrep (installed separately) as the live-grep source.
 					vimgrep_arguments = {
 						"rg",
@@ -29,8 +30,7 @@ return {
 						"--column",
 						"--smart-case",
 					},
-					-- Use fd (installed separately) as the file finding source.
-					find_command = { "fd", "--type", "f", "--hidden", "--follow", "--exclude", ".git" },
+
 					-- Cache results to make things snappier
 					cache_picker = {
 						num_pickers = 10,
@@ -56,6 +56,7 @@ return {
 						".git",
 						"dist",
 						"build",
+						"fontawesome*",
 					},
 					-- Format the search results to display the file name first
 					-- followed by the full file path.
@@ -81,6 +82,66 @@ return {
 				pickers = {
 					lsp_code_actions = {
 						theme = "cursor",
+					},
+					live_grep = {
+						max_results = 50,
+					},
+					find_files = {
+						-- find_command = { "fd", "--type", "f", "--hidden", "--follow", "--exclude", ".git" },
+						max_results = 50,
+						find_command = {
+							"fd",
+							"--type",
+							"f",
+							"--exclude",
+							"*.png",
+							"--exclude",
+							"*.jpg",
+							"--exclude",
+							"*.jpeg",
+							"--exclude",
+							"*.gif",
+							"--exclude",
+							"*.bmp",
+							"--exclude",
+							"*.tiff",
+							"--exclude",
+							"*.ico",
+							"--exclude",
+							"*.mp4",
+							"--exclude",
+							"*.mp3",
+							"--exclude",
+							"*.wav",
+							"--exclude",
+							"*.ogg",
+							"--exclude",
+							"*.flac",
+							"--exclude",
+							"*.pdf",
+							"--exclude",
+							"*.doc",
+							"--exclude",
+							"*.docx",
+							"--exclude",
+							"*.ppt",
+							"--exclude",
+							"*.pptx",
+							"--exclude",
+							"*.xls",
+							"--exclude",
+							"*.xlsx",
+							"--exclude",
+							"*.zip",
+							"--exclude",
+							"*.tar",
+							"--exclude",
+							"*.gz",
+							"--exclude",
+							"*.rar",
+							"--exclude",
+							"*.7z",
+						},
 					},
 				},
 				extensions = {

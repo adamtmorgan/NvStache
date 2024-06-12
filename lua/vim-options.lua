@@ -34,7 +34,6 @@ vim.g.mapleader = " "
 
 -- Allow clipboard copy/paste
 vim.keymap.set("v", "<C-c>", '"+y', { noremap = true, silent = true })
-vim.keymap.set("n", "<C-v>", '"+p', { noremap = true, silent = true })
 
 -- Clear search
 vim.keymap.set("n", "<leader>/", ":noh<CR>", {})
