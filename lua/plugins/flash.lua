@@ -3,6 +3,7 @@ return {
 	event = "VeryLazy",
 	---@type Flash.Config
 	opts = {
+		update_markers_on_input = false,
 		label = {
 			uppercase = true,
 		},
