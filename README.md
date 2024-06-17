@@ -131,7 +131,9 @@ This is because this config relies on LSPs instead.
 
 - Clear search - `<leader>/` aka `:noh<CR>` (normal mode)
 
-- Toggle neo-tree - `<C-b>` (normal mode)
+- Open CWD in [Oil](https://github.com/stevearc/oil.nvim) - `<leader>o`
+
+- Open most recent buffer directory in [Oil](https://github.com/stevearc/oil.nvim) - `<leader>e`
 
 - Find Files (telescope) - `<leader>ff` (normal mode)
 
