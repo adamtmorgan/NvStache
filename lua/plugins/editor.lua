@@ -49,7 +49,9 @@ return {
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
-		opts = {},
+		opts = {
+			use_treesitter = true,
+		},
 		config = function()
 			local highlight = { "blankLineDim" }
 			local hooks = require("ibl.hooks")
