@@ -64,6 +64,9 @@ return {
 
 			-- setup must be called before loading
 			vim.cmd("colorscheme kanagawa")
+
+			-- Overriding visual mode highlight color to match row highlight
+			vim.api.nvim_set_hl(0, "Visual", { bg = "#363646" })
 		end,
 	},
 }
