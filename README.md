@@ -2,7 +2,7 @@
 
 ![screenshot](screenshot.jpg)
 
-## External Dependencies
+# External Dependencies
 
 ### Node
 
@@ -35,7 +35,9 @@ node --version
 npm --version
 ```
 
-### ripgrep and fd
+## Fast Search!
+
+#### ripgrep and fd
 
 This config relies on [ripgrep](https://github.com/BurntSushi/ripgrep) (for live-grep) and [fd](https://github.com/sharkdp/fd) (for file searching).
 They are cli search utilities that will DRASTICALLY increase performance inside of [telescope](https://github.com/nvim-telescope/telescope.nvim).
@@ -45,7 +47,13 @@ Install them both separately:
 brew install ripgrep \ fd
 ```
 
-## Setup
+#### `make` and `gcc` or `clang`
+
+This config also uses [telescope-fzf-native](https://github.com/nvim-telescope/telescope-fzf-native.nvim) for enhanced, native-speed fuzzy finding search results.
+ripgrep and fd (mentioned above) are great for actually retrieiving the search results, but fzf will greatly speed up the filtering down and ranking of those results so
+we see the most relevant results first, and quickly! This plugin is written in C and compiled for best performance. Lazy will actually build this natively for your platform using `make`, hence the dependency.
+
+# Setup
 
 ### Cloning and Moving Config
 
@@ -57,6 +65,8 @@ git clone https://github.com/adamtmorgan/NvStache.git
 mv nvim nvim_bak
 mv NvStache nvim
 ```
+
+Alternatively, you can symlink the directory to your `.config` folder as well, and then store the base repo wherever you please.
 
 ### One-Time Setups
 
