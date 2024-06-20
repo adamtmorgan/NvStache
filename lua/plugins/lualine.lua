@@ -32,7 +32,13 @@ return {
 					},
 				},
 				lualine_b = {
-					"branch",
+					{
+						"branch",
+						separator = {
+							left = section_separator_left,
+							right = "",
+						},
+					},
 				},
 				lualine_c = {
 					{
@@ -52,11 +58,10 @@ return {
 						filetype_names = {
 							TelescopePrompt = "Telescope",
 							dashboard = "Dashboard",
-							packer = "Packer",
 							fzf = "FZF",
 							alpha = "Alpha",
 						},
-						use_mode_colors = true,
+						-- use_mode_colors = true,
 						buffers_color = {
 							active = "lualine_a_normal", -- Color for active buffer
 							inactive = { fg = "#8DA3CF", bg = "#323948" }, -- Color for inactive buffer
