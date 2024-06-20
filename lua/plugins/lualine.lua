@@ -7,11 +7,18 @@ return {
 		lualine_theme.normal.c.bg = "none"
 		lualine_theme.inactive.c.bg = "none"
 
+		local section_separator_left = ""
+		local section_separator_right = ""
+		local component_separator_left = ""
+		local component_separator_right = ""
+
 		require("lualine").setup({
 			options = {
 				icons_enabled = true,
 				-- theme = "auto", -- You can change this to any theme you prefer
 				theme = lualine_theme,
+				-- section_separators = { left = section_separator_left, right = section_separator_right },
+				-- componenet_separators = { left = component_separator_left, right = component_separator_right },
 			},
 			sections = {
 				lualine_a = {
@@ -21,9 +28,12 @@ return {
 							local mode_icon = "󱗞 " -- Stache icon for memes
 							return mode_icon .. str
 						end,
+						separator = { left = section_separator_left, right = section_separator_right },
 					},
 				},
-				lualine_b = { "branch" },
+				lualine_b = {
+					"branch",
+				},
 				lualine_c = {
 					{
 						"buffers",
@@ -56,11 +66,17 @@ return {
 							-- alternate_file = "#", -- Text to show to identify the alternate file
 							directory = "", -- Text to show when the buffer is a directory
 						},
+						separator = { right = section_separator_right },
 					},
 				},
 				lualine_x = { "diff", "encoding", "filetype" },
 				lualine_y = { "progress" },
-				lualine_z = { "location" },
+				lualine_z = {
+					{
+						"location",
+						separator = { left = section_separator_left, right = section_separator_right },
+					},
+				},
 			},
 			tabline = {},
 			extensions = {},
