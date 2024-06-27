@@ -21,6 +21,11 @@ return {
 			use_default_keymaps = false,
 			keymaps = {
 				["<CR>"] = "actions.select", -- Enter key to open file or directory
+				["<C-v>"] = {
+					"actions.select",
+					opts = { vertical = true },
+					desc = "Open the entry in a vertical split",
+				},
 				["-"] = "actions.parent", -- '-' to go up one directory level
 				["_"] = "actions.open_cwd", -- opens current working dir
 				["q"] = "actions.close", -- 'q' to close the oil window

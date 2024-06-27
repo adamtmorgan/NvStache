@@ -1,5 +1,6 @@
 ------------------------------------------
 vim.cmd("set expandtab")
+vim.cmd("set splitright")
 
 vim.opt.autoindent = true
 vim.opt.smartindent = true
