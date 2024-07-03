@@ -33,7 +33,6 @@ return {
 						"--column",
 						"--smart-case",
 					},
-
 					-- Cache results to make things snappier
 					cache_picker = {
 						num_pickers = 10,
@@ -76,9 +75,11 @@ return {
 							["<C-j>"] = actions.move_selection_next,
 							["<C-k>"] = actions.move_selection_previous,
 							["<C-r>"] = actions.delete_buffer,
+							["<C-s>"] = actions.select_vertical,
 						},
 						n = {
 							["d"] = actions.delete_buffer,
+							["<C-s>"] = actions.select_vertical,
 						},
 					},
 					file_previewer = require("telescope.previewers").vim_buffer_cat.new,

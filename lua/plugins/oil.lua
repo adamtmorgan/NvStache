@@ -21,16 +21,17 @@ return {
 			use_default_keymaps = false,
 			keymaps = {
 				["<CR>"] = "actions.select", -- Enter key to open file or directory
-				["<C-v>"] = {
+				["<C-s>"] = {
 					"actions.select",
 					opts = { vertical = true },
 					desc = "Open the entry in a vertical split",
 				},
 				["-"] = "actions.parent", -- '-' to go up one directory level
 				["_"] = "actions.open_cwd", -- opens current working dir
-				["q"] = "actions.close", -- 'q' to close the oil window
-				["<Esc>"] = "actions.close", -- 'Escape' to close the oil window without saving changes
-				["<leader>o"] = "actions.close", -- 'Escape' to close the oil window without saving changes
+				["q"] = { callback = "actions.close", mode = "n" }, -- 'q' to close the oil window
+				["<Esc>"] = { callback = "actions.close", mode = "n" }, -- 'Escape' to close the oil window without saving changes
+				["<leader>o"] = { callback = "actions.close", mode = "n" }, -- 'Escape' to close the oil window without saving changes
+				["<leader>e"] = { callback = "actions.close", mode = "n" }, -- 'Escape' to close the oil window without saving changes
 				["<C-r>"] = "actions.refresh", -- Ctrl+r to refresh the directory
 			},
 			view_options = {
