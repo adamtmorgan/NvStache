@@ -165,6 +165,14 @@ return {
 			vim.api.nvim_set_keymap("n", "gd", '<cmd>lua require("telescope.builtin").lsp_definitions()<CR>', {})
 			vim.api.nvim_set_keymap("n", "gi", '<cmd>lua require("telescope.builtin").lsp_implementations()<CR>', {})
 			vim.api.nvim_set_keymap("n", "gr", '<cmd>lua require("telescope.builtin").lsp_references()<CR>', {})
+			-- vim.api.nvim_set_keymap("n", "fs", '<cmd>lua require("telescope.builtin").lsp_workspace_symbols()<CR>', {})
+			vim.api.nvim_set_keymap(
+				"n",
+				"fs",
+				'<cmd>lua require("telescope.builtin").lsp_dynamic_workspace_symbols()<CR>',
+				{}
+			)
+			vim.api.nvim_set_keymap("n", "fS", '<cmd>lua require("telescope.builtin").lsp_document_symbols()<CR>', {})
 		end,
 	},
 

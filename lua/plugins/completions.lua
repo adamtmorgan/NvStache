@@ -69,6 +69,26 @@ return {
 			-- Add key bindings for navigation completions in command mode
 			vim.keymap.set("c", "<C-j>", cmp.mapping.select_next_item(), {})
 			vim.keymap.set("c", "<C-k>", cmp.mapping.select_prev_item(), {})
+
+			vim.cmd("highlight LspSignatureActiveParameter guifg=#ff0000 guibg=none")
+		end,
+	},
+	--------------------------------------------------
+	-- Handles LSP as source for completions
+	--------------------------------------------------
+	{
+		"ray-x/lsp_signature.nvim",
+		config = function()
+			require("lsp_signature").setup({
+				bind = true, -- This is mandatory, otherwise border config won't get registered.
+				handler_opts = {
+					border = "rounded",
+				},
+				floating_window = true, -- show hint in a floating window, set to false for virtual text only mode
+				hint_enable = true, -- virtual hint enable
+				hint_prefix = "🐼 ", -- Panda for parameter hint
+				hi_parameter = "Search", -- Highlight for current parameter
+			})
 		end,
 	},
 	--------------------------------------------------

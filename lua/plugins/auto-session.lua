@@ -22,7 +22,7 @@ return {
 		})
 
 		-- Popup telescope browser for sessions
-		vim.keymap.set("n", "<leader>fs", require("auto-session.session-lens").search_session, {
+		vim.keymap.set("n", "<leader>fp", require("auto-session.session-lens").search_session, {
 			noremap = true,
 		})
 
