@@ -1,4 +1,32 @@
 return {
+	-- For scrollbar. Use with gitsigns to show git changes
+	-- in project.
+	{
+		"petertriho/nvim-scrollbar",
+		config = function()
+			require("scrollbar").setup()
+		end,
+	},
+
+	-- For showing git changes per-line in-document.
+	{
+		"lewis6991/gitsigns.nvim",
+		config = function()
+			require("gitsigns").setup()
+		end,
+	},
+
+	-- For better glancing at matched info in searches
+	{
+		"kevinhwang91/nvim-hlslens",
+		config = function()
+			-- require('hlslens').setup() is not required
+			require("scrollbar.handlers.search").setup({
+				-- hlslens config overrides
+			})
+		end,
+	},
+
 	-- Adds comment formatting features
 	{
 		"numToStr/Comment.nvim",
@@ -7,12 +35,14 @@ return {
 		},
 		lazy = false,
 	},
+
 	-- Adds support for documentation generation for
 	-- a variety of languages.
 	-- use <Leader>d to gen docs for the current line.
 	{
 		"kkoomen/vim-doge",
 	},
+
 	-- Auto adds closing brackets, braces, etc.
 	{
 		"windwp/nvim-autopairs",
