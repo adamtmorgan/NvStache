@@ -38,7 +38,6 @@ return {
 
 	-- Adds support for documentation generation for
 	-- a variety of languages.
-	-- use <Leader>d to gen docs for the current line.
 	{
 		"kkoomen/vim-doge",
 	},

@@ -1,2 +1,5 @@
-lazy-lock.json
+# System
 .DS_Store
+
+# Project
+lazy-lock.json
