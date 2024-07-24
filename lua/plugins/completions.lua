@@ -47,14 +47,6 @@ return {
 				}),
 			})
 
-			-- Setup up vim-dadbod (db client)
-			cmp.setup.filetype({ "sql" }, {
-				sources = {
-					{ name = "vim-dadbod-completion" },
-					{ name = "buffer" },
-				},
-			})
-
 			-- Added to support cmp-cmdline
 			-- Use buffer source for `/` (search) and `?` (reverse search).
 			cmp.setup.cmdline({ "/", "?" }, {
