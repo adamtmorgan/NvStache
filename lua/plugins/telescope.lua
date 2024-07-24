@@ -2,6 +2,19 @@ return {
 	-- FZF Native. Fuzzy-finds results in telescope. Requires "gcc or clang as well as make".
 	-- This actually builds the dependency on device. Might not be compatible with all systems.
 	{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+	-- tiny-code-actions is a substitute for code actions window that shows
+	-- a preview of the changes before committing.
+	{
+		"rachartier/tiny-code-action.nvim",
+		dependencies = {
+			{ "nvim-lua/plenary.nvim" },
+			{ "nvim-telescope/telescope.nvim" },
+		},
+		event = "LspAttach",
+		config = function()
+			require("tiny-code-action").setup()
+		end,
+	},
 	-- Main telescope plugin
 	{
 		"nvim-telescope/telescope.nvim",

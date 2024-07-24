@@ -159,7 +159,9 @@ return {
 			vim.keymap.set("n", "ge", vim.diagnostic.open_float, {})
 			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, {})
 			vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, {})
-			vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
+			vim.keymap.set("n", "<leader>ca", function()
+				require("tiny-code-action").code_action()
+			end, { noremap = true, silent = true })
 
 			-- These open up lsp features inside of telescope instead
 			vim.api.nvim_set_keymap("n", "gd", '<cmd>lua require("telescope.builtin").lsp_definitions()<CR>', {})
