@@ -90,8 +90,22 @@ return {
 					qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
 				},
 				pickers = {
-					lsp_code_actions = {
-						theme = "cursor",
+					-- code actions using a different plugin, so not including here.
+					lsp_definitions = {
+						layout_strategy = "vertical",
+						layout_config = {
+							width = 0.7,
+							preview_cutoff = 50,
+							prompt_position = "top",
+						},
+					},
+					lsp_references = {
+						layout_strategy = "vertical",
+						layout_config = {
+							width = 0.7,
+							preview_cutoff = 50,
+							prompt_position = "top",
+						},
 					},
 					live_grep = {
 						max_results = 50,
