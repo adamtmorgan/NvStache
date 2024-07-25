@@ -1,7 +1,6 @@
 return {
 	"folke/flash.nvim",
 	event = "VeryLazy",
-	---@type Flash.Config
 	opts = {
 		update_markers_on_input = false,
 		label = {

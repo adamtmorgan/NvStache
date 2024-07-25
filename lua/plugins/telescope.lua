@@ -73,16 +73,6 @@ return {
 						"build",
 						"fontawesome*",
 					},
-					-- Format the search results to display the file name first
-					-- followed by the full file path.
-					-- path_display = function(ops, path)
-					-- 	local tail = require("telescope.utils").path_tail(path)
-					-- 	return string.format("%s - %s", tail, path)
-					-- end,
-					--
-					-- NOTE: Disabled for now, as it had a huge impact on performance
-					-- in larger projects. Big sad... will stay this way for now.
-					-- path_display = { "smart" },
 					mappings = {
 						i = {
 							["<C-j>"] = actions.move_selection_next,
@@ -107,8 +97,6 @@ return {
 						max_results = 50,
 					},
 					find_files = {
-						-- find_command = { "fd", "--type", "f", "--hidden", "--follow", "--exclude", ".git" },
-						-- theme = "dropdown",
 						max_results = 50,
 						find_command = {
 							"fd",
@@ -189,20 +177,6 @@ return {
 						require("telescope.themes").get_dropdown({
 							-- even more opts
 						}),
-
-						-- pseudo code / specification for writing custom displays, like the one
-						-- for "codeactions"
-						-- specific_opts = {
-						--   [kind] = {
-						--     make_indexed = function(items) -> indexed_items, width,
-						--     make_displayer = function(widths) -> displayer
-						--     make_display = function(displayer) -> function(e)
-						--     make_ordinal = function(e) -> string
-						--   },
-						--   -- for example to disable the custom builtin "codeactions" display
-						--      do the following
-						--   codeactions = false,
-						-- }
 					},
 				},
 			})
