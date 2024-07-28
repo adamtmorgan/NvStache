@@ -1,7 +1,5 @@
 return {
 	"stevearc/oil.nvim",
-	opts = {},
-	--Optional dependencies
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	config = function()
 		local float_options = {
@@ -11,7 +9,7 @@ return {
 		}
 
 		require("oil").setup({
-			default_file_explorer = true,
+			default_file_explorer = false,
 			columns = {
 				-- "size",
 				"icon",

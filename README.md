@@ -99,12 +99,11 @@ You shouldn't have to manually install LSP, linting, and formatting thanks to `e
   - sqlfluff (sql)
   - tflint (terraform)
 - Formatting
-  - ktlint (kotlin formatting)
   - prettierd (formatting js, css, ts, and many others)
   - stylua (lua formatting)
 - Hybrid (lsp/lint/format)
   - rust-analyzer (rust)
-  - ktlint (kotlin linting)
+  - ktlint (kotlin)
 
 If you don't want to use some of these LSPs, you can disable
 them by visiting the LSP section of the config found in
@@ -166,6 +165,14 @@ This is because this config relies on LSPs instead.
 - Comment line toggle - `gcc` in normal mode. `gc` in visual mode.
 
 - Uses default [flash.nvim](https://github.com/folke/flash.nvim) bindings for quick navigation in view.
+
+- Sessions
+  - If a session is saved, it will automatically save current state on Neovim close.
+  - Saved sessions are tied to CWD. If a directory is opened and has a saved session, that session will load in automatically.
+  - Save session - `<C-s>s`
+  - Find session - `<C-s>f`
+  - Load session - `<C-s>r`
+  - Delete session - `<C-s>d` (when hovering in Find Session window)
 
 ## A Note on Workflow
 

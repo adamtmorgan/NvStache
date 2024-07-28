@@ -170,11 +170,16 @@ return {
 			-- vim.api.nvim_set_keymap("n", "fs", '<cmd>lua require("telescope.builtin").lsp_workspace_symbols()<CR>', {})
 			vim.api.nvim_set_keymap(
 				"n",
-				"fs",
+				"<leader>fs",
 				'<cmd>lua require("telescope.builtin").lsp_dynamic_workspace_symbols()<CR>',
 				{}
 			)
-			vim.api.nvim_set_keymap("n", "fS", '<cmd>lua require("telescope.builtin").lsp_document_symbols()<CR>', {})
+			vim.api.nvim_set_keymap(
+				"n",
+				"<leader>fS",
+				'<cmd>lua require("telescope.builtin").lsp_document_symbols()<CR>',
+				{}
+			)
 		end,
 	},
 
