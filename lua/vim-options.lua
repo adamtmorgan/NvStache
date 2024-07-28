@@ -1,4 +1,6 @@
 ------------------------------------------
+-- Misc default settings
+------------------------------------------
 vim.cmd("set expandtab")
 vim.cmd("set splitright")
 
