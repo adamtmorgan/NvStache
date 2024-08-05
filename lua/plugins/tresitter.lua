@@ -6,44 +6,53 @@ return {
 		local treeSitterConfig = require("nvim-treesitter.configs")
 		treeSitterConfig.setup({
 			ensure_installed = {
-				"lua",
-				"bash",
+				-- Programming/styling languages
 				"jsdoc",
 				"javascript",
 				"typescript",
+				"tsx",
+				"vue",
+				"svelte",
+				"html",
+				"css",
+				"scss",
+				"rust",
+				"lua",
 				"wgsl",
 				"glsl",
 				"php",
 				"python",
 				"kotlin",
 				"java",
-				"tsx",
-				"html",
-				"css",
-				"scss",
-				"rust",
-				"toml",
-				"yaml",
-				"ron",
-				"vue",
+				"arduino",
+
+				-- Data
 				"sql",
-				"terraform",
-				"csv",
-				"dockerfile",
-				"gitignore",
-				"json",
 				"graphql",
-				"markdown",
-				"regex",
+				"json",
 				"csv",
 				"tsv",
 				"psv",
+
+				-- Config languages
+				"toml",
+				"yaml",
+				"ron",
+				"terraform",
+				"dockerfile",
+				"gitignore",
+				"nginx",
+
+				-- System scripting
+				"bash",
+				"nix",
+
+				-- Misc
+				"markdown",
+				"regex",
 			},
-			--sync_install = false,
 			highlight = { enable = true },
 			indent = { enable = true },
-			--autopairs = { enable = true },
-			--autotag = { enable = true },
 		})
 	end,
 }
