@@ -8,14 +8,6 @@ return {
 		end,
 	},
 
-	-- For showing git changes per-line in-document.
-	{
-		"lewis6991/gitsigns.nvim",
-		config = function()
-			require("gitsigns").setup()
-		end,
-	},
-
 	-- For better glancing at matched info in searches
 	{
 		"kevinhwang91/nvim-hlslens",
