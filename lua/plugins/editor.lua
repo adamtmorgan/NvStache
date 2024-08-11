@@ -43,6 +43,13 @@ return {
 		-- this is equalent to setup({}) function
 	},
 
+	-- For editing enclosing chars or blocks
+	-- 's' is used as an object reference. Just as if you'd say `ciw` to
+	-- change inside word, you'd say `cs{[` to change a surrounding `{` to a `[`
+	{
+		"tpope/vim-surround",
+	},
+
 	-- Adds auto closing and renaming tags
 	{
 		"windwp/nvim-ts-autotag",
