@@ -1,8 +1,8 @@
-# NvStache - My personal Neovim configuration.
+# 〰️ NvStache - My personal Neovim configuration.
 
 ![screenshot](screenshot.png)
 
-# External Dependencies
+# 📦 External Dependencies
 
 ### Node
 
@@ -11,7 +11,7 @@ LSP, linting, and formatting features in this config depend on Nodejs. I recomme
 I use MacOS and Homebrew. If you're on another system, you will need to follow an alternate method of installation.
 
 ```bash
-brew install nvm
+$ brew install nvm
 ```
 
 Then add the following to your shell profile (most likely `~/.zshrc`):
@@ -31,8 +31,8 @@ nvm install node
 Confirm success by running:
 
 ```bash
-node --version
-npm --version
+$ node --version
+$ npm --version
 ```
 
 ## Fast Search!
@@ -53,20 +53,19 @@ This config also uses [telescope-fzf-native](https://github.com/nvim-telescope/t
 ripgrep and fd (mentioned above) are great for actually retrieiving the search results, but fzf will greatly speed up the filtering down and ranking of those results so
 we see the most relevant results first, and quickly! This plugin is written in C and compiled for best performance. Lazy will actually build this natively for your platform using `make`, hence the dependency.
 
-# Setup
+# 👨‍💻 Setup
 
 ### Cloning and Moving Config
 
-The contents of this repo will eventually live in your `~/.config/nvim` directory (or wherever you store your config). To start, I'd recommend cloning this repo into your `~/.config` directory, backing up your old config (if there is one), and then renaming the `NvStache` directory to `nvim`. This way if you want to pull an update it's a simple `git pull` and you're good to go. This process might look something like this, depending on where you choose to store your config:
+The contents of this repo will eventually live in your `~/.config/nvim` directory (or wherever you store your config). I recomend cloning this repo to a desired location and then symlinking it to your `~/.config/nvim` folder. This way you can easily get updates with a simple `git pull`:
 
 ```bash
-cd ~/.config
-git clone https://github.com/adamtmorgan/NvStache.git
-mv nvim nvim_bak
-mv NvStache nvim
+$ cd [your_desired_directory]
+$ git clone https://github.com/adamtmorgan/NvStache.git
+$ ln -s [your_desired_directory]/NvStache [full_path_to_home]/.config/nvim
 ```
 
-Alternatively, you can symlink the directory to your `.config` folder as well, and then store the base repo wherever you please.
+Alternatively, you can move the repo contents to your `~/.config/nvim` directory, if you don't like linking.
 
 ### One-Time Setups
 
@@ -94,8 +93,6 @@ You shouldn't have to manually install LSP, linting, and formatting thanks to `e
   - typescript-language-server (typescript)
   - vetur-vls (vue.js)
 - Linting
-  - eslint_d (javascript)
-  - htmlhint (html)
   - sqlfluff (sql)
   - tflint (terraform)
 - Formatting
@@ -103,7 +100,6 @@ You shouldn't have to manually install LSP, linting, and formatting thanks to `e
   - stylua (lua formatting)
 - Hybrid (lsp/lint/format)
   - rust-analyzer (rust)
-  - ktlint (kotlin)
 
 If you don't want to use some of these LSPs, you can disable
 them by visiting the LSP section of the config found in
@@ -111,7 +107,7 @@ them by visiting the LSP section of the config found in
 disable parts in the Mason, nvim-lspconfig, linting, and formatting
 sections of that file.
 
-## Notable Custom Bindings and Features
+## ⌨️ Notable Custom Bindings and Features
 
 Keybindings in this config are typically assigned
 alongside their plugin counterparts. Other generic bindings
@@ -156,7 +152,7 @@ This is because this config relies on LSPs instead.
 
 - Telescope Previous Result - `<C-k>` (in telescope window)
 
-- Git Blake Toggle - `:BlameToggle`
+- Default commands for Git via [Fugitive](https://github.com/tpope/vim-fugitive)
 
 - Preview `.md` files in browser - `:MarkdownPreview`
 
