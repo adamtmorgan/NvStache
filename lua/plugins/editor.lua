@@ -50,6 +50,10 @@ return {
 		"tpope/vim-surround",
 	},
 
+	-- For auto-detecting and changing `shiftwidth` and `expandtab`
+	-- settings based on the current file's pattern.
+	{ "tpope/vim-sleuth" },
+
 	-- Adds auto closing and renaming tags
 	{
 		"windwp/nvim-ts-autotag",
