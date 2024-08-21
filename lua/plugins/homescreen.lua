@@ -37,8 +37,8 @@ return {
 				margin = 5,
 				content = {
 					{ " Grep File", "Telescope find_files", "<leader>ff" },
-					{ "󰍉 Grep", "Telescope live_grep", "<leader>fg" },
-					{ "󰏇 Browse Files (Oil)", ":Oil ./ --float<CR>", "<leader>o" },
+					{ "󰍉 Grep File Contents", "Telescope live_grep", "<leader>fg" },
+					{ "󰏇 Browse Files (Oil)", "Oil ./ --float", "<leader>o" },
 				},
 				-- highlight = "String",
 				highlight = "",
