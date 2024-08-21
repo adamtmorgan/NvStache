@@ -35,6 +35,7 @@ return {
 					"dockerls", -- docker
 					"docker_compose_language_service", -- docker compose
 					"terraformls", -- terraform
+					"rnix", -- nix
 					"graphql", -- graphql
 					"glsl_analyzer", -- webgl
 					"wgsl_analyzer", -- webgpu
@@ -96,6 +97,9 @@ return {
 				capabilities = capabilities,
 			})
 			lspconfig.bashls.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.rnix.setup({
 				capabilities = capabilities,
 			})
 			lspconfig.rust_analyzer.setup({
