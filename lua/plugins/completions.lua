@@ -7,9 +7,9 @@ return {
 		config = function()
 			local cmp = require("cmp")
 
-			-- Loads in the "friendly-snippets" from snippet manager
-			-- in next table.
+			-- Register LuaSnip snippet sources --------------------------------
 			require("luasnip.loaders.from_vscode").lazy_load()
+			require("vim-react-snippets").lazy_load()
 
 			cmp.setup({
 				completion = { completeopt = "menu,menuone,noinsert" },
@@ -28,8 +28,8 @@ return {
 					documentation = cmp.config.window.bordered(),
 				},
 				mapping = cmp.mapping.preset.insert({
-					["<C-p>"] = cmp.mapping.scroll_docs(-4),
-					["<C-n>"] = cmp.mapping.scroll_docs(4),
+					["<C-u>"] = cmp.mapping.scroll_docs(-4),
+					["<C-d>"] = cmp.mapping.scroll_docs(4),
 					["<C-j>"] = cmp.mapping.select_next_item(),
 					["<C-k>"] = cmp.mapping.select_prev_item(),
 					["<C-Space>"] = cmp.mapping.complete(),
@@ -103,8 +103,9 @@ return {
 	{
 		"L3MON4D3/LuaSnip",
 		dependencies = {
-			"saadparwaiz1/cmp_luasnip",
-			"rafamadriz/friendly-snippets",
+			"saadparwaiz1/cmp_luasnip", -- integration with nvim-cmp
+			"rafamadriz/friendly-snippets", -- Common snippets for various languages
+			"mlaursen/vim-react-snippets", -- React snippets
 		},
 	},
 
