@@ -88,8 +88,6 @@ if vim.g.neovide then
 	vim.g.neovide_show_border = true
 	vim.g.neovide_hide_titlebar = true
 
-	vim.g.neovide_scroll_animation_length = 0.2
-
 	vim.g.neovide_floating_transparency = 1
 	vim.g.neovide_window_floating_opacity = 1
 
@@ -108,4 +106,22 @@ if vim.g.neovide then
 
 	-- Behavior
 	vim.g.neovide_hide_mouse_when_typing = 1
+
+	-- Cursor and animation
+	vim.g.neovide_cursor_animation_length = 0.08
+	vim.g.neovide_cursor_trail_size = 0.6
+
+	-- Copy/paste in neovide:
+	vim.keymap.set("n", "<D-s>", ":w<CR>") -- Save
+	vim.keymap.set("v", "<D-c>", '"+y') -- Copy
+	vim.keymap.set("n", "<D-v>", '"+P') -- Paste normal mode
+	vim.keymap.set("v", "<D-v>", '"+P') -- Paste visual mode
+	vim.keymap.set("c", "<D-v>", "<C-R>+") -- Paste command mode
+	vim.keymap.set("i", "<D-v>", '<ESC>l"+Pli') -- Paste insert mode
 end
+
+-- Allow clipboard copy paste in neovim
+vim.api.nvim_set_keymap("", "<D-v>", "+p<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("!", "<D-v>", "<C-R>+", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("t", "<D-v>", "<C-R>+", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<D-v>", "<C-R>+", { noremap = true, silent = true })
