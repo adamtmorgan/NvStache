@@ -170,6 +170,24 @@ This is because this config relies on LSPs instead.
   - Load session - `<C-s>r`
   - Delete session - `<C-s>d` (when hovering in Find Session window)
 
+## ⚡Neovide Support
+
+If you like speed and flashy animations, check out [Neovide](https://neovide.dev/).
+I recommend adding a function to your `.zshrc` file to get the best look without having to type `--frame transparent` every time you want to open.
+
+```bash[.zshrc]
+nvide() {
+  if [ -z "$1" ]
+  then
+    neovide --frame transparent
+  else
+    neovide "$1" --frame transparent
+  fi
+}
+```
+
+With this, you should now be able to run `nvide` or `nvide my/file.lua` and you will have the window formatting that best suits MacOS.
+
 ## A Note on Workflow
 
 This Neovim config (for better or worse) has been optimized to work with a set of specific tools (notably Tmux and Alacritty, but others as well). To see details on how I've configured other pieces of my workflow, visit my [dotfiles](https://github.com/adamtmorgan/dotfiles) repository where you can see terminal enhancement configs, recommended MacOS apps to boost productivity, among other things.
