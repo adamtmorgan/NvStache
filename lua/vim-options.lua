@@ -72,3 +72,38 @@ end, {})
 ------------------------------------------
 vim.cmd("autocmd InsertEnter * :set norelativenumber")
 vim.cmd("autocmd InsertLeave * :set relativenumber")
+
+-- Neovide-specific config
+if vim.g.neovide then
+	vim.opt.termguicolors = true
+	vim.o.guifont = "JetBrainsMono Nerd Font:h12"
+	vim.opt.linespace = 0
+
+	vim.g.neovide_padding_top = 0
+	vim.g.neovide_padding_bottom = 0
+	vim.g.neovide_padding_right = 5
+	vim.g.neovide_padding_left = 5
+
+	vim.g.neovide_show_border = true
+	vim.g.neovide_hide_titlebar = true
+
+	vim.g.neovide_scroll_animation_length = 0.2
+
+	vim.g.neovide_floating_transparency = 1
+	vim.g.neovide_window_floating_opacity = 1
+
+	-- Helper function for transparency formatting
+	local alpha = function()
+		return string.format("%x", math.floor((255 * vim.g.transparency) or 0.8))
+	end
+	vim.g.neovide_transparency = 1
+	vim.g.transparency = 0.9
+	vim.g.neovide_background_color = "#1c2129" .. alpha()
+
+	-- vim.g.neovide_background_color = "#1c2129"
+	vim.g.neovide_window_blurred = true
+
+	vim.g.neovide_floating_shadow = false
+	vim.g.neovide_light_angle_degrees = 45
+	vim.g.neovide_light_radius = 5
+end
