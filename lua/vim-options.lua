@@ -75,10 +75,11 @@ vim.cmd("autocmd InsertLeave * :set relativenumber")
 
 -- Neovide-specific config
 if vim.g.neovide then
-	vim.opt.termguicolors = true
+	-- Font
 	vim.o.guifont = "JetBrainsMono Nerd Font:h12"
 	vim.opt.linespace = 0
 
+	-- Window styling
 	vim.g.neovide_padding_top = 0
 	vim.g.neovide_padding_bottom = 0
 	vim.g.neovide_padding_right = 5
@@ -99,11 +100,12 @@ if vim.g.neovide then
 	vim.g.neovide_transparency = 1
 	vim.g.transparency = 0.9
 	vim.g.neovide_background_color = "#1c2129" .. alpha()
-
-	-- vim.g.neovide_background_color = "#1c2129"
 	vim.g.neovide_window_blurred = true
 
 	vim.g.neovide_floating_shadow = false
 	vim.g.neovide_light_angle_degrees = 45
 	vim.g.neovide_light_radius = 5
+
+	-- Behavior
+	vim.g.neovide_hide_mouse_when_typing = 1
 end
