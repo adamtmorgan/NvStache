@@ -66,11 +66,13 @@ return {
 			vim.cmd("colorscheme kanagawa")
 
 			-- I personally like a slightly different color for my
-			-- background, so I override it here.
-			vim.cmd([[
+			-- background, so I override it here, if neovide
+			if vim.g.neovide then
+				vim.cmd([[
 				  colorscheme kanagawa
-				  highlight Normal guibg=#1D212A
+				  highlight Normal guibg=#1C212A
 				]])
+			end
 
 			-- Overriding visual mode highlight color to match row highlight
 			vim.api.nvim_set_hl(0, "Visual", { bg = "#363646" })
