@@ -27,7 +27,6 @@ return {
 				["-"] = "actions.parent", -- '-' to go up one directory level
 				["_"] = "actions.open_cwd", -- opens current working dir
 				["q"] = { callback = "actions.close", mode = "n" }, -- 'q' to close the oil window
-				["<Esc>"] = { callback = "actions.close", mode = "n" }, -- 'Escape' to close the oil window without saving changes
 				["<leader>o"] = { callback = "actions.close", mode = "n" }, -- 'Escape' to close the oil window without saving changes
 				["<leader>e"] = { callback = "actions.close", mode = "n" }, -- 'Escape' to close the oil window without saving changes
 				["<C-r>"] = "actions.refresh", -- Ctrl+r to refresh the directory
