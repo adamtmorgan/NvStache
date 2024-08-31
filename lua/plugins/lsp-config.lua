@@ -1,5 +1,16 @@
 return {
 	--------------------------------------------------------
+	-- Lang-specific plugins
+	--------------------------------------------------------
+
+	-- Rust
+	{
+		"mrcjkb/rustaceanvim",
+		version = "^5", -- Recommended
+		lazy = false, -- This plugin is already lazy
+	},
+
+	--------------------------------------------------------
 	-- Mason LSP. Grants us LSP support in Neovim.
 	--------------------------------------------------------
 	{
@@ -19,6 +30,8 @@ return {
 		config = function()
 			require("mason-lspconfig").setup({
 				ensure_installed = {
+					"codelldb", -- Debugging for Rust/C/C++/Zig
+					"cpptools", -- Debugging for Rust/C/C++
 					"lua_ls", -- lua
 					"tsserver", -- typescript
 					"eslint", -- javascript
@@ -102,9 +115,15 @@ return {
 			lspconfig.rnix.setup({
 				capabilities = capabilities,
 			})
-			lspconfig.rust_analyzer.setup({
-				capabilities = capabilities,
-			})
+
+			-- No longer needed since using rustacianvim
+			-- to manage rust features. Keeping here
+			-- as reference just in case.
+
+			-- lspconfig.rust_analyzer.setup({
+			-- 	capabilities = capabilities,
+			-- })
+
 			lspconfig.pyright.setup({
 				capabilities = capabilities,
 			})
@@ -129,16 +148,6 @@ return {
 
 			-- Add borders to our hover windows
 			local _border = "rounded"
-			-- local _border = {
-			-- 	{ "╭", "FloatBorder" },
-			-- 	{ "─", "FloatBorder" },
-			-- 	{ "╮", "FloatBorder" },
-			-- 	{ "│", "FloatBorder" },
-			-- 	{ "╯", "FloatBorder" },
-			-- 	{ "─", "FloatBorder" },
-			-- 	{ "╰", "FloatBorder" },
-			-- 	{ "│", "FloatBorder" },
-			-- }
 
 			local windowSettings = {
 				border = _border,
@@ -262,4 +271,58 @@ return {
 			end, { desc = "Format file or range (in visual mode)" })
 		end,
 	},
+
+	--------------------------------------------------------
+	-- Debugging
+	--------------------------------------------------------
+	{
+		"mfussenegger/nvim-dap",
+		config = function()
+			local dap, dapui = require("dap"), require("dapui")
+			dap.listeners.before.attach.dapui_config = function()
+				dapui.open()
+			end
+			dap.listeners.before.launch.dapui_config = function()
+				dapui.open()
+			end
+			dap.listeners.before.event_terminated.dapui_config = function()
+				dapui.close()
+			end
+			dap.listeners.before.event_exited.dapui_config = function()
+				dapui.close()
+			end
+
+			-- keybindings
+			local map = vim.keymap.set
+
+			map("n", ";", ":", { desc = "CMD enter command mode" })
+			map("i", "jk", "<ESC>")
+
+			-- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
+
+			-- Nvim DAP
+			map("n", "<Leader>dl", "<cmd>lua require'dap'.step_into()<CR>", { desc = "Debugger step into" })
+			map("n", "<Leader>dj", "<cmd>lua require'dap'.step_over()<CR>", { desc = "Debugger step over" })
+			map("n", "<Leader>dk", "<cmd>lua require'dap'.step_out()<CR>", { desc = "Debugger step out" })
+			map("n", "<Leader>dc>", "<cmd>lua require'dap'.continue()<CR>", { desc = "Debugger continue" })
+			map(
+				"n",
+				"<Leader>db",
+				"<cmd>lua require'dap'.toggle_breakpoint()<CR>",
+				{ desc = "Debugger toggle breakpoint" }
+			)
+			map(
+				"n",
+				"<Leader>dd",
+				"<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
+				{ desc = "Debugger set conditional breakpoint" }
+			)
+			map("n", "<Leader>de", "<cmd>lua require'dap'.terminate()<CR>", { desc = "Debugger reset" })
+			map("n", "<Leader>dr", "<cmd>lua require'dap'.run_last()<CR>", { desc = "Debugger run last" })
+
+			-- rustaceanvim
+			map("n", "<Leader>dt", "<cmd>lua vim.cmd('RustLsp testables')<CR>", { desc = "Debugger testables" })
+		end,
+	},
+	{ "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } },
 }
