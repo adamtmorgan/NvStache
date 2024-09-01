@@ -36,8 +36,10 @@ return {
 
 		local normal_string = "󱗞 NORMAL"
 		local visual_string = "󰈈 VISUAL"
+		local visual_block_string = "󰡫 VBLOCK"
+		local visual_row_string = "󰡭 VISROW"
 		local select_string = "󰒅 SELECT"
-		local insert_string = " INSERT"
+		local insert_string = " INSERT"
 		local replace_string = "󰯍 REPLACE"
 		local command_string = " REPLACE"
 		local ex_string = " EXECUTE"
@@ -73,9 +75,9 @@ return {
 			nt = normal_string,
 			v = visual_string,
 			vs = visual_string,
-			V = visual_string,
+			V = visual_row_string,
 			Vs = visual_string,
-			["\22"] = visual_string,
+			["\22"] = visual_block_string,
 			["\22s"] = visual_string,
 			s = select_string,
 			S = select_string,
