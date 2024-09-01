@@ -6,6 +6,9 @@
 
 return {
 	"rebelot/heirline.nvim",
+	dependencies = {
+		{ "nvim-tree/nvim-web-devicons" },
+	},
 	-- You can optionally lazy-load heirline on UiEnter
 	-- to make sure all required plugins and colorschemes are loaded before setup
 	-- event = "UiEnter",
@@ -20,7 +23,7 @@ return {
 
 		local colors = {
 			background = "#1c2129",
-			gray = "#3D3E50",
+			gray = "#60687e",
 			dark_gray = "#0D1117",
 			white = "#E2DCC0",
 			blue = "#80A7E0",
@@ -222,6 +225,101 @@ return {
 		}
 
 		----------------------------------------------------
+		--- Spacers, dividers, and positioning
+		----------------------------------------------------
+
+		local Divider = {
+			provider = " ❭ ",
+		}
+
+		local Space = {
+			provider = " ",
+		}
+
+		local Align = { provider = "%=" }
+
+		----------------------------------------------------
+		--- Make buffer list
+		----------------------------------------------------
+
+		local FileIcon = {
+			init = function(self)
+				local filename = self.fileName
+				local extension = vim.fn.fnamemodify(filename, ":e")
+				self.icon, self.icon_color =
+					require("nvim-web-devicons").get_icon_color(filename, extension, { default = true })
+			end,
+			provider = function(self)
+				return self.icon and (" " .. self.icon .. " ")
+			end,
+			hl = function(self)
+				if self.is_active and self.modeCat ~= "n" then
+					return { fg = self.colorPrmiary }
+				elseif self.is_active and self.modeCat == "n" then
+					return { fg = self.icon_color }
+				else
+					return { fg = colors.gray }
+				end
+			end,
+		}
+
+		local BufferFileName = {
+			provider = function(self)
+				return self.fileName .. " "
+			end,
+		}
+
+		local Buffer = {
+			init = function(self)
+				self.filePath = vim.api.nvim_buf_get_name(self.bufnr)
+				self.fileName = self.filePath:match("^.+/(.+)$")
+			end,
+			FileIcon,
+			BufferFileName,
+			on_click = {
+				callback = function(_, minwid, _, button)
+					if button == "m" then -- close on mouse middle click
+						vim.schedule(function()
+							vim.api.nvim_buf_delete(minwid, { force = false })
+						end)
+					else
+						vim.api.nvim_win_set_buf(0, minwid)
+					end
+				end,
+				minwid = function(self)
+					return self.bufnr
+				end,
+				name = "heirline_tabline_buffer_callback",
+			},
+			hl = function(self)
+				if self.is_active then
+					return { fg = self.colorPrimary }
+				else
+					return { fg = colors.gray }
+				end
+			end,
+		}
+
+		local Buffers = utils.make_buflist(
+			Buffer,
+			{ provider = "...", hl = { fg = colors.gray } },
+			{ provider = "...", hl = { fg = colors.gray } }
+		)
+
+		----------------------------------------------------
+		--- Cursor position and scrollbar
+		----------------------------------------------------
+
+		-- We're getting minimalist here!
+		local Position = {
+			-- %l = current line number
+			-- %L = number of lines in the buffer
+			-- %c = column number
+			-- %P = percentage through file of displayed window
+			provider = "%7(%l/%3L%):%2c %P",
+		}
+
+		----------------------------------------------------
 		--- Status line assembly
 		----------------------------------------------------
 
@@ -233,15 +331,17 @@ return {
 				self.modeCat = self.mode:sub(1, 1) -- first char only
 				self.colorPrimary = mode_colors[self.modeCat]
 			end,
+			-- Watch below closely... Performance could suck and this will
+			-- need to be changed:
+			-- update = { "BufAdd", "BufEnter", "BufLeave", "ModeChanged" },
 			ViModeSection,
+			Space,
 			Git,
-			update = {
-				"ModeChanged",
-				pattern = "*:*",
-				callback = vim.schedule_wrap(function()
-					vim.cmd("redrawstatus")
-				end),
-			},
+			Space,
+			Divider,
+			Buffers,
+			Align,
+			Position,
 		}
 
 		-- Full Status line
