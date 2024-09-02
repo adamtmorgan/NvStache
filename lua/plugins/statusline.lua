@@ -41,7 +41,7 @@ return {
 		local select_string = "󰒅 SELECT"
 		local insert_string = " INSERT"
 		local replace_string = "󰯍 REPLACE"
-		local command_string = " REPLACE"
+		local command_string = " COMMAND"
 		local ex_string = " EXECUTE"
 		local debug_string = " DEBUG"
 
