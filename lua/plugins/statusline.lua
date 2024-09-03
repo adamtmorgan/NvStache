@@ -125,19 +125,19 @@ return {
 				{
 					provider = "",
 					hl = function(self)
-						return { fg = self.colorPrimary, bg = "none" }
+						return { fg = self.color_primpary, bg = "none" }
 					end,
 				},
 				{
 					ViModeText,
 					hl = function(self)
-						return { fg = colors.background, bg = self.colorPrimary, bold = true }
+						return { fg = colors.background, bg = self.color_primpary, bold = true }
 					end,
 				},
 				{
 					provider = "",
 					hl = function(self)
-						return { fg = self.colorPrimary, bg = "none" }
+						return { fg = self.color_primpary, bg = "none" }
 					end,
 				},
 			},
@@ -181,12 +181,12 @@ return {
 			end,
 
 			hl = function(self)
-				return { fg = self.colorPrimary }
+				return { fg = self.color_primpary }
 			end,
 
 			{ -- git branch name
 				provider = function(self)
-					return "  " .. self.status_dict.head
+					return "   " .. self.status_dict.head
 				end,
 				hl = { bold = true },
 			},
@@ -246,7 +246,7 @@ return {
 
 		local FileIcon = {
 			init = function(self)
-				local filename = self.fileName
+				local filename = self.file_name
 				local extension = vim.fn.fnamemodify(filename, ":e")
 				self.icon, self.icon_color =
 					require("nvim-web-devicons").get_icon_color(filename, extension, { default = true })
@@ -255,9 +255,9 @@ return {
 				return self.icon and (" " .. self.icon .. " ")
 			end,
 			hl = function(self)
-				if self.is_active and self.modeCat ~= "n" then
-					return { fg = self.colorPrmiary }
-				elseif self.is_active and self.modeCat == "n" then
+				if self.is_active and self.mode_cat ~= "n" then
+					return { fg = self.color_primary }
+				elseif self.is_active and self.mode_cat == "n" then
 					return { fg = self.icon_color }
 				else
 					return { fg = colors.gray }
@@ -267,15 +267,21 @@ return {
 
 		local BufferFileName = {
 			provider = function(self)
-				return self.fileName .. " "
+				return self.file_name .. " "
 			end,
 		}
 
 		local Buffer = {
 			init = function(self)
-				self.filePath = vim.api.nvim_buf_get_name(self.bufnr)
-				self.fileName = self.filePath:match("^.+/(.+)$")
+				self.file_name_path = vim.api.nvim_buf_get_name(self.bufnr)
+				self.file_name = self.file_name_path:match("^.+/(.+)$")
+				if self.file_name == nil then
+					self.file_name = vim.api.nvim_buf_get_option(self.bufnr, "buftype")
+				end
 			end,
+			-- condition = function(self)
+			-- 	return self.file_name ~= nil
+			-- end,
 			FileIcon,
 			BufferFileName,
 			on_click = {
@@ -295,7 +301,7 @@ return {
 			},
 			hl = function(self)
 				if self.is_active then
-					return { fg = self.colorPrimary }
+					return { fg = self.color_primpary }
 				else
 					return { fg = colors.gray }
 				end
@@ -304,8 +310,8 @@ return {
 
 		local Buffers = utils.make_buflist(
 			Buffer,
-			{ provider = "...", hl = { fg = colors.gray } },
-			{ provider = "...", hl = { fg = colors.gray } }
+			{ provider = "…", hl = { fg = colors.gray } },
+			{ provider = "…", hl = { fg = colors.gray } }
 		)
 
 		----------------------------------------------------
@@ -320,7 +326,7 @@ return {
 			-- %P = percentage through file of displayed window
 			provider = "%7(%l/%3L%):%2c %P",
 			hl = function(self)
-				return { fg = self.colorPrimary }
+				return { fg = self.color_primpary }
 			end,
 		}
 
@@ -333,14 +339,13 @@ return {
 		local MainLine = {
 			init = function(self)
 				self.mode = vim.fn.mode(1) -- :h mode()
-				self.modeCat = self.mode:sub(1, 1) -- first char only
-				self.colorPrimary = mode_colors[self.modeCat]
+				self.mode_cat = self.mode:sub(1, 1) -- first char only
+				self.color_primpary = mode_colors[self.mode_cat]
 			end,
 			-- Watch below closely... Performance could suck and this will
 			-- need to be changed:
 			-- update = { "BufAdd", "BufEnter", "BufLeave", "ModeChanged" },
 			ViModeSection,
-			Space,
 			Git,
 			Space,
 			Divider,
