@@ -31,7 +31,10 @@ return {
 	{
 		"nvim-telescope/telescope-ui-select.nvim",
 		config = function()
+			local open_with_trouble = require("trouble.sources.telescope").open
+			-- local add_to_trouble = require("trouble.sources.telescope").add
 			local actions = require("telescope.actions")
+
 			require("telescope").setup({
 				-- Override some mappings
 				defaults = {
@@ -79,10 +82,12 @@ return {
 							["<C-k>"] = actions.move_selection_previous,
 							["<C-r>"] = actions.delete_buffer,
 							["<C-s>"] = actions.select_vertical,
+							["<C-t>"] = open_with_trouble,
 						},
 						n = {
 							["d"] = actions.delete_buffer,
 							["<C-s>"] = actions.select_vertical,
+							["<C-t>"] = open_with_trouble,
 						},
 					},
 					file_previewer = require("telescope.previewers").vim_buffer_cat.new,
