@@ -144,18 +144,12 @@ return {
 			--lspconfig.terraform_ls.setup({
 			--	capabilities = capabilities,
 			--})
-			--
 
 			-- Add borders to our hover windows
 			local _border = "rounded"
 
 			local windowSettings = {
 				border = _border,
-				-- width = nil,
-				-- height = nil,
-				-- max_width = nil,
-				-- max_height = nil,
-				-- focusable = false,
 			}
 
 			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, windowSettings)
@@ -198,39 +192,6 @@ return {
 	},
 
 	--------------------------------------------------------
-	-- Linting configuration
-	--------------------------------------------------------
-	{
-		"mfussenegger/nvim-lint",
-		event = {
-			"BufReadPre",
-			"BufNewFile",
-		},
-		config = function()
-			local lint = require("lint")
-
-			lint.linters_by_ft = {
-				-- ESLint not needed since it's included as LSP.
-				kotlin = { "ktlint" },
-				terraform = { "tflint" },
-				html = { "htmlhint" },
-				sql = { "sqlfluff" },
-			}
-
-			--local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = "true" })
-			local lint_augroup = vim.api.nvim_create_augroup("lint", {})
-
-			-- Trigger when linting happens
-			vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-				group = lint_augroup,
-				callback = function()
-					require("lint").try_lint()
-				end,
-			})
-		end,
-	},
-
-	--------------------------------------------------------
 	-- Formatting configuration
 	--------------------------------------------------------
 	{
@@ -258,7 +219,6 @@ return {
 					graphql = { "prettierd" },
 					css = { "prettierd" },
 					scss = { "prettierd" },
-					kotlin = { "ktlint" },
 					markdown = { "prettierd" },
 					html = { "htmlbeautifier" },
 					rust = { "rustfmt" },
