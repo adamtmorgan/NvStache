@@ -3,7 +3,6 @@
 ----------------------------------------------------
 
 -- Status line config ------------------------------
-
 return {
 	"rebelot/heirline.nvim",
 	dependencies = {
@@ -191,51 +190,39 @@ return {
 				hl = { bold = true },
 			},
 			-- You could handle delimiters, icons and counts similar to Diagnostics
-			{
-				condition = function(self)
-					return self.has_changes
-				end,
-				provider = "(",
-			},
-			{
-				provider = function(self)
-					local count = self.status_dict.added or 0
-					return count > 0 and ("+" .. count)
-				end,
-				hl = { fg = colors.green },
-			},
-			{
-				provider = function(self)
-					local count = self.status_dict.removed or 0
-					return count > 0 and ("-" .. count)
-				end,
-				hl = { fg = colors.red },
-			},
-			{
-				provider = function(self)
-					local count = self.status_dict.changed or 0
-					return count > 0 and ("~" .. count)
-				end,
-				hl = { fg = colors.yellow },
-			},
-			{
-				condition = function(self)
-					return self.has_changes
-				end,
-				provider = ")",
-			},
-		}
-
-		----------------------------------------------------
-		--- Spacers, dividers, and positioning
-		----------------------------------------------------
-
-		local Divider = {
-			provider = " ❭ ",
-		}
-
-		local Space = {
-			provider = " ",
+			-- {
+			-- 	condition = function(self)
+			-- 		return self.has_changes
+			-- 	end,
+			-- 	provider = "(",
+			-- },
+			-- {
+			-- 	provider = function(self)
+			-- 		local count = self.status_dict.added or 0
+			-- 		return count > 0 and ("+" .. count)
+			-- 	end,
+			-- 	hl = { fg = colors.green },
+			-- },
+			-- {
+			-- 	provider = function(self)
+			-- 		local count = self.status_dict.removed or 0
+			-- 		return count > 0 and ("-" .. count)
+			-- 	end,
+			-- 	hl = { fg = colors.red },
+			-- },
+			-- {
+			-- 	provider = function(self)
+			-- 		local count = self.status_dict.changed or 0
+			-- 		return count > 0 and ("~" .. count)
+			-- 	end,
+			-- 	hl = { fg = colors.yellow },
+			-- },
+			-- {
+			-- 	condition = function(self)
+			-- 		return self.has_changes
+			-- 	end,
+			-- 	provider = ")",
+			-- },
 		}
 
 		local Align = { provider = "%=" }
@@ -334,6 +321,19 @@ return {
 		--- Status line assembly
 		----------------------------------------------------
 
+		local Left = {
+			ViModeSection,
+			Git,
+		}
+
+		local Center = {
+			Buffers,
+		}
+
+		local Right = {
+			Position,
+		}
+
 		-- Main line computes colors based on mode for child
 		-- components to reference via `self`
 		local MainLine = {
@@ -345,13 +345,11 @@ return {
 			-- Watch below closely... Performance could suck and this will
 			-- need to be changed:
 			-- update = { "BufAdd", "BufEnter", "BufLeave", "ModeChanged" },
-			ViModeSection,
-			Git,
-			Space,
-			Divider,
-			Buffers,
+			Left,
 			Align,
-			Position,
+			Center,
+			Align,
+			Right,
 		}
 
 		-- Full Status line
