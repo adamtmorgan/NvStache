@@ -50,10 +50,7 @@ vim.keymap.set("n", "<C-t>h", ":-tabnext<CR>", { noremap = true, silent = true }
 -- Switch between buffers quickly
 vim.keymap.set("n", "<leader>l", ":bnext<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>h", ":bprevious<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>x", ":bdelete<CR>", { noremap = true, silent = true })
-
--- Popup buffer command quickly
-vim.keymap.set("n", "<leader>b", ":b ", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>bd", ":bd<CR>", { noremap = true, silent = true })
 
 -- Clears all buffers except for the currently open one
 vim.keymap.set("n", "<leader>!", ":Clean<CR>", { noremap = true, silent = true })

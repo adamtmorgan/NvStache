@@ -130,7 +130,7 @@ This is because this config relies on LSPs instead.
 
 - Previous buffer - `<leader>h` (normal mode)
 
-- Delete buffer - `<leader>x` (normal mode)
+- Delete buffer - `<leader>bd` (normal mode)
 
 - Delete all buffers except current - `:Clean` or `<leader>!`
 

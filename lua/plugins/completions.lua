@@ -86,7 +86,7 @@ return {
 				},
 				floating_window = true, -- show hint in a floating window, set to false for virtual text only mode
 				hint_enable = true, -- virtual hint enable
-				hint_prefix = "🐼 ", -- Panda for parameter hint
+				hint_prefix = "󱗞 ", -- Panda for parameter hint
 				hi_parameter = "Search", -- Highlight for current parameter
 			})
 		end,
