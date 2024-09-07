@@ -97,6 +97,7 @@ return {
 				pickers = {
 					-- code actions using a different plugin, so not including here.
 					lsp_definitions = {
+						show_line = false,
 						layout_strategy = "vertical",
 						layout_config = {
 							width = 0.7,
@@ -105,6 +106,7 @@ return {
 						},
 					},
 					lsp_references = {
+						show_line = false,
 						layout_strategy = "vertical",
 						layout_config = {
 							width = 0.7,
@@ -113,6 +115,7 @@ return {
 						},
 					},
 					live_grep = {
+						show_line = false,
 						max_results = 50,
 					},
 					find_files = {
