@@ -33,7 +33,7 @@ return {
 					"codelldb", -- Debugging for Rust/C/C++/Zig
 					"cpptools", -- Debugging for Rust/C/C++
 					"lua_ls", -- lua
-					"tsserver", -- typescript
+					"ts_ls", -- typescript
 					"eslint", -- javascript
 					"vuels", -- vue.js
 					"jsonls", -- json
@@ -76,7 +76,7 @@ return {
 			lspconfig.lua_ls.setup({
 				capabilities = capabilities,
 			})
-			lspconfig.tsserver.setup({
+			lspconfig.ts_ls.setup({
 				capabilities = capabilities,
 			})
 			lspconfig.eslint.setup({
