@@ -1,16 +1,5 @@
 return {
 	--------------------------------------------------------
-	-- Lang-specific plugins
-	--------------------------------------------------------
-
-	-- Rust
-	{
-		"mrcjkb/rustaceanvim",
-		version = "^5", -- Recommended
-		lazy = false, -- This plugin is already lazy
-	},
-
-	--------------------------------------------------------
 	-- Mason LSP. Grants us LSP support in Neovim.
 	--------------------------------------------------------
 	{
@@ -33,7 +22,7 @@ return {
 					"codelldb", -- Debugging for Rust/C/C++/Zig
 					"cpptools", -- Debugging for Rust/C/C++
 					"lua_ls", -- lua
-					"ts_ls", -- typescript
+					"tsserver", -- typescript
 					"eslint", -- javascript
 					"vuels", -- vue.js
 					"jsonls", -- json
@@ -59,6 +48,24 @@ return {
 	},
 
 	--------------------------------------------------------
+	-- Lang-specific plugins/toolsets
+	--------------------------------------------------------
+
+	-- Rust
+	{
+		"mrcjkb/rustaceanvim",
+		version = "^5",
+		lazy = false, -- This plugin is already lazy
+	},
+
+	-- TypeScript
+	{
+		"pmizio/typescript-tools.nvim",
+		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+		opts = {},
+	},
+
+	--------------------------------------------------------
 	-- Nvim LSP Config
 	-- Wires up the lsp support and lsps themselves
 	-- to the neovim instance.
@@ -76,9 +83,14 @@ return {
 			lspconfig.lua_ls.setup({
 				capabilities = capabilities,
 			})
-			lspconfig.ts_ls.setup({
-				capabilities = capabilities,
-			})
+
+			-- No longer needed since using typescript-tools.nvim.
+			-- Keeping as a reference just in case.
+
+			-- lspconfig.ts_ls.setup({ -- aka "tsserver"
+			-- 	capabilities = capabilities,
+			-- })
+
 			lspconfig.eslint.setup({
 				capabilities = capabilities,
 			})
