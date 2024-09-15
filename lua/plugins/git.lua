@@ -1,18 +1,30 @@
 -- Shows inline git blame
 return {
-	-- Allows execution and previewing of git commands from vim
-	{
-		"tpope/vim-fugitive",
-		config = function()
-			vim.keymap.set("n", "<leader>gb", ":Git blame<CR>", { silent = true })
-			vim.keymap.set("n", "<leader>gc", ":Git commit<CR>", { silent = true })
-		end,
-	},
-	-- Git features in the editor (showing lines changed, for example)
+	-- Shows git signs in editor
 	{
 		"lewis6991/gitsigns.nvim",
 		config = function()
 			require("gitsigns").setup()
 		end,
+	},
+	-- Calls LazyGit inside of Neovim
+	{
+		"kdheepak/lazygit.nvim",
+		cmd = {
+			"LazyGit",
+			"LazyGitConfig",
+			"LazyGitCurrentFile",
+			"LazyGitFilter",
+			"LazyGitFilterCurrentFile",
+		},
+		-- optional for floating window border decoration
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+		-- setting the keybinding for LazyGit with 'keys' is recommended in
+		-- order to load the plugin when the command is run for the first time
+		keys = {
+			{ "<leader>g", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+		},
 	},
 }

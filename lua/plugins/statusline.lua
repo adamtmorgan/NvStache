@@ -305,13 +305,18 @@ return {
 		--- Cursor position and scrollbar
 		----------------------------------------------------
 
+		local LeftArrow = {
+			provider = "   ",
+			hl = { fg = colors.gray },
+		}
+
 		-- We're getting minimalist here!
 		local Position = {
 			-- %l = current line number
 			-- %L = number of lines in the buffer
 			-- %c = column number
 			-- %P = percentage through file of displayed window
-			provider = "%7(%l/%3L%):%2c %P",
+			provider = "%7(%l/%3L%):%2c  %P",
 			hl = function(self)
 				return { fg = self.color_primpary }
 			end,
@@ -324,9 +329,7 @@ return {
 		local Left = {
 			ViModeSection,
 			Git,
-		}
-
-		local Center = {
+			LeftArrow,
 			Buffers,
 		}
 
@@ -346,8 +349,8 @@ return {
 			-- need to be changed:
 			-- update = { "BufAdd", "BufEnter", "BufLeave", "ModeChanged" },
 			Left,
-			Align,
-			Center,
+			-- Align,
+			-- Center,
 			Align,
 			Right,
 		}

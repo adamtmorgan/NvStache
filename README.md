@@ -53,6 +53,14 @@ This config also uses [telescope-fzf-native](https://github.com/nvim-telescope/t
 ripgrep and fd (mentioned above) are great for actually retrieiving the search results, but fzf will greatly speed up the filtering down and ranking of those results so
 we see the most relevant results first, and quickly! This plugin is written in C and compiled for best performance. Lazy will actually build this natively for your platform using `make`, hence the dependency.
 
+## Git ([Lazygit](https://github.com/jesseduffield/lazygit))
+
+This config utilizes Lazygit as the Git client TUI of choice. [lazygit.nvim](https://github.com/kdheepak/lazygit.nvim) (plugin) simply opens a terminal inside of Neovim and opens Lazygit inside of it. For this to work, naturally, you'll need Lazygit installed separately. I highly recommend checking it out if you haven't already.
+
+```bash
+brew install jesseduffield/lazygit/lazygit
+```
+
 # 👨‍💻 Setup
 
 ### Cloning and Moving Config
@@ -152,7 +160,7 @@ This is because this config relies on LSPs instead.
 
 - Telescope Previous Result - `<C-k>` (in telescope window)
 
-- Default commands for Git via [Fugitive](https://github.com/tpope/vim-fugitive)
+- [Lazygit](https://github.com/jesseduffield/lazygit) (Git client) - `<leader>g`
 
 - Preview `.md` files in browser - `:MarkdownPreview`
 
