@@ -4,7 +4,11 @@ return {
 	{
 		"petertriho/nvim-scrollbar",
 		config = function()
-			require("scrollbar").setup()
+			require("scrollbar").setup({
+				handle = {
+					color = "#56576f",
+				},
+			})
 		end,
 	},
 

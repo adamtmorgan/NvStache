@@ -26,6 +26,7 @@ return {
 					"eslint", -- javascript
 					"vuels", -- vue.js
 					"jsonls", -- json
+					"yamlls", -- yaml
 					"html", -- html
 					"cssls", -- css
 					"intelephense", -- php
@@ -104,6 +105,9 @@ return {
 				capabilities = capabilities,
 			})
 			lspconfig.jsonls.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.yamlls.setup({
 				capabilities = capabilities,
 			})
 			lspconfig.taplo.setup({
