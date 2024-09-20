@@ -43,6 +43,7 @@ return {
 					"glsl_analyzer", -- webgl
 					"wgsl_analyzer", -- webgpu
 					"bashls", -- bash
+					"prettierd", -- Formatting for various common filetypes
 				},
 			})
 		end,
@@ -231,7 +232,8 @@ return {
 					javascript = { "prettierd" },
 					typescriptreact = { "prettierd" },
 					javascriptreact = { "prettierd" },
-					json = { "prettierd", "prettier" },
+					json = { "prettierd" },
+					yaml = { "prettierd" },
 					graphql = { "prettierd" },
 					css = { "prettierd" },
 					scss = { "prettierd" },
