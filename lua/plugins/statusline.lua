@@ -15,6 +15,7 @@ return {
 		local heirline = require("heirline")
 		local utils = require("heirline.utils")
 		local conditions = require("heirline.conditions")
+		local web_devicons = require("nvim-web-devicons")
 
 		----------------------------------------------------
 		--- Define Tables for colors and vim modes
@@ -236,7 +237,7 @@ return {
 				local filename = self.file_name
 				local extension = vim.fn.fnamemodify(filename, ":e")
 				self.icon, self.icon_color =
-					require("nvim-web-devicons").get_icon_color(filename, extension, { default = true })
+					web_devicons.get_icon_color(filename, extension, { default = true, variant = "light" })
 			end,
 			provider = function(self)
 				return self.icon and (" " .. self.icon .. " ")

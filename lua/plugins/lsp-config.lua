@@ -19,6 +19,7 @@ return {
 		config = function()
 			require("mason-lspconfig").setup({
 				ensure_installed = {
+					-- LSPs
 					"codelldb", -- Debugging for Rust/C/C++/Zig
 					"cpptools", -- Debugging for Rust/C/C++
 					"lua_ls", -- lua
@@ -43,7 +44,10 @@ return {
 					"glsl_analyzer", -- webgl
 					"wgsl_analyzer", -- webgpu
 					"bashls", -- bash
+
+					-- Formatting
 					"prettierd", -- Formatting for various common filetypes
+					"shfmt", -- Formatting for bash
 				},
 			})
 		end,
@@ -240,6 +244,7 @@ return {
 					markdown = { "prettierd" },
 					html = { "htmlbeautifier" },
 					rust = { "rustfmt" },
+					bash = { "shfmt" },
 				},
 			})
 
