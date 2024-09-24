@@ -47,7 +47,6 @@ return {
 
 					-- Formatting
 					"prettierd", -- Formatting for various common filetypes
-					"shfmt", -- Formatting for bash
 				},
 			})
 		end,
