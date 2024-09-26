@@ -7,11 +7,6 @@ return {
 			require("gitsigns").setup()
 		end,
 	},
-	-- For git actions in vim. Use Lazygit for most things,
-	-- but nice for in-editor stuff like 'blame.'
-	{
-		"tpope/vim-fugitive",
-	},
 	-- Calls LazyGit inside of Neovim
 	{
 		"kdheepak/lazygit.nvim",
