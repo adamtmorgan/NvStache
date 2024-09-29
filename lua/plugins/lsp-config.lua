@@ -1,6 +1,8 @@
 return {
 	--------------------------------------------------------
-	-- Mason LSP. Grants us LSP support in Neovim.
+	-- Mason is a package manager for various CLI and
+	-- server applications that connect to neovim for
+	-- various LSP, formatting, and other features.
 	--------------------------------------------------------
 	{
 		"williamboman/mason.nvim",
@@ -10,44 +12,45 @@ return {
 	},
 
 	--------------------------------------------------------
-	-- Mason LSP Config. Helps us install the LSPs
-	-- themselves so we don't have to do it manually.
-	-- https://github.com/williamboman/mason-lspconfig.nvim
+	-- Installs listed Mason packages on startup.
 	--------------------------------------------------------
 	{
-		"williamboman/mason-lspconfig.nvim",
+		-- "williamboman/mason-lspconfig.nvim",
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		config = function()
-			require("mason-lspconfig").setup({
+			-- require("mason-lspconfig").setup({
+			require("mason-tool-installer").setup({
 				ensure_installed = {
 					-- LSPs
 					"codelldb", -- Debugging for Rust/C/C++/Zig
 					"cpptools", -- Debugging for Rust/C/C++
-					"lua_ls", -- lua
-					"tsserver", -- typescript
-					"eslint", -- javascript
-					"vuels", -- vue.js
-					"jsonls", -- json
-					"yamlls", -- yaml
-					"html", -- html
-					"cssls", -- css
+					"lua-language-server", -- lua
+					"typescript-language-server", -- typescript
+					"eslint-lsp", -- javascript
+					"vetur-vls", -- vue.js
+					"json-lsp", -- json
+					"yaml-language-server", -- yaml
+					"html-lsp", -- html
+					"css-lsp", -- css
 					"intelephense", -- php
 					"pyright", -- python
-					"rust_analyzer", -- rust
+					"rust-analyzer", -- rust
 					"taplo", -- toml
 					"sqlls", -- sql
-					"bashls", -- bash
-					"dockerls", -- docker
-					"docker_compose_language_service", -- docker compose
-					"terraformls", -- terraform
-					"rnix", -- nix
-					"graphql", -- graphql
+					"bash-language-server", -- bash
+					"dockerfile-language-server", -- docker
+					"docker-compose-language-service", -- docker compose
+					"terraform-ls", -- terraform
+					"rnix-lsp", -- nix
+					"graphql-language-service-cli", -- graphql
 					"glsl_analyzer", -- webgl
-					"wgsl_analyzer", -- webgpu
-					"bashls", -- bash
+					"wgsl-analyzer", -- webgpu
 
 					-- Formatting
 					"prettierd", -- Formatting for various common filetypes
 				},
+				run_on_start = true,
+				auto_update = false,
 			})
 		end,
 	},
@@ -72,8 +75,8 @@ return {
 
 	--------------------------------------------------------
 	-- Nvim LSP Config
-	-- Wires up the lsp support and lsps themselves
-	-- to the neovim instance.
+	-- Wires up LSPs that have been installed via Mason
+	-- (or manually) to the LSP features in Neovim.
 	-- https://github.com/neovim/nvim-lspconfig
 	--------------------------------------------------------
 	{
@@ -212,7 +215,8 @@ return {
 	},
 
 	--------------------------------------------------------
-	-- Formatting configuration
+	-- Wires up formatters installed via Mason (or manually)
+	-- to the current buffer.
 	--------------------------------------------------------
 	{
 		"stevearc/conform.nvim",
