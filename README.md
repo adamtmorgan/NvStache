@@ -84,30 +84,37 @@ Open Neovim and run:
 
 ### LSP, Linting, and Formatting Servers
 
-You shouldn't have to manually install LSP, linting, and formatting thanks to `ensure-installed` in Mason, but just in case, I have listed the Mason dependencies here. You can manually manage these by opening the Mason interface inside of Neovim by running `:Mason`. The following are all supported in this config:
+You shouldn't have to manually install LSP, linting, and formatting thanks to [mason-tool-installer](https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim), but just in case, I have listed the Mason dependencies here. You can manually manage these by opening the Mason interface inside of Neovim by running `:Mason`. The following are all supported in this config:
 
-- LSP
-  - bash-language-server (bash)
-  - css-lsp (css)
-  - docker-compose-language-service (docker-compose)
-  - dockerfile-language-server (dockerfile)
-  - html-lsp (html)
-  - json-lsp (json)
-  - lua-language-server (lua)
-  - pyright (python)
-  - sqlls (sql)
-  - tailwindcss-language-server (tailwind.css)
-  - taplo (toml)
-  - typescript-language-server (typescript)
-  - vetur-vls (vue.js)
-- Linting
-  - sqlfluff (sql)
-  - tflint (terraform)
-- Formatting
-  - prettierd (formatting js, css, ts, and many others)
-  - stylua (lua formatting)
-- Hybrid (lsp/lint/format)
-  - rust-analyzer (rust)
+#### LSPs
+
+- `codelldb` - Debugging for Rust/C/C++/Zig
+- `cpptools` - Debugging for Rust/C/C++
+- `lua-language-server` - lua
+- `typescript-language-server` - typescript
+- `eslint-lsp` - javascript
+- `vetur-vls` - vue.js
+- `json-lsp` - json
+- `yaml-language-server` - yaml
+- `html-lsp` - html
+- `css-lsp` - css
+- `intelephense` - php
+- `pyright` - python
+- `rust-analyzer` - rust
+- `taplo` - toml
+- `sqlls` - sql
+- `bash-language-server` - bash
+- `dockerfile-language-server` - docker
+- `docker-compose-language-service` - docker compose
+- `terraform-ls` - terraform
+- `rnix-lsp` - nix
+- `graphql-language-service-cli` - graphql
+- `glsl_analyzer` - webgl
+- `wgsl-analyzer` - webgpu
+
+#### Formatters
+
+- prettierd -- Formatting for various common filetypes
 
 If you don't want to use some of these LSPs, you can disable
 them by visiting the LSP section of the config found in
