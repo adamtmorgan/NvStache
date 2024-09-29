@@ -8,50 +8,59 @@ return {
 		"williamboman/mason.nvim",
 		config = function()
 			require("mason").setup()
-		end,
-	},
 
-	--------------------------------------------------------
-	-- Installs listed Mason packages on startup.
-	--------------------------------------------------------
-	{
-		-- "williamboman/mason-lspconfig.nvim",
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
-		config = function()
-			-- require("mason-lspconfig").setup({
-			require("mason-tool-installer").setup({
-				ensure_installed = {
-					-- LSPs
-					"codelldb", -- Debugging for Rust/C/C++/Zig
-					"cpptools", -- Debugging for Rust/C/C++
-					"lua-language-server", -- lua
-					"typescript-language-server", -- typescript
-					"eslint-lsp", -- javascript
-					"vetur-vls", -- vue.js
-					"json-lsp", -- json
-					"yaml-language-server", -- yaml
-					"html-lsp", -- html
-					"css-lsp", -- css
-					"intelephense", -- php
-					"pyright", -- python
-					"rust-analyzer", -- rust
-					"taplo", -- toml
-					"sqlls", -- sql
-					"bash-language-server", -- bash
-					"dockerfile-language-server", -- docker
-					"docker-compose-language-service", -- docker compose
-					"terraform-ls", -- terraform
-					"rnix-lsp", -- nix
-					"graphql-language-service-cli", -- graphql
-					"glsl_analyzer", -- webgl
-					"wgsl-analyzer", -- webgpu
+			-- Checks listed packages and installs them
+			-- if they are not already:
 
-					-- Formatting
-					"prettierd", -- Formatting for various common filetypes
-				},
-				run_on_start = true,
-				auto_update = false,
-			})
+			local registry = require("mason-registry")
+
+			-- These are package names sourced from the Mason registry,
+			-- and may not necessarily match the server names used in lspconfig
+			local ensure_installed = {
+				-- LSPs
+				"codelldb", -- Debugging for Rust/C/C++/Zig
+				"cpptools", -- Debugging for Rust/C/C++
+				"lua-language-server", -- lua
+				"typescript-language-server", -- typescript
+				"eslint-lsp", -- javascript
+				"vetur-vls", -- vue.js
+				"json-lsp", -- json
+				"yaml-language-server", -- yaml
+				"html-lsp", -- html
+				"css-lsp", -- css
+				"intelephense", -- php
+				"pyright", -- python
+				"rust-analyzer", -- rust
+				"taplo", -- toml
+				"sqlls", -- sql
+				"bash-language-server", -- bash
+				"dockerfile-language-server", -- docker
+				"docker-compose-language-service", -- docker compose
+				"terraform-ls", -- terraform
+				"rnix-lsp", -- nix
+				"graphql-language-service-cli", -- graphql
+				"glsl_analyzer", -- webgl
+				"wgsl-analyzer", -- webgpu
+
+				-- Formatting
+				"prettierd", -- Formatting for various common filetypes
+			}
+
+			-- Ensure packages are installed and up to date
+			registry.refresh(function()
+				for _, name in pairs(ensure_installed) do
+					local package = registry.get_package(name)
+					if not registry.is_installed(name) then
+						package:install()
+					else
+						package:check_new_version(function(success, result_or_err)
+							if success then
+								package:install({ version = result_or_err.latest_version })
+							end
+						end)
+					end
+				end
+			end)
 		end,
 	},
 
