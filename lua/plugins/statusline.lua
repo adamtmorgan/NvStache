@@ -39,22 +39,14 @@ local function compute_buffer_path_name(full_path)
 	return trimmed_path
 end
 
-local function count_file_buffers()
-	local buffers = vim.api.nvim_list_bufs() -- Get a list of all buffers
-	local file_buf_count = 0
-
-	for _, buf in ipairs(buffers) do
-		-- Check if the buffer is valid and its 'buftype' is empty (indicating a file buffer)
-		if vim.api.nvim_buf_is_valid(buf) and vim.bo[buf].buftype == "" then
-			-- Check if the buffer has a file name (to avoid counting unnamed buffers)
-			local buf_name = vim.api.nvim_buf_get_name(buf)
-			if buf_name ~= "" then
-				file_buf_count = file_buf_count + 1
-			end
+local function buffer_count()
+	local count = 0
+	for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+		if vim.fn.buflisted(bufnr) == 1 then
+			count = count + 1
 		end
 	end
-
-	return file_buf_count
+	return count
 end
 
 ----------------------------------------------------
@@ -140,10 +132,7 @@ local mode_names = { -- change the strings if you like it vvvvverbose!
 	t = "T",
 }
 
-----------------------------------------------------
---- Status line version 1
-----------------------------------------------------
-local v1 = {
+return {
 	"rebelot/heirline.nvim",
 	dependencies = {
 		{ "nvim-tree/nvim-web-devicons" },
@@ -198,292 +187,8 @@ local v1 = {
 					end,
 				},
 			},
-		}
-
-		----------------------------------------------------
-		--- Component that shows if a macro is recording
-		----------------------------------------------------
-
-		local MacroRec = {
-			condition = function()
-				return vim.fn.reg_recording() ~= "" and vim.o.cmdheight == 0
-			end,
-			utils.surround({ "", " " }, colors.red, {
-				provider = "󰻂 ",
-				hl = { fg = colors.background, bold = true },
-				utils.surround({ "[", "]" }, nil, {
-					provider = function()
-						return vim.fn.reg_recording()
-					end,
-					hl = { bold = true },
-				}),
-				update = {
-					"RecordingEnter",
-					"RecordingLeave",
-				},
-			}),
-		}
-
-		----------------------------------------------------
-		--- Git
-		----------------------------------------------------
-
-		local Git = {
-			condition = conditions.is_git_repo,
-			init = function(self)
-				self.status_dict = vim.b.gitsigns_status_dict
-				self.has_changes = self.status_dict.added ~= 0
-					or self.status_dict.removed ~= 0
-					or self.status_dict.changed ~= 0
-			end,
-
-			hl = function(self)
-				return { fg = self.color_primpary }
-			end,
-
-			{ -- git branch name
-				provider = function(self)
-					return "   " .. self.status_dict.head
-				end,
-				hl = { bold = true },
-			},
-			-- You could handle delimiters, icons and counts similar to Diagnostics
-			-- {
-			-- 	condition = function(self)
-			-- 		return self.has_changes
-			-- 	end,
-			-- 	provider = "(",
-			-- },
-			-- {
-			-- 	provider = function(self)
-			-- 		local count = self.status_dict.added or 0
-			-- 		return count > 0 and ("+" .. count)
-			-- 	end,
-			-- 	hl = { fg = colors.green },
-			-- },
-			-- {
-			-- 	provider = function(self)
-			-- 		local count = self.status_dict.removed or 0
-			-- 		return count > 0 and ("-" .. count)
-			-- 	end,
-			-- 	hl = { fg = colors.red },
-			-- },
-			-- {
-			-- 	provider = function(self)
-			-- 		local count = self.status_dict.changed or 0
-			-- 		return count > 0 and ("~" .. count)
-			-- 	end,
-			-- 	hl = { fg = colors.yellow },
-			-- },
-			-- {
-			-- 	condition = function(self)
-			-- 		return self.has_changes
-			-- 	end,
-			-- 	provider = ")",
-			-- },
-		}
-
-		local Align = { provider = "%=" }
-
-		----------------------------------------------------
-		--- Make buffer list
-		----------------------------------------------------
-
-		local FileIcon = {
-			init = function(self)
-				local filename = self.file_name
-				local extension = vim.fn.fnamemodify(filename, ":e")
-				self.icon, self.icon_color =
-					web_devicons.get_icon_color(filename, extension, { default = true, variant = "light" })
-			end,
-			provider = function(self)
-				return self.icon and (" " .. self.icon .. " ")
-			end,
-			hl = function(self)
-				if self.is_active and self.mode_cat ~= "n" then
-					return { fg = self.color_primary }
-				elseif self.is_active and self.mode_cat == "n" then
-					return { fg = self.icon_color }
-				else
-					return { fg = colors.gray }
-				end
-			end,
-		}
-
-		local BufferFileName = {
-			provider = function(self)
-				return self.file_name .. " "
-			end,
-		}
-
-		local Buffer = {
-			init = function(self)
-				self.file_name_path = vim.api.nvim_buf_get_name(self.bufnr)
-				self.file_name = self.file_name_path:match("^.+/(.+)$")
-				if self.file_name == nil then
-					self.file_name = vim.api.nvim_buf_get_option(self.bufnr, "buftype")
-				end
-			end,
-			-- condition = function(self)
-			-- 	return self.file_name ~= nil
-			-- end,
-			FileIcon,
-			BufferFileName,
-			on_click = {
-				callback = function(_, minwid, _, button)
-					if button == "m" then -- close on mouse middle click
-						vim.schedule(function()
-							vim.api.nvim_buf_delete(minwid, { force = false })
-						end)
-					else
-						vim.api.nvim_win_set_buf(0, minwid)
-					end
-				end,
-				minwid = function(self)
-					return self.bufnr
-				end,
-				name = "heirline_tabline_buffer_callback",
-			},
-			hl = function(self)
-				if self.is_active then
-					return { fg = self.color_primpary }
-				else
-					return { fg = colors.gray }
-				end
-			end,
-		}
-
-		local Buffers = utils.make_buflist(
-			Buffer,
-			{ provider = "…", hl = { fg = colors.gray } },
-			{ provider = "…", hl = { fg = colors.gray } }
-		)
-
-		----------------------------------------------------
-		--- Cursor position and scrollbar
-		----------------------------------------------------
-
-		local LeftArrow = {
-			provider = "   ",
-			hl = { fg = colors.gray },
-		}
-
-		-- We're getting minimalist here!
-		local Position = {
-			-- %l = current line number
-			-- %L = number of lines in the buffer
-			-- %c = column number
-			-- %P = percentage through file of displayed window
-			provider = "%7(%l/%3L%):%2c  %P",
-			hl = function(self)
-				return { fg = self.color_primpary }
-			end,
-		}
-
-		----------------------------------------------------
-		--- Status line assembly
-		----------------------------------------------------
-
-		local Left = {
-			ViModeSection,
-			Git,
-			LeftArrow,
-			Buffers,
-		}
-
-		local Right = {
-			Position,
-		}
-
-		-- Main line computes colors based on mode for child
-		-- components to reference via `self`
-		local MainLine = {
-			init = function(self)
-				self.mode = vim.fn.mode(1) -- :h mode()
-				self.mode_cat = self.mode:sub(1, 1) -- first char only
-				self.color_primpary = mode_colors[self.mode_cat]
-			end,
-			-- Watch below closely... Performance could suck and this will
-			-- need to be changed:
-			-- update = { "BufAdd", "BufEnter", "BufLeave", "ModeChanged" },
-			Left,
-			-- Align,
-			-- Center,
-			Align,
-			Right,
-		}
-
-		-- Full Status line
-		local StatusLine = { hl = { bg = "none" }, { MacroRec, MainLine } }
-
-		-- Make status line background transparent so heirline can take over.
-		vim.cmd([[
-		  highlight StatusLine ctermbg=NONE guibg=NONE
-		  highlight StatusLineNC ctermbg=NONE guibg=NONE
-		]])
-
-		heirline.setup({ statusline = StatusLine, ops = { colors = colors } })
-	end,
-}
-
-----------------------------------------------------
---- Status line version 1
-----------------------------------------------------
-
-local v2 = {
-	"rebelot/heirline.nvim",
-	dependencies = {
-		{ "nvim-tree/nvim-web-devicons" },
-	},
-	-- You can optionally lazy-load heirline on UiEnter
-	-- to make sure all required plugins and colorschemes are loaded before setup
-	-- event = "UiEnter",
-	config = function()
-		local heirline = require("heirline")
-		local utils = require("heirline.utils")
-		local conditions = require("heirline.conditions")
-		local web_devicons = require("nvim-web-devicons")
-
-		----------------------------------------------------
-		--- Vim Mode Components
-		----------------------------------------------------
-
-		local ViModeText = {
-			init = function(self)
-				self.mode = vim.fn.mode(1) -- :h mode()
-			end,
-			provider = function(self)
-				return mode_names[self.mode]
-			end,
 			update = {
 				"ModeChanged",
-				pattern = "*:*",
-				callback = vim.schedule_wrap(function()
-					vim.cmd("redrawstatus")
-				end),
-			},
-		}
-
-		local ViModeSection = {
-			{
-				{
-					provider = "",
-					hl = function(self)
-						return { fg = self.color_primpary, bg = "none" }
-					end,
-				},
-				{
-					ViModeText,
-					hl = function(self)
-						return { fg = colors.background, bg = self.color_primpary, bold = true }
-					end,
-				},
-				{
-					provider = "",
-					hl = function(self)
-						return { fg = self.color_primpary, bg = "none" }
-					end,
-				},
 			},
 		}
 
@@ -584,18 +289,29 @@ local v2 = {
 			hl = function(self)
 				return { fg = self.color_primpary }
 			end,
+			update = {
+				"BufEnter",
+				"BufLeave",
+				"ModeChanged",
+			},
 		}
 
 		local OpenBuffersCount = {
-			init = function(self)
-				self.open_buffers_count = count_file_buffers()
-			end,
-			provider = function(self)
-				return "  " .. self.open_buffers_count
+			provider = function()
+				local count = buffer_count()
+				return "  " .. count
 			end,
 			hl = function(self)
 				return { fg = self.color_primpary }
 			end,
+			update = {
+				"VimEnter",
+				"BufAdd",
+				"BufDelete",
+				"BufFilePost",
+				"BufNew",
+				"ModeChanged",
+			},
 		}
 
 		----------------------------------------------------
@@ -607,7 +323,6 @@ local v2 = {
 			hl = { fg = colors.gray },
 		}
 
-		-- We're getting minimalist here!
 		local Position = {
 			-- %l = current line number
 			-- %L = number of lines in the buffer
@@ -617,6 +332,9 @@ local v2 = {
 			hl = function(self)
 				return { fg = self.color_primpary }
 			end,
+			update = {
+				"ModeChanged",
+			},
 		}
 
 		----------------------------------------------------
@@ -651,6 +369,7 @@ local v2 = {
 			-- Center,
 			Align,
 			Right,
+			update = { "BufEnter", "BufLeave", "ModeChanged" },
 		}
 
 		-- Full Status line
@@ -665,5 +384,3 @@ local v2 = {
 		heirline.setup({ statusline = StatusLine, ops = { colors = colors } })
 	end,
 }
-
-return v2
