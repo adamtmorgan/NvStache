@@ -84,7 +84,7 @@ Open Neovim and run:
 
 ### LSP, Linting, and Formatting Servers
 
-You shouldn't have to manually install LSP, linting, and formatting thanks to [mason-tool-installer](https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim), but just in case, I have listed the Mason dependencies here. You can manually manage these by opening the Mason interface inside of Neovim by running `:Mason`. The following are all supported in this config:
+You shouldn't have to manually install LSP, linting, and formatting, as the `lsp-config.lua` file checks for a list of Mason registers on Neovim startup. Just in case you require manual intervention, I have listed the Mason dependencies here. You can manually manage these by opening the Mason interface inside of Neovim by running `:Mason`. Just note that if you remove a registered package manually and do not remove it from the `ensure_installed` table in `lsp-config.lua`, the package will be re-installed the next time you open Neovim, so make sure you uninstall via Mason UI as well as removing the item from the `ensure_installed` table. The following are all supported in this config:
 
 #### LSPs
 
