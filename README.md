@@ -88,35 +88,35 @@ You shouldn't have to manually install LSP, linting, and formatting thanks to [m
 
 #### LSPs
 
-- `codelldb` - Debugging for Rust/C/C++/Zig
-- `cpptools` - Debugging for Rust/C/C++
-- `lua-language-server` - lua
-- `typescript-language-server` - typescript
-- `eslint-lsp` - javascript
-- `vetur-vls` - vue.js
-- `json-lsp` - json
-- `yaml-language-server` - yaml
-- `html-lsp` - html
-- `css-lsp` - css
-- `intelephense` - php
-- `pyright` - python
-- `rust-analyzer` - rust
-- `taplo` - toml
-- `sqlls` - sql
-- `bash-language-server` - bash
-- `dockerfile-language-server` - docker
-- `docker-compose-language-service` - docker compose
-- `terraform-ls` - terraform
-- `rnix-lsp` - nix
-- `graphql-language-service-cli` - graphql
-- `glsl_analyzer` - webgl
-- `wgsl-analyzer` - webgpu
+- **bash-language-server**: (keywords: bash)
+- **codelldb**: (keywords: c, c++, rust, zig)
+- **cpptools**: (keywords: c, c++, rust)
+- **css-lsp**: (keywords: css, scss, less)
+- **docker-compose-language-service**: (keywords: docker)
+- **dockerfile-language-server**: (keywords: docker)
+- **eslint-lsp**: (keywords: javascript, typescript)
+- **glsl_analyzer**: (keywords: opengl)
+- **graphql-language-service-cli**: (keywords: graphql)
+- **html-lsp**: (keywords: html)
+- **intelephense**: (keywords: php)
+- **json-lsp**: (keywords: json)
+- **lua-language-server**: (keywords: lua)
+- **luau-lsp**: (keywords: luau)
+- **prettierd**: (keywords: angular, css, flow, graphql, html, json, jsx, javascript, less, markdown, scss, typescript, vue, yaml)
+- **pyright**: (keywords: python)
+- **rnix-lsp**: (keywords: nix)
+- **rust-analyzer**: (keywords: rust)
+- **shfmt**: (keywords: bash, mksh, shell)
+- **sqlls**: (keywords: sql)
+- **stylua**: (keywords: lua, luau)
+- **taplo**: (keywords: toml)
+- **terraform-ls**: (keywords: terraform)
+- **typescript-language-server**: (keywords: typescript, javascript)
+- **vetur-vls**: (keywords: vue)
+- **wgsl-analyzer**: (keywords: wgsl)
+- **yaml-language-server**: (keywords: yaml)
 
-#### Formatters
-
-- prettierd -- Formatting for various common filetypes
-
-If you don't want to use some of these LSPs, you can disable
+If you don't want to use some of these LSPs/formatters, you can disable
 them by visiting the LSP section of the config found in
 `lua/plugins/lsp-config.lua`. Keep in mind that you will need to
 disable parts in the Mason, nvim-lspconfig, linting, and formatting
@@ -176,6 +176,10 @@ This is because this config relies on LSPs instead.
 - Comment line toggle - `gcc` in normal mode. `gc` in visual mode.
 
 - Uses default [flash.nvim](https://github.com/folke/flash.nvim) bindings for quick navigation in view.
+
+- Open marked files using [Arrow](https://github.com/otavioschwanck/arrow.nvim) - `;` - close with `q`
+
+- Open marks in current buffer using [Arrow](https://github.com/otavioschwanck/arrow.nvim) - `m` - close with `q`
 
 - Sessions
   - If a session is saved, it will automatically save current state on Neovim close.
