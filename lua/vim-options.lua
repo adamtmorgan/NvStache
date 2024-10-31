@@ -11,7 +11,6 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.cmdheight = 0
 vim.opt.scrolloff = 50
 
 ------------------------------------------
@@ -69,6 +68,12 @@ end, {})
 ------------------------------------------
 vim.cmd("autocmd InsertEnter * :set norelativenumber")
 vim.cmd("autocmd InsertLeave * :set relativenumber")
+
+-- Show command line below status bar rather than
+-- replacing it completely.
+vim.opt.cmdheight = 0
+vim.cmd("autocmd CmdlineEnter * :set cmdheight=1")
+vim.cmd("autocmd CmdlineLeave * :set cmdheight=0")
 
 -- Neovide-specific config
 if vim.g.neovide then
