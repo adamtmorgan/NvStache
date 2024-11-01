@@ -38,7 +38,7 @@ vim.g.mapleader = " "
 vim.keymap.set("v", "<C-c>", '"+y', { noremap = true, silent = true })
 
 -- Clear search
-vim.keymap.set("n", "<leader>/", ":noh<CR>", {})
+vim.keymap.set("n", "<leader>/", ":noh<CR>", { silent = true })
 
 -- Switch between panes and tabs quickly
 vim.keymap.set("n", "<C-t>n", ":tabnew<CR>", { noremap = true, silent = true }) -- overrites ctag (idc since we use lsp)
