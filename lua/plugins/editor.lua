@@ -3,10 +3,29 @@ return {
 	-- in project.
 	{
 		"petertriho/nvim-scrollbar",
+		dependencies = { "lewis6991/gitsigns.nvim", "kevinhwang91/nvim-hlslens" },
 		config = function()
 			require("scrollbar").setup({
+				handlers = {
+					cursor = true,
+					diagnostic = true,
+					gitsigns = false, -- Requires gitsigns
+					handle = true,
+					search = true, -- Requires hlslens
+				},
 				handle = {
 					color = "#56576f",
+				},
+				marks = {
+					Cursor = {
+						text = "◆",
+						priority = 0,
+						gui = nil,
+						color = nil,
+						cterm = nil,
+						color_nr = nil, -- cterm
+						highlight = "Normal",
+					},
 				},
 			})
 		end,
