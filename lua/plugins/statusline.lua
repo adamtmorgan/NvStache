@@ -94,6 +94,10 @@ local mode_colors = {
 	t = colors.red,
 }
 
+local statusline_bg = "none"
+-- local statusline_bg = "#2f323c"
+-- local statusline_bg = "#1c2125"
+
 local mode_names = { -- change the strings if you like it vvvvverbose!
 	-- Normal
 	n = normal_string,
@@ -183,7 +187,7 @@ return {
 				{
 					provider = "",
 					hl = function(self)
-						return { fg = self.color_primpary, bg = "none" }
+						return { fg = self.color_primpary, bg = statusline_bg }
 					end,
 				},
 			},
@@ -230,7 +234,7 @@ return {
 			end,
 
 			hl = function(self)
-				return { fg = self.color_primpary }
+				return { fg = self.color_primpary, bg = statusline_bg }
 			end,
 
 			{ -- git branch name
@@ -241,7 +245,7 @@ return {
 			},
 		}
 
-		local Align = { provider = "%=" }
+		local Align = { provider = "%=", hl = { bg = statusline_bg } }
 
 		----------------------------------------------------
 		--- Make buffer list
@@ -297,20 +301,29 @@ return {
 		}
 
 		local OpenBuffersCount = {
-			provider = function()
-				local count = buffer_count()
-				return "  " .. count
-			end,
-			hl = function(self)
-				return { fg = self.color_primpary }
-			end,
-			update = {
-				"VimEnter",
-				"BufAdd",
-				"BufDelete",
-				"BufFilePost",
-				"BufNew",
-				"ModeChanged",
+			{
+				provider = function()
+					local count = buffer_count()
+					return "  " .. count .. " "
+				end,
+				hl = function(self)
+					return { fg = self.color_primpary }
+				end,
+				update = {
+					"VimEnter",
+					"BufAdd",
+					"BufDelete",
+					"BufFilePost",
+					"BufNew",
+					"ModeChanged",
+				},
+			},
+			{
+				provider = "",
+				hl = { fg = statusline_bg, bg = "none" },
+				condition = function()
+					return statusline_bg ~= "none"
+				end,
 			},
 		}
 
@@ -320,7 +333,7 @@ return {
 
 		local LeftArrow = {
 			provider = "   ",
-			hl = { fg = colors.gray },
+			hl = { fg = colors.gray, bg = statusline_bg },
 		}
 
 		local Position = {
@@ -330,7 +343,7 @@ return {
 			-- %P = percentage through file of displayed window
 			provider = "%7(%l/%3L%):%2c  %P ",
 			hl = function(self)
-				return { fg = self.color_primpary }
+				return { fg = self.color_primpary, bg = statusline_bg }
 			end,
 			update = {
 				"ModeChanged",
@@ -346,11 +359,13 @@ return {
 			Git,
 			LeftArrow,
 			ActiveBuffer,
+			hl = { bg = statusline_bg },
 		}
 
 		local Right = {
 			Position,
 			OpenBuffersCount,
+			hl = { bg = statusline_bg },
 		}
 
 		-- Main line computes colors based on mode for child
