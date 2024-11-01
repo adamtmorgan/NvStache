@@ -209,6 +209,9 @@ return {
 
 			-- Loads FZF as fuzzy finder
 			require("telescope").load_extension("fzf")
+
+			-- Use Noice with telescope
+			-- require("telescope").load_extension("noice")
 		end,
 	},
 }
