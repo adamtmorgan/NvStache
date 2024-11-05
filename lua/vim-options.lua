@@ -77,6 +77,9 @@ vim.cmd("autocmd CmdlineLeave * :set cmdheight=0")
 
 -- Neovide-specific config
 if vim.g.neovide then
+	-- Cursorline has bugs in Neovide
+	vim.opt.cursorline = false
+
 	-- Font
 	vim.o.guifont = "JetBrainsMono Nerd Font:h12"
 	vim.opt.linespace = 0
