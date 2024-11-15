@@ -3,6 +3,7 @@
 ------------------------------------------
 vim.cmd("set expandtab")
 vim.cmd("set splitright")
+vim.cmd("set nowrap")
 
 vim.opt.autoindent = true
 vim.opt.smartindent = true
