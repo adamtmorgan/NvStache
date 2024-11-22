@@ -19,11 +19,24 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.6",
-		dependencies = { "nvim-lua/plenary.nvim" },
+		dependencies = {
+			{ "nvim-lua/plenary.nvim" },
+			{
+				"nvim-telescope/telescope-live-grep-args.nvim",
+				-- This will not install any breaking changes.
+				-- For major updates, this must be adjusted manually.
+				version = "^1.0.0",
+			},
+		},
 		config = function()
+			local live_grep_args_shortcuts = require("telescope-live-grep-args.shortcuts")
 			local telescopeBuiltin = require("telescope.builtin")
+			local telescope = require("telescope")
+
 			vim.keymap.set("n", "<leader>ff", telescopeBuiltin.find_files, {})
-			vim.keymap.set("n", "<leader>fg", telescopeBuiltin.live_grep, {})
+			vim.keymap.set("n", "<leader>fg", telescope.extensions.live_grep_args.live_grep_args, {})
+			vim.keymap.set("v", "<leader>fg", live_grep_args_shortcuts.grep_visual_selection, {})
+			vim.keymap.set("n", "<leader>fc", live_grep_args_shortcuts.grep_word_under_cursor, {})
 			vim.keymap.set("n", "<leader>fb", telescopeBuiltin.buffers, {})
 			vim.keymap.set("n", "<leader>fh", telescopeBuiltin.help_tags, {})
 		end,
@@ -36,7 +49,9 @@ return {
 			-- local add_to_trouble = require("trouble.sources.telescope").add
 			local actions = require("telescope.actions")
 
-			require("telescope").setup({
+			local telescope = require("telescope")
+
+			telescope.setup({
 				-- Override some mappings
 				defaults = {
 					max_results = 50,
@@ -205,10 +220,13 @@ return {
 			})
 			-- To get ui-select loaded and working with telescope, you need to call
 			-- load_extension, somewhere after setup function:
-			require("telescope").load_extension("ui-select")
+			telescope.load_extension("ui-select")
 
 			-- Loads FZF as fuzzy finder
-			require("telescope").load_extension("fzf")
+			telescope.load_extension("fzf")
+
+			-- Allows args to be used in telescope live-grep field
+			telescope.load_extension("live_grep_args")
 
 			-- Use Noice with telescope
 			-- require("telescope").load_extension("noice")
