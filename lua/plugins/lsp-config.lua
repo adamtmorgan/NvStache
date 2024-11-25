@@ -161,6 +161,7 @@ return {
 			})
 			lspconfig.graphql.setup({
 				capabilities = capabilities,
+				root_dir = lspconfig.util.root_pattern(".graphqlconfig", ".graphqlrc", "package.json", ".git"),
 			})
 			lspconfig.glsl_analyzer.setup({
 				capabilities = capabilities,
