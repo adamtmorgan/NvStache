@@ -5,6 +5,12 @@ return {
 	-- 	opts = {},
 	-- },
 	{
+		"norcalli/nvim-colorizer.lua",
+		config = function()
+			require("colorizer").setup()
+		end,
+	},
+	{
 		"j-hui/fidget.nvim",
 		opts = {
 			notification = {
