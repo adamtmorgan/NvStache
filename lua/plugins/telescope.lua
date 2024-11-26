@@ -90,6 +90,7 @@ return {
 						".git",
 						"dist",
 						"build",
+						"target",
 						"fontawesome*",
 					},
 					mappings = {
@@ -143,9 +144,15 @@ return {
 							"--hidden",
 							"--follow",
 
-							-- Exclusions
-							"--exclude",
-							".git",
+							-- Project exclusions
+							-- "--exclude",
+							-- "*/node_modules/*",
+							-- "--exclude",
+							-- "*/target/*",
+							-- "--exclude",
+							-- ".git",
+
+							-- Filetype Exclusions
 							"--exclude",
 							"*.png",
 							"--exclude",

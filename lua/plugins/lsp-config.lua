@@ -73,6 +73,15 @@ return {
 		"mrcjkb/rustaceanvim",
 		version = "^5",
 		lazy = false, -- This plugin is already lazy
+		config = function()
+			vim.g.rustaceanvim = {
+				tools = {
+					float_win_config = {
+						border = "rounded",
+					},
+				},
+			}
+		end,
 	},
 
 	-- TypeScript
@@ -90,6 +99,7 @@ return {
 	--------------------------------------------------------
 	{
 		"neovim/nvim-lspconfig",
+		dependencies = { "Fildo7525/pretty_hover" },
 		config = function()
 			-- Here we reference the autocomplete lsp provider so that
 			-- our autocomplete can use LSP data.

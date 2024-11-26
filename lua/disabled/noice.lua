@@ -15,7 +15,7 @@ return {
 	config = function()
 		-- Overriding the border color
 		vim.api.nvim_set_hl(0, "NoiceCmdlinePopupBorder", { fg = "#D1C79B" })
-		require("lua.disabled.noice").setup({
+		require("noice").setup({
 			lsp = {
 				-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
 				override = {
