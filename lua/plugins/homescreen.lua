@@ -55,7 +55,7 @@ return {
 				fold_section = false,
 				title = "Footer",
 				margin = 5,
-				content = { '🍷 "In vino veritas."' },
+				content = { '👉 "Say When..."' },
 				highlight = "Number",
 				default_color = "",
 				oldfiles_amount = 0,
