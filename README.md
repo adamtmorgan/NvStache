@@ -2,40 +2,15 @@
 
 ![screenshot](screenshot.png)
 
-# 📦 External Dependencies
+# 👉 Say When...
 
-### Node
+NvStache is a my personal Neovim configuration, tailored for speed and workflow with a carefully-curated plugin selection.
+This config is great for web programming (ts, js, css, html, etc.), Rust programming, and general-purpose config editing (xml, yaml, toml, etc.)
+I tweak this config as new circumstances arise.
 
-LSP, linting, and formatting features in this config depend on Nodejs. I recommend installing Node via [NVM](https://github.com/nvm-sh/nvm).
+# 👨‍💻 Setup
 
-I use MacOS and Homebrew. If you're on another system, you will need to follow an alternate method of installation.
-
-```bash
-$ brew install nvm
-```
-
-Then add the following to your shell profile (most likely `~/.zshrc`):
-
-```bash
-  export NVM_DIR="$HOME/.nvm"
-    [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" # This loads nvm
-    [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
-```
-
-Then install the latest version of Node:
-
-```bash
-nvm install node
-```
-
-Confirm success by running:
-
-```bash
-$ node --version
-$ npm --version
-```
-
-## Fast Search!
+### 📦 Dependencies
 
 #### ripgrep and fd
 
@@ -53,7 +28,7 @@ This config also uses [telescope-fzf-native](https://github.com/nvim-telescope/t
 ripgrep and fd (mentioned above) are great for actually retrieiving the search results, but fzf will greatly speed up the filtering down and ranking of those results so
 we see the most relevant results first, and quickly! This plugin is written in C and compiled for best performance. Lazy will actually build this natively for your platform using `make`, hence the dependency.
 
-## Git ([Lazygit](https://github.com/jesseduffield/lazygit))
+#### Git ([Lazygit](https://github.com/jesseduffield/lazygit))
 
 This config utilizes Lazygit as the Git client TUI of choice. [lazygit.nvim](https://github.com/kdheepak/lazygit.nvim) (plugin) simply opens a terminal inside of Neovim and opens Lazygit inside of it. For this to work, naturally, you'll need Lazygit installed separately. I highly recommend checking it out if you haven't already.
 
@@ -61,9 +36,7 @@ This config utilizes Lazygit as the Git client TUI of choice. [lazygit.nvim](htt
 brew install jesseduffield/lazygit/lazygit
 ```
 
-# 👨‍💻 Setup
-
-### Cloning and Moving Config
+### 🚚 Cloning and Moving Config
 
 The contents of this repo will eventually live in your `~/.config/nvim` directory (or wherever you store your config). I recomend cloning this repo to a desired location and then symlinking it to your `~/.config/nvim` folder. This way you can easily get updates with a simple `git pull`:
 
@@ -75,14 +48,14 @@ $ ln -s [your_desired_directory]/NvStache [full_path_to_home]/.config/nvim
 
 Alternatively, you can move the repo contents to your `~/.config/nvim` directory, if you don't like linking.
 
-### One-Time Setups
+### 1️⃣ One-Time Setups
 
 This config uses [vim-doge](https://github.com/kkoomen/vim-doge) for documentation generation in comments. The first time you run Neovim, you'll have to run the following to install it (per the vim-doge README):
 
 Open Neovim and run:
 `:call doge#install()`
 
-### LSP, Linting, and Formatting Servers
+## LSP, Linting, and Formatting Servers
 
 You shouldn't have to manually install LSP, linting, and formatting, as the `lsp-config.lua` file checks for a list of Mason registers on Neovim startup. Just in case you require manual intervention, I have listed the Mason dependencies here. You can manually manage these by opening the Mason interface inside of Neovim by running `:Mason`. Just note that if you remove a registered package manually and do not remove it from the `ensure_installed` table in `lsp-config.lua`, the package will be re-installed the next time you open Neovim, so make sure you uninstall via Mason UI as well as removing the item from the `ensure_installed` table. The following are all supported in this config:
 
