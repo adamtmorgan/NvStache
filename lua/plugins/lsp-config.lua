@@ -84,6 +84,28 @@ return {
 		end,
 	},
 
+	-- Apple dev ecosystem (MacOS, iOS, WatchOS, etc.)
+	{
+		"wojciech-kulik/xcodebuild.nvim",
+		dependencies = {
+			"nvim-telescope/telescope.nvim",
+			"MunifTanjim/nui.nvim",
+			"nvim-treesitter/nvim-treesitter", -- (optional) for Quick tests support (required Swift parser)
+		},
+		config = function()
+			require("xcodebuild").setup({
+				-- put some options here or leave it empty to use default settings
+			})
+		end,
+	},
+
+	-- TypeScript
+	{
+		"pmizio/typescript-tools.nvim",
+		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+		opts = {},
+	},
+
 	-- TypeScript
 	{
 		"pmizio/typescript-tools.nvim",
