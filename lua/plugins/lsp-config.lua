@@ -85,6 +85,7 @@ return {
 	},
 
 	-- Apple dev ecosystem (MacOS, iOS, WatchOS, etc.)
+	-- https://github.com/wojciech-kulik/xcodebuild.nvim/wiki
 	{
 		"wojciech-kulik/xcodebuild.nvim",
 		dependencies = {
@@ -139,7 +140,9 @@ return {
 			-- lspconfig.ts_ls.setup({ -- aka "tsserver"
 			-- 	capabilities = capabilities,
 			-- })
-
+			lspconfig.sourcekit.setup({
+				capabilities = capabilities,
+			})
 			lspconfig.eslint.setup({
 				capabilities = capabilities,
 			})

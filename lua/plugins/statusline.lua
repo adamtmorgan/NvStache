@@ -1,5 +1,5 @@
 ----------------------------------------------------
----Defines custom status line
+--Defines custom status line
 ----------------------------------------------------
 
 -- Config vars that apply to all versions
@@ -242,6 +242,58 @@ return {
 					return "   " .. self.status_dict.head
 				end,
 				hl = { bold = true },
+			},
+			-- You could handle delimiters, icons and counts similar to Diagnostics
+			{
+				condition = function(self)
+					return self.has_changes
+				end,
+				provider = "(",
+			},
+			{
+				provider = function(self)
+					local count = self.status_dict.added or 0
+					return count > 0 and ("+" .. count)
+				end,
+				hl = function(self)
+					if self.mode_cat == "n" then
+						return { fg = colors.green }
+					else
+						return { fg = self.color_primary }
+					end
+				end,
+			},
+			{
+				provider = function(self)
+					local count = self.status_dict.removed or 0
+					return count > 0 and ("-" .. count)
+				end,
+				hl = function(self)
+					if self.mode_cat == "n" then
+						return { fg = colors.red }
+					else
+						return { fg = self.color_primary }
+					end
+				end,
+			},
+			{
+				provider = function(self)
+					local count = self.status_dict.changed or 0
+					return count > 0 and ("~" .. count)
+				end,
+				hl = function(self)
+					if self.mode_cat == "n" then
+						return { fg = colors.orange }
+					else
+						return { fg = self.color_primary }
+					end
+				end,
+			},
+			{
+				condition = function(self)
+					return self.has_changes
+				end,
+				provider = ")",
 			},
 		}
 
