@@ -106,6 +106,8 @@ This is because this config relies on LSPs instead.
 
 - `<leader>` = `space`
 
+- ESC key alternative is `<C-;>` for homerow escaping
+
 - New Tab - `<C-t>n` (normal mode)
 
 - Delete Tab - `<C-t>d` (normal mode)
