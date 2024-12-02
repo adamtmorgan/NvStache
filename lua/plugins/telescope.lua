@@ -30,15 +30,15 @@ return {
 		},
 		config = function()
 			local live_grep_args_shortcuts = require("telescope-live-grep-args.shortcuts")
-			local telescopeBuiltin = require("telescope.builtin")
+			local telescope_builtin = require("telescope.builtin")
 			local telescope = require("telescope")
 
-			vim.keymap.set("n", "<leader>ff", telescopeBuiltin.find_files, {})
+			vim.keymap.set("n", "<leader>ff", telescope_builtin.find_files, {})
 			vim.keymap.set("n", "<leader>fg", telescope.extensions.live_grep_args.live_grep_args, {})
 			vim.keymap.set("v", "<leader>fg", live_grep_args_shortcuts.grep_visual_selection, {})
 			vim.keymap.set("n", "<leader>fc", live_grep_args_shortcuts.grep_word_under_cursor, {})
-			vim.keymap.set("n", "<leader>fb", telescopeBuiltin.buffers, {})
-			vim.keymap.set("n", "<leader>fh", telescopeBuiltin.help_tags, {})
+			vim.keymap.set("n", "<leader>fb", telescope_builtin.buffers, {})
+			vim.keymap.set("n", "<leader>fh", telescope_builtin.help_tags, {})
 		end,
 	},
 	-- plugin for telescope that makes select UI look nicer.
@@ -105,6 +105,8 @@ return {
 							["d"] = actions.delete_buffer,
 							["<C-s>"] = actions.select_vertical,
 							["<C-t>"] = open_with_trouble,
+							["q"] = actions.close,
+							["<C-;>"] = actions.close,
 						},
 					},
 					file_previewer = require("telescope.previewers").vim_buffer_cat.new,

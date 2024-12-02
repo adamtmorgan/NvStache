@@ -35,6 +35,11 @@ vim.opt.wildignore:append({ "*/node_modules/*" })
 -- Set leader key
 vim.g.mapleader = " "
 
+-- Rebind escape for simpler
+vim.keymap.set("n", "<C-;>", "<esc>", { noremap = true, silent = true })
+vim.keymap.set("v", "<C-;>", "<esc>", { noremap = true, silent = true })
+vim.keymap.set("i", "<C-;>", "<esc>", { noremap = true, silent = true })
+
 -- Allow clipboard copy/paste
 vim.keymap.set("v", "<C-c>", '"+y', { noremap = true, silent = true })
 
