@@ -140,6 +140,7 @@ return {
 	"rebelot/heirline.nvim",
 	dependencies = {
 		{ "nvim-tree/nvim-web-devicons" },
+		{ "lewis6991/gitsigns.nvim" },
 	},
 	-- You can optionally lazy-load heirline on UiEnter
 	-- to make sure all required plugins and colorschemes are loaded before setup
@@ -418,6 +419,7 @@ return {
 			Position,
 			OpenBuffersCount,
 			hl = { bg = statusline_bg },
+			update = { "BufEnter", "BufLeave", "ModeChanged" },
 		}
 
 		-- Main line computes colors based on mode for child
@@ -428,9 +430,6 @@ return {
 				self.mode_cat = self.mode:sub(1, 1) -- first char only
 				self.color_primpary = mode_colors[self.mode_cat]
 			end,
-			-- Watch below closely... Performance could suck and this will
-			-- need to be changed:
-			-- update = { "BufAdd", "BufEnter", "BufLeave", "ModeChanged" },
 			Left,
 			-- Align,
 			-- Center,
