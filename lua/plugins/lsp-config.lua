@@ -293,6 +293,7 @@ return {
 					html = { "htmlbeautifier" },
 					rust = { "rustfmt" },
 					bash = { "shfmt" },
+					toml = { "taplo" },
 				},
 			})
 
