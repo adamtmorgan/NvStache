@@ -41,7 +41,13 @@ vim.keymap.set("v", "<C-;>", "<esc>", { noremap = true, silent = true })
 vim.keymap.set("i", "<C-;>", "<esc>", { noremap = true, silent = true })
 
 -- Allow clipboard copy/paste
+vim.keymap.set("n", "<S-j>", ":move .+1<CR>", { silent = true })
+vim.keymap.set("n", "<S-k>", ":move .-2<CR>", { silent = true })
+vim.keymap.set("v", "<S-j>", ":move '>+1<CR> gv", { silent = true })
 vim.keymap.set("v", "<C-c>", '"+y', { noremap = true, silent = true })
+
+-- Mapping for shifting lines up or down
+vim.keymap.set("v", "<S-k>", ":move '<-2<CR> gv", { silent = true })
 
 -- Clear search
 vim.keymap.set("n", "<leader>/", ":noh<CR>", { silent = true })
@@ -77,8 +83,8 @@ vim.cmd("autocmd InsertLeave * :set relativenumber")
 
 -- Show command line below status bar rather than
 -- replacing it completely.
-vim.opt.cmdheight = 0
 vim.cmd("autocmd CmdlineEnter * :set cmdheight=1")
+vim.opt.cmdheight = 0
 vim.cmd("autocmd CmdlineLeave * :set cmdheight=0")
 
 -- Neovide-specific config
