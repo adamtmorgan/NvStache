@@ -25,8 +25,7 @@ brew install ripgrep \ fd
 #### `make` and `gcc` or `clang`
 
 This config also uses [telescope-fzf-native](https://github.com/nvim-telescope/telescope-fzf-native.nvim) for enhanced, native-speed fuzzy finding search results.
-ripgrep and fd (mentioned above) are great for actually retrieiving the search results, but fzf will greatly speed up the filtering down and ranking of those results so
-we see the most relevant results first, and quickly! This plugin is written in C and compiled for best performance. Lazy will actually build this natively for your platform using `make`, hence the dependency.
+ripgrep and fd (mentioned above) are great for actually retrieiving the search results, but fzf will greatly speed up the filtering down and ranking of those results. This plugin is written in C and compiled for best performance. Lazy will actually build this natively for your platform using `make`, hence the dependency.
 
 #### Git ([Lazygit](https://github.com/jesseduffield/lazygit))
 
