@@ -73,6 +73,14 @@ return {
 		"tpope/vim-surround",
 	},
 
+	-- Used to quickly align text vertically across rows.
+	{
+		"junegunn/vim-easy-align",
+		config = function()
+			vim.keymap.set("x", "ga", ":EasyAlign ", { silent = true })
+		end,
+	},
+
 	-- For auto-detecting and changing `shiftwidth` and `expandtab`
 	-- settings based on the current file's pattern.
 	{ "tpope/vim-sleuth" },
