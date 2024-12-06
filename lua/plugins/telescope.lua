@@ -237,8 +237,8 @@ return {
 			-- Allows args to be used in telescope live-grep field
 			telescope.load_extension("live_grep_args")
 
-			-- Use Noice with telescope
-			-- require("telescope").load_extension("noice")
+			-- Intergation with notifications plugin
+			telescope.load_extension("notify")
 		end,
 	},
 }
