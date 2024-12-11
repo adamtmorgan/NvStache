@@ -94,9 +94,8 @@ local mode_colors = {
 	t = colors.red,
 }
 
-local statusline_bg = "none"
 -- local statusline_bg = "#2f323c"
--- local statusline_bg = "#1c2125"
+local statusline_bg = "none"
 
 local mode_names = { -- change the strings if you like it vvvvverbose!
 	-- Normal
@@ -186,7 +185,7 @@ return {
 					end,
 				},
 				{
-					provider = "",
+					provider = "█",
 					hl = function(self)
 						return { fg = self.color_primpary, bg = statusline_bg }
 					end,
