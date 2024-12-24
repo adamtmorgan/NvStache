@@ -124,7 +124,7 @@ return {
 				content = {
 					{ " Grep File", "Telescope find_files", "<leader>ff" },
 					{ "󰍉 Grep File Contents", "Telescope live_grep", "<leader>fg" },
-					{ "󰏇 Browse Files (Oil)", "Oil ./ --float", "<leader>o" },
+					{ " Browse Files (Mini-Files)", "lua MiniFiles.open()", "<leader>o" },
 				},
 				highlight = "TelescopePromptTitle",
 				oldfiles_amount = 0,
