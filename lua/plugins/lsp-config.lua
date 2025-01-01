@@ -217,6 +217,7 @@ return {
 			lspconfig.graphql.setup({
 				capabilities = capabilities,
 				root_dir = lspconfig.util.root_pattern(".graphqlconfig", ".graphqlrc", "package.json", ".git"),
+				filetypes = { "graphql", "graphqlrc", "graphqlconfig" },
 			})
 			lspconfig.glsl_analyzer.setup({
 				capabilities = capabilities,
@@ -334,9 +335,8 @@ return {
 			dap.listeners.before.attach.dapui_config = function()
 				dapui.open()
 			end
-			dap.listeners.before.launch.dapui_config = function()
-				dapui.open()
-			end
+			dapui.open()
+			dap.listeners.before.launch.dapui_config = function() end
 			dap.listeners.before.event_terminated.dapui_config = function()
 				dapui.close()
 			end

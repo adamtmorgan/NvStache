@@ -35,6 +35,7 @@ return {
 			vim.notify = require("notify")
 			require("notify").setup({
 				render = "wrapped-compact",
+				fps = 60,
 			})
 		end,
 	},
