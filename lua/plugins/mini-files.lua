@@ -4,6 +4,7 @@ return {
 	config = function()
 		require("mini.files").setup({
 			windows = {
+				max_number = 1,
 				preview = false,
 				width_preview = 120,
 			},

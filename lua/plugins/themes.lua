@@ -70,7 +70,7 @@ return {
 			if vim.g.neovide then
 				vim.cmd([[
 				  colorscheme kanagawa
-				  highlight Normal guibg=#1C212A
+				  highlight Normal guibg=#191E25
 				]])
 			end
 
