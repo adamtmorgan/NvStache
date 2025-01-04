@@ -434,7 +434,8 @@ return {
 			-- Center,
 			Align,
 			Right,
-			update = { "BufEnter", "BufLeave", "ModeChanged" },
+			-- NOTE: Might need to optimize later, but for now updating on every change seems to be performant enough.
+			-- update = { "BufEnter", "BufLeave", "ModeChanged", "TextChanged", "TextYankPost" },
 		}
 
 		-- Full Status line
