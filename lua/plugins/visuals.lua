@@ -32,11 +32,27 @@ return {
 	{
 		"rcarriga/nvim-notify",
 		config = function()
-			vim.notify = require("notify")
-			require("notify").setup({
+			local notify = require("notify")
+
+			notify.setup({
 				render = "wrapped-compact",
 				fps = 60,
 			})
+
+			vim.notify = function(msg, level)
+				-- Define a list of messages or patterns to silence
+				local silenced_patterns = {
+					-- "No information available",
+				}
+
+				for _, pattern in ipairs(silenced_patterns) do
+					if msg:match(pattern) then
+						return
+					end
+				end
+
+				notify(msg, level)
+			end
 		end,
 	},
 }
