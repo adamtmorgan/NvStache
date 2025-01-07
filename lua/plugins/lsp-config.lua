@@ -31,6 +31,7 @@ return {
 				"intelephense", -- php
 				"pyright", -- python
 				"rust-analyzer", -- rust
+				"clangd", -- C, C++
 				"taplo", -- toml
 				"sqlls", -- sql
 				"bash-language-server", -- bash
@@ -44,6 +45,7 @@ return {
 
 				-- Formatting
 				"prettierd", -- Formatting for various common filetypes
+				"clang-format", -- Formatting C, C++
 			}
 
 			-- Ensure packages are installed and up to date
@@ -211,6 +213,9 @@ return {
 			-- 	capabilities = capabilities,
 			-- })
 
+			lspconfig.clangd.setup({
+				capabilities = capabilities,
+			})
 			lspconfig.pyright.setup({
 				capabilities = capabilities,
 			})
@@ -313,6 +318,7 @@ return {
 					markdown = { "prettierd" },
 					html = { "htmlbeautifier" },
 					rust = { "rustfmt" },
+					c = { "clang-format" },
 					bash = { "shfmt" },
 					toml = { "taplo" },
 				},
