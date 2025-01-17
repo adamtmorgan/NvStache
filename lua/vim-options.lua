@@ -128,6 +128,8 @@ if vim.g.neovide then
 	-- Cursor and animation
 	vim.g.neovide_cursor_animation_length = 0.08
 	vim.g.neovide_cursor_trail_size = 0.6
+	vim.g.neovide_scroll_animation_far_lines = 0
+	vim.g.neovide_scroll_animation_length = 0.15
 
 	-- Copy/paste in neovide:
 	vim.keymap.set("n", "<D-s>", ":w<CR>") -- Save
