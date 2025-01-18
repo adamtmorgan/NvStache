@@ -42,9 +42,9 @@ return {
 		})
 
 		-- Popup telescope browser for sessions
-		vim.keymap.set("n", "<C-s>f", require("auto-session.session-lens").search_session, {
-			noremap = true,
-		})
+		-- vim.keymap.set("n", "<C-s>f", require("auto-session.session-lens").search_session, {
+		-- 	noremap = true,
+		-- })
 
 		vim.keymap.set("n", "<C-s>s", ":SessionSave<CR>", {
 			noremap = true,

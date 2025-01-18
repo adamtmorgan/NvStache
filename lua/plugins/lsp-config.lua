@@ -88,19 +88,18 @@ return {
 
 	-- Apple dev ecosystem (MacOS, iOS, WatchOS, etc.)
 	-- https://github.com/wojciech-kulik/xcodebuild.nvim/wiki
-	{
-		"wojciech-kulik/xcodebuild.nvim",
-		dependencies = {
-			"nvim-telescope/telescope.nvim",
-			"MunifTanjim/nui.nvim",
-			"nvim-treesitter/nvim-treesitter", -- (optional) for Quick tests support (required Swift parser)
-		},
-		config = function()
-			require("xcodebuild").setup({
-				-- put some options here or leave it empty to use default settings
-			})
-		end,
-	},
+	-- {
+	-- 	"wojciech-kulik/xcodebuild.nvim",
+	-- 	dependencies = {
+	-- 		"MunifTanjim/nui.nvim",
+	-- 		"nvim-treesitter/nvim-treesitter", -- (optional) for Quick tests support (required Swift parser)
+	-- 	},
+	-- 	config = function()
+	-- 		require("xcodebuild").setup({
+	-- 			-- put some options here or leave it empty to use default settings
+	-- 		})
+	-- 	end,
+	-- },
 
 	-- TypeScript
 	{
@@ -259,29 +258,6 @@ return {
 			vim.keymap.set("n", "gh", vim.lsp.buf.hover, {})
 			vim.keymap.set("n", "ge", vim.diagnostic.open_float, {})
 			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, {})
-			-- vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, {})
-			vim.keymap.set("n", "<leader>ca", function()
-				require("tiny-code-action").code_action()
-			end, { noremap = true, silent = true })
-
-			-- These open up lsp features inside of telescope instead
-			vim.api.nvim_set_keymap("n", "gd", '<cmd>lua require("telescope.builtin").lsp_definitions()<CR>', {})
-			vim.api.nvim_set_keymap("n", "gi", '<cmd>lua require("telescope.builtin").lsp_implementations()<CR>', {})
-			vim.api.nvim_set_keymap("n", "gr", '<cmd>lua require("telescope.builtin").lsp_references()<CR>', {})
-			vim.api.nvim_set_keymap("n", "gt", '<cmd>lua require("telescope.builtin").lsp_type_definitions()<CR>', {})
-			-- vim.api.nvim_set_keymap("n", "fs", '<cmd>lua require("telescope.builtin").lsp_workspace_symbols()<CR>', {})
-			vim.api.nvim_set_keymap(
-				"n",
-				"<leader>fs",
-				'<cmd>lua require("telescope.builtin").lsp_dynamic_workspace_symbols()<CR>',
-				{}
-			)
-			vim.api.nvim_set_keymap(
-				"n",
-				"<leader>fS",
-				'<cmd>lua require("telescope.builtin").lsp_document_symbols()<CR>',
-				{}
-			)
 		end,
 	},
 

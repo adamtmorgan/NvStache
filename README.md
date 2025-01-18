@@ -14,18 +14,15 @@ I tweak this config as new circumstances arise.
 
 #### ripgrep and fd
 
-This config relies on [ripgrep](https://github.com/BurntSushi/ripgrep) (for live-grep) and [fd](https://github.com/sharkdp/fd) (for file searching).
-They are cli search utilities that will DRASTICALLY increase performance inside of [telescope](https://github.com/nvim-telescope/telescope.nvim).
+Do yourself a favor and install [ripgrep](https://github.com/BurntSushi/ripgrep) (for live-grep) and [fd](https://github.com/sharkdp/fd) (for file searching).
+They are cli search utilities that will DRASTICALLY increase performance inside of [picker](https://github.com/folke/snacks.nvim/blob/main/docs/picker.md).
+[picker](https://github.com/folke/snacks.nvim/blob/main/docs/picker.md) automatically uses `fd` and `rg` if they are installed and available.
+
 Install them both separately:
 
 ```bash
 brew install ripgrep \ fd
 ```
-
-#### `make` and `gcc` or `clang`
-
-This config also uses [telescope-fzf-native](https://github.com/nvim-telescope/telescope-fzf-native.nvim) for enhanced, native-speed fuzzy finding search results.
-ripgrep and fd (mentioned above) are great for actually retrieiving the search results, but fzf will greatly speed up the filtering down and ranking of those results. This plugin is written in C and compiled for best performance. Lazy will actually build this natively for your platform using `make`, hence the dependency.
 
 #### Git ([Lazygit](https://github.com/jesseduffield/lazygit))
 
@@ -129,17 +126,15 @@ This is because this config relies on LSPs instead.
 
 - Open most recent buffer directory in [Oil](https://github.com/stevearc/oil.nvim) - `<leader>e`
 
-- Find Files (telescope) - `<leader>ff` (normal mode)
+- Find Files - `<leader>ff` (normal mode)
 
-- Find Grep (telescope) - `<leader>fg` (normal mode)
+- Live Grep - `<leader>fg` (normal mode)
 
-- Find Buffer (telescope) - `<leader>fb` (normal mode)
+- Live Grep Word - `<leader>fG` (normal mode)
 
-- Delete(remove) hovered buffer - `<C>r` (in telescope Find Buffer results)
+- Fnd Buffer - `<leader>fb` (normal mode)
 
-- Telescope Next Result - `<C-j>` (in telescope window)
-
-- Telescope Previous Result - `<C-k>` (in telescope window)
+- Delete(remove) hovered buffer - `<C>x` (in Find Buffer results)
 
 - [Lazygit](https://github.com/jesseduffield/lazygit) (Git client) - `<leader>g`
 

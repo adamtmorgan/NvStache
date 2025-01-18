@@ -80,7 +80,7 @@ local week_day = {
 
 return {
 	"startup-nvim/startup.nvim",
-	dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+	dependencies = { "nvim-lua/plenary.nvim" },
 	config = function()
 		local day = os.date("%A")
 		local day_picture = week_day[day]
@@ -122,8 +122,8 @@ return {
 				title = "Basic Commands",
 				margin = 5,
 				content = {
-					{ " Grep File", "Telescope find_files", "<leader>ff" },
-					{ "󰍉 Grep File Contents", "Telescope live_grep", "<leader>fg" },
+					{ " Grep File", ":lua Snacks.picker.files()", "<leader>ff" },
+					{ "󰍉 Grep File Contents", ":lua Snacks.picker.grep()", "<leader>fg" },
 					{ " Browse Files", ":Oil ./ --float<CR>", "<leader>o" },
 				},
 				highlight = "TelescopePromptTitle",
