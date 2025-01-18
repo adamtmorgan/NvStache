@@ -254,6 +254,7 @@ return {
 			require("lspconfig.ui.windows").default_options = windowSettings
 
 			-- Setup key bindings for lsp
+			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
 			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {})
 			vim.keymap.set("n", "gh", vim.lsp.buf.hover, {})
 			vim.keymap.set("n", "ge", vim.diagnostic.open_float, {})
