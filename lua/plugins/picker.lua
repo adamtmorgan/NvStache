@@ -3,12 +3,15 @@ return {
 	lazy = false,
 	---@type snacks.Config
 	opts = {
-		picker = {},
-	},
-	win = {
-		input = {
-			keys = {
-				["<C-;>"] = { "close", mode = "n" },
+		picker = {
+			win = {
+				input = {
+					keys = {
+						["<C-;>"] = { "close", mode = "n" },
+						["<C-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
+						["<C-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
+					},
+				},
 			},
 		},
 	},

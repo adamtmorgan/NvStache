@@ -125,12 +125,15 @@ return {
 		"neovim/nvim-lspconfig",
 		dependencies = { "Fildo7525/pretty_hover" },
 		config = function()
+			-- Note: Wiring up `capabilities` is not necessary anymore
+			-- ever since migrating to blink.cmp, which is smart enough
+			-- to auto-detect lsp setups.
+
 			local lspconfig = require("lspconfig")
 
 			-- Any particular LSP configurations
 			-- Go here. Otherwise, defaults are used.
 			lspconfig.lua_ls.setup({
-				-- capabilities = capabilities,
 				settings = {
 					Lua = {
 						runtime = {
@@ -153,88 +156,10 @@ return {
 				},
 			})
 
-			-- No longer needed since using typescript-tools.nvim.
-			-- Keeping as a reference just in case.
-
-			-- lspconfig.ts_ls.setup({ -- aka "tsserver"
-			-- 	capabilities = capabilities,
-			-- })
-			-- lspconfig.sourcekit.setup({
-			-- 	capabilities = capabilities,
-			-- })
-			-- lspconfig.eslint.setup({
-			-- 	capabilities = capabilities,
-			-- })
-			-- lspconfig.cssls.setup({
-			-- 	capabilities = capabilities,
-			-- })
-			-- lspconfig.html.setup({
-			-- 	capabilities = capabilities,
-			-- })
-			-- lspconfig.intelephense.setup({
-			-- 	capabilities = capabilities,
-			-- })
-			-- lspconfig.jsonls.setup({
-			-- 	capabilities = capabilities,
-			-- })
-			-- lspconfig.yamlls.setup({
-			-- 	capabilities = capabilities,
-			-- })
-			-- lspconfig.taplo.setup({
-			-- 	capabilities = capabilities,
-			-- })
-			-- lspconfig.vuels.setup({
-			-- 	capabilities = capabilities,
-			-- })
-			-- lspconfig.sqlls.setup({
-			-- 	capabilities = capabilities,
-			-- })
-			-- lspconfig.dockerls.setup({
-			-- 	capabilities = capabilities,
-			-- })
-			-- lspconfig.docker_compose_language_service.setup({
-			-- 	capabilities = capabilities,
-			-- })
-			-- lspconfig.bashls.setup({
-			-- 	capabilities = capabilities,
-			-- })
-			-- lspconfig.rnix.setup({
-			-- 	capabilities = capabilities,
-			-- })
-
-			-- No longer needed since using rustacianvim
-			-- to manage rust features. Keeping here
-			-- as reference just in case.
-
-			-- lspconfig.rust_analyzer.setup({
-			-- 	capabilities = capabilities,
-			-- })
-
-			-- lspconfig.clangd.setup({
-			-- 	capabilities = capabilities,
-			-- })
-			-- lspconfig.pyright.setup({
-			-- 	capabilities = capabilities,
-			-- })
-			-- lspconfig.graphql.setup({
-			-- 	capabilities = capabilities,
-			-- 	root_dir = lspconfig.util.root_pattern(".graphqlconfig", ".graphqlrc", "package.json", ".git"),
-			-- 	filetypes = { "graphql", "graphqlrc", "graphqlconfig" },
-			-- })
-			-- lspconfig.glsl_analyzer.setup({
-			-- 	capabilities = capabilities,
-			-- })
-			-- lspconfig.wgsl_analyzer.setup({
-			-- 	capabilities = capabilities,
-			-- })
-
-			-- Terraform requires a separate config
-			-- that I don't have set up right now.
-			-- Check in on this later:
-
-			--lspconfig.terraform_ls.setup({
-			--	capabilities = capabilities,
-			--})
+			lspconfig.graphql.setup({
+				root_dir = lspconfig.util.root_pattern(".graphqlconfig", ".graphqlrc", "package.json", ".git"),
+				filetypes = { "graphql", "graphqlrc", "graphqlconfig" },
+			})
 
 			-- Add borders to our hover windows
 			local _border = "rounded"
