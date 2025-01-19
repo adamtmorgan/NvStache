@@ -45,7 +45,12 @@ return {
 				},
 			},
 
-			signature = { window = { border = "rounded" } },
+			signature = {
+				enabled = true,
+				window = {
+					border = "rounded",
+				},
+			},
 
 			-- 'default' for mappings similar to built-in completion
 			-- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
@@ -82,19 +87,23 @@ return {
 	--------------------------------------------------
 	-- Handles LSP as source for completions
 	--------------------------------------------------
-	{
-		"ray-x/lsp_signature.nvim",
-		config = function()
-			require("lsp_signature").setup({
-				bind = true, -- This is mandatory, otherwise border config won't get registered.
-				handler_opts = {
-					border = "rounded",
-				},
-				floating_window = true, -- show hint in a floating window, set to false for virtual text only mode
-				hint_enable = true, -- virtual hint enable
-				hint_prefix = "󰛨 ", -- Panda for parameter hint
-				hi_parameter = "Search", -- Highlight for current parameter
-			})
-		end,
-	},
+	-- NOTE: keep this in mind for later:
+	-- https://cmp.saghen.dev/configuration/signature.html#signature
+	-- Testing blink.cmp to see if it can replace this. Keeping details
+	-- here in the meantime just in case I need to revert.
+	-- {
+	-- 	"ray-x/lsp_signature.nvim",
+	-- 	config = function()
+	-- 		require("lsp_signature").setup({
+	-- 			bind = true, -- This is mandatory, otherwise border config won't get registered.
+	-- 			handler_opts = {
+	-- 				border = "rounded",
+	-- 			},
+	-- 			floating_window = true, -- show hint in a floating window, set to false for virtual text only mode
+	-- 			hint_enable = true, -- virtual hint enable
+	-- 			hint_prefix = "󰛨 ", -- Panda for parameter hint
+	-- 			hi_parameter = "Search", -- Highlight for current parameter
+	-- 		})
+	-- 	end,
+	-- },
 }
