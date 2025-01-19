@@ -4,6 +4,8 @@ return {
 	---@type snacks.Config
 	opts = {
 		picker = {
+			prompt = "  ",
+			ui_select = true,
 			win = {
 				input = {
 					keys = {
