@@ -3,75 +3,81 @@ return {
 	-- Handles the popup window for autocomplete
 	--------------------------------------------------
 	{
-		"hrsh7th/nvim-cmp",
-		config = function()
-			local cmp = require("cmp")
+		"saghen/blink.cmp",
+		-- optional: provides snippets for the snippet source
+		dependencies = "rafamadriz/friendly-snippets",
 
-			-- Register LuaSnip snippet sources --------------------------------
-			require("luasnip.loaders.from_vscode").lazy_load()
-			require("vim-react-snippets").lazy_load()
+		-- use a release tag to download pre-built binaries
+		version = "*",
+		-- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
+		-- build = 'cargo build --release',
+		-- If you use nix, you can build from source using latest nightly rust with:
+		-- build = 'nix run .#build-plugin',
 
-			cmp.setup({
-				completion = { completeopt = "menu,menuone,noinsert" },
-				snippet = {
-					-- REQUIRED - you must specify a snippet engine
-					expand = function(args)
-						--vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-						require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
-						-- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-						-- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-						-- vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
-					end,
+		---@module 'blink.cmp'
+		---@type blink.cmp.Config
+		opts = {
+			completion = {
+				list = {
+					selection = {
+						-- Autoselect doesn't activate in cmd line
+						preselect = function(ctx)
+							return ctx.mode ~= "cmdline" and not require("blink.cmp").snippet_active({ direction = 1 })
+						end,
+						auto_insert = false,
+					},
 				},
-				window = {
-					completion = cmp.config.window.bordered(),
-					documentation = cmp.config.window.bordered(),
+				menu = {
+					border = "rounded",
 				},
-				mapping = cmp.mapping.preset.insert({
-					["<C-u>"] = cmp.mapping.scroll_docs(-4),
-					["<C-d>"] = cmp.mapping.scroll_docs(4),
-					["<C-j>"] = cmp.mapping.select_next_item(),
-					["<C-k>"] = cmp.mapping.select_prev_item(),
-					["<C-Space>"] = cmp.mapping.complete(),
-					["<C-e>"] = cmp.mapping.abort(),
-					["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-				}),
-				sources = cmp.config.sources({
-					{ name = "nvim_lsp" },
-					-- { name = "vsnip" }, -- For vsnip users.
-					{ name = "luasnip" }, -- For luasnip users.
-					-- { name = 'ultisnips' }, -- For ultisnips users.
-					-- { name = 'snippy' }, -- For snippy users.
-				}, {
-					{ name = "buffer" },
-				}),
-			})
-
-			-- Added to support cmp-cmdline
-			-- Use buffer source for `/` (search) and `?` (reverse search).
-			cmp.setup.cmdline({ "/", "?" }, {
-				mapping = cmp.mapping.preset.cmdline(),
-				sources = {
-					{ name = "buffer" },
+				documentation = {
+					window = {
+						border = "rounded",
+					},
+					auto_show = true,
+					auto_show_delay_ms = 0,
 				},
-			})
+				ghost_text = {
+					enabled = true,
+				},
+				trigger = {
+					show_on_trigger_character = true,
+				},
+			},
 
-			-- Use cmdline & path source for ':' (command line).
-			cmp.setup.cmdline(":", {
-				mapping = cmp.mapping.preset.cmdline(),
-				sources = cmp.config.sources({
-					{ name = "path" },
-				}, {
-					{ name = "cmdline" },
-				}),
-			})
+			signature = { window = { border = "rounded" } },
 
-			-- Add key bindings for navigation completions in command mode
-			vim.keymap.set("c", "<C-j>", cmp.mapping.select_next_item(), {})
-			vim.keymap.set("c", "<C-k>", cmp.mapping.select_prev_item(), {})
+			-- 'default' for mappings similar to built-in completion
+			-- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
+			-- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
+			-- See the full "keymap" documentation for information on defining your own keymap.
+			keymap = {
+				preset = "enter",
+				["<C-k>"] = { "select_prev" },
+				["<C-j>"] = { "select_next" },
+				["<C-u>"] = { "scroll_documentation_up" },
+				["<C-d>"] = { "scroll_documentation_down" },
+				["<Tab>"] = { "snippet_forward", "fallback" },
+				["<S-Tab>"] = { "snippet_backward", "fallback" },
+			},
 
-			vim.cmd("highlight LspSignatureActiveParameter guifg=#ff0000 guibg=none")
-		end,
+			appearance = {
+				-- Sets the fallback highlight groups to nvim-cmp's highlight groups
+				-- Useful for when your theme doesn't support blink.cmp
+				-- Will be removed in a future release
+				use_nvim_cmp_as_default = true,
+				-- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+				-- Adjusts spacing to ensure icons are aligned
+				nerd_font_variant = "mono",
+			},
+
+			-- Default list of enabled providers defined so that you can extend it
+			-- elsewhere in your config, without redefining it, due to `opts_extend`
+			sources = {
+				default = { "lsp", "path", "snippets", "buffer" },
+			},
+		},
+		opts_extend = { "sources.default" },
 	},
 	--------------------------------------------------
 	-- Handles LSP as source for completions
@@ -90,30 +96,5 @@ return {
 				hi_parameter = "Search", -- Highlight for current parameter
 			})
 		end,
-	},
-	--------------------------------------------------
-	-- Handles LSP as source for completions
-	--------------------------------------------------
-	{
-		"hrsh7th/cmp-nvim-lsp",
-	},
-	--------------------------------------------------
-	-- Handles snippet management
-	--------------------------------------------------
-	{
-		"L3MON4D3/LuaSnip",
-		dependencies = {
-			"saadparwaiz1/cmp_luasnip", -- integration with nvim-cmp
-			"rafamadriz/friendly-snippets", -- Common snippets for various languages
-			"mlaursen/vim-react-snippets", -- React snippets
-		},
-	},
-
-	--------------------------------------------------
-	-- Supplies command line and search completions
-	-- sources for nvim-cpm.
-	--------------------------------------------------
-	{
-		"hrsh7th/cmp-cmdline",
 	},
 }

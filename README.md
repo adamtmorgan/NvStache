@@ -132,7 +132,7 @@ This is because this config relies on LSPs instead.
 
 - Live Grep Word - `<leader>fG` (normal mode)
 
-- Fnd Buffer - `<leader>fb` (normal mode)
+- Find Buffer - `<leader>fb` (normal mode)
 
 - Delete(remove) hovered buffer - `<C>x` (in Find Buffer results)
 

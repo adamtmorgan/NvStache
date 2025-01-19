@@ -6,6 +6,23 @@ return {
 		dependencies = { "lewis6991/gitsigns.nvim", "kevinhwang91/nvim-hlslens" },
 		config = function()
 			require("scrollbar").setup({
+				excluded_buftypes = {
+					"terminal",
+				},
+				excluded_filetypes = {
+					"dropbar_menu",
+					"dropbar_menu_fzf",
+					"DressingInput",
+					"cmp_docs",
+					"cmp_menu",
+					"noice",
+					"prompt",
+					"TelescopePrompt",
+					"blink-cmp",
+					"blink-cmp-menu",
+					"blink-cmp-signature",
+					"blink-cmp-documentation",
+				},
 				handlers = {
 					cursor = true,
 					diagnostic = true,

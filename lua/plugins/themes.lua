@@ -76,6 +76,12 @@ return {
 
 			-- Overriding visual mode highlight color to match row highlight
 			vim.api.nvim_set_hl(0, "Visual", { bg = "#363646" })
+
+			-- Set Blink CMP colors
+			vim.api.nvim_set_hl(0, "BlinkCmpMenu", { bg = "none" })
+			vim.api.nvim_set_hl(0, "BlinkCmpMenuBorder", { fg = "#54546D", bg = "none" })
+			vim.api.nvim_set_hl(0, "BlinkCmpMenuSelection", { fg = "#DBD7BA", bg = "#363646" })
+			vim.api.nvim_set_hl(0, "BlinkCmpScrollBarThumb", { fg = "#54546D", bg = "#54546D" })
 		end,
 	},
 }
