@@ -6,5 +6,8 @@ return {
 		buffer_leader_key = "m", -- Per Buffer Mappings
 		always_show_path = true,
 		hide_handbook = true, -- If false, it will show help options
+		window = {
+			border = "rounded",
+		},
 	},
 }
