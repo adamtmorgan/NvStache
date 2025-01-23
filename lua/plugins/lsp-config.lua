@@ -161,6 +161,35 @@ return {
 				filetypes = { "graphql", "graphqlrc", "graphqlconfig" },
 			})
 
+			lspconfig.sourcekit.setup({})
+			lspconfig.eslint.setup({})
+			lspconfig.cssls.setup({})
+			lspconfig.html.setup({})
+			lspconfig.intelephense.setup({})
+			lspconfig.jsonls.setup({})
+			lspconfig.yamlls.setup({})
+			lspconfig.taplo.setup({})
+			lspconfig.vuels.setup({})
+			lspconfig.sqlls.setup({})
+			lspconfig.dockerls.setup({})
+			lspconfig.docker_compose_language_service.setup({})
+			lspconfig.bashls.setup({})
+			lspconfig.rnix.setup({})
+			-- No longer needed since using rustacianvim
+			-- to manage rust features. Keeping here
+			-- as reference just in case.
+			-- lspconfig.rust_analyzer.setup({
+			-- 	capabilities = capabilities,
+			-- })
+			lspconfig.clangd.setup({})
+			lspconfig.pyright.setup({})
+			lspconfig.glsl_analyzer.setup({})
+			lspconfig.wgsl_analyzer.setup({})
+			-- Terraform requires a separate config
+			-- that I don't have set up right now.
+			-- Check in on this later:
+			-- lspconfig.terraform_ls.setup({})
+
 			-- Add borders to our hover windows
 			local _border = "rounded"
 
