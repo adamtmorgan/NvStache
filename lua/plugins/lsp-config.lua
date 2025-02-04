@@ -123,7 +123,9 @@ return {
 	--------------------------------------------------------
 	{
 		"neovim/nvim-lspconfig",
-		dependencies = { "Fildo7525/pretty_hover" },
+		-- Picker is a dependency to ensure that it loads prior to lsp startup, as it
+		-- overrides the select menu for code actions.
+		dependencies = { "Fildo7525/pretty_hover", "folke/snacks.nvim" },
 		config = function()
 			-- Note: Wiring up `capabilities` is not necessary anymore
 			-- ever since migrating to blink.cmp, which is smart enough
