@@ -22,8 +22,8 @@ return {
 				"cpptools", -- Debugging for Rust/C/C++
 				"lua-language-server", -- lua
 				"typescript-language-server", -- typescript
+				"vue-language-server", -- aka "volar" - vue
 				"eslint-lsp", -- javascript
-				"vetur-vls", -- vue.js
 				"json-lsp", -- json
 				"yaml-language-server", -- yaml
 				"html-lsp", -- html
@@ -105,14 +105,22 @@ return {
 	{
 		"pmizio/typescript-tools.nvim",
 		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-		opts = {},
-	},
-
-	-- TypeScript
-	{
-		"pmizio/typescript-tools.nvim",
-		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-		opts = {},
+		config = function()
+			require("typescript-tools").setup({
+				settings = {
+					filetypes = {
+						"javascript",
+						"javascriptreact",
+						"typescript",
+						"typescriptreact",
+						"vue",
+					},
+					tsserver_plugins = {
+						"@vue/typescript-plugin",
+					},
+				},
+			})
+		end,
 	},
 
 	--------------------------------------------------------
