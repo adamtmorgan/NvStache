@@ -4,6 +4,7 @@ return {
 	build = ":TSUpdate",
 	config = function()
 		local treeSitterConfig = require("nvim-treesitter.configs")
+		---@diagnostic disable-next-line: missing-fields -- Works without "required" fields
 		treeSitterConfig.setup({
 			ensure_installed = {
 				-- Programming/styling languages
@@ -30,6 +31,7 @@ return {
 				"sql",
 				"graphql",
 				"json",
+				"proto",
 				"csv",
 				"tsv",
 				"psv",
