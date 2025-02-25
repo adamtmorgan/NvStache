@@ -40,6 +40,7 @@ return {
 				"terraform-ls", -- terraform
 				"rnix-lsp", -- nix
 				"graphql-language-service-cli", -- graphql
+				"buf", -- gRPC/Protobuf
 				"glsl_analyzer", -- webgl
 				"wgsl-analyzer", -- webgpu
 
@@ -171,6 +172,7 @@ return {
 				filetypes = { "graphql", "graphqlrc", "graphqlconfig" },
 			})
 
+			lspconfig.buf_ls.setup({})
 			lspconfig.sourcekit.setup({})
 			lspconfig.eslint.setup({})
 			lspconfig.cssls.setup({})
@@ -191,7 +193,9 @@ return {
 			-- lspconfig.rust_analyzer.setup({
 			-- 	capabilities = capabilities,
 			-- })
-			lspconfig.clangd.setup({})
+			lspconfig.clangd.setup({
+				filetypes = { "c", "cpp", "objc", "cuda" },
+			})
 			lspconfig.pyright.setup({})
 			lspconfig.glsl_analyzer.setup({})
 			lspconfig.wgsl_analyzer.setup({})
