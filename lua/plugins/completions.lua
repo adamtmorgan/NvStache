@@ -20,10 +20,7 @@ return {
 			completion = {
 				list = {
 					selection = {
-						-- Autoselect doesn't activate in cmd line
-						preselect = function(ctx)
-							return ctx.mode ~= "cmdline" and not require("blink.cmp").snippet_active({ direction = 1 })
-						end,
+						preselect = true,
 						auto_insert = false,
 					},
 				},
@@ -77,7 +74,21 @@ return {
 			},
 
 			cmdline = {
-				completion = { menu = { auto_show = true } },
+				completion = {
+					menu = { auto_show = true },
+					list = {
+						selection = { preselect = false, auto_insert = false },
+					},
+				},
+				keymap = {
+					preset = "enter",
+					["<C-k>"] = { "select_prev" },
+					["<C-j>"] = { "select_next" },
+					["<C-u>"] = { "scroll_documentation_up" },
+					["<C-d>"] = { "scroll_documentation_down" },
+					["<Tab>"] = { "snippet_forward", "fallback" },
+					["<S-Tab>"] = { "snippet_backward", "fallback" },
+				},
 			},
 
 			-- Default list of enabled providers defined so that you can extend it
