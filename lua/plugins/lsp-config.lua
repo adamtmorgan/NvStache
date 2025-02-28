@@ -185,7 +185,9 @@ return {
 			lspconfig.sqlls.setup({})
 			lspconfig.dockerls.setup({})
 			lspconfig.docker_compose_language_service.setup({})
-			lspconfig.bashls.setup({})
+			lspconfig.bashls.setup({
+				filetypes = { "zsh", "sh", "bash" },
+			})
 			lspconfig.rnix.setup({})
 			-- No longer needed since using rustacianvim
 			-- to manage rust features. Keeping here
