@@ -106,16 +106,19 @@ return {
 	{
 		"pmizio/typescript-tools.nvim",
 		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+		-- Vue plugin must be installed for vue to work
+		-- `npm i -g @vue/typescript-plugin`
 		config = function()
 			require("typescript-tools").setup({
+				filetypes = {
+					"javascript",
+					"javascriptreact",
+					"typescript",
+					"typescriptreact",
+					"vue",
+				},
 				settings = {
-					filetypes = {
-						"javascript",
-						"javascriptreact",
-						"typescript",
-						"typescriptreact",
-						"vue",
-					},
+					single_file_support = false,
 					tsserver_plugins = {
 						"@vue/typescript-plugin",
 					},
@@ -175,13 +178,23 @@ return {
 			lspconfig.buf_ls.setup({})
 			lspconfig.sourcekit.setup({})
 			lspconfig.eslint.setup({})
-			lspconfig.cssls.setup({})
-			lspconfig.html.setup({})
+			lspconfig.cssls.setup({
+				filetypes = { "css", "scss", "less"},
+			})
+			lspconfig.html.setup({
+				filetypes = { "html" },
+				on_attach = function(client, bufnr)
+					-- Was having weird attachment issues with Vue, so forced
+					-- to stop client if filetype is not html.
+					if vim.bo[bufnr].filetype ~= "html" then
+						client.stop()
+					end
+				end,
+			})
 			lspconfig.intelephense.setup({})
 			lspconfig.jsonls.setup({})
 			lspconfig.yamlls.setup({})
 			lspconfig.taplo.setup({})
-			lspconfig.vuels.setup({})
 			lspconfig.sqlls.setup({})
 			lspconfig.dockerls.setup({})
 			lspconfig.docker_compose_language_service.setup({})
