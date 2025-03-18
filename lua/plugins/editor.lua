@@ -74,6 +74,15 @@ return {
 		"kkoomen/vim-doge",
 	},
 
+	-- Enhances crate composing in cargo.toml files
+	{
+		"saecki/crates.nvim",
+		tag = "stable",
+		config = function()
+			require("crates").setup()
+		end,
+	},
+
 	-- Auto adds closing brackets, braces, etc.
 	{
 		"windwp/nvim-autopairs",
