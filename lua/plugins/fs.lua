@@ -56,8 +56,8 @@ return {
 			})
 
 			-- Set keymaps
-			vim.keymap.set("n", "<leader>o", ":Oil ./ --float<CR>", { silent = true })
-			vim.keymap.set("n", "<leader>e", ":Oil --float<CR>", { silent = true })
+			vim.keymap.set("n", "<leader>O", ":Oil ./ --float<CR>", { silent = true })
+			vim.keymap.set("n", "<leader>E", ":Oil --float<CR>", { silent = true })
 		end,
 	},
 }

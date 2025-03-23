@@ -86,8 +86,6 @@ return {
 					["<C-j>"] = { "select_next" },
 					["<C-u>"] = { "scroll_documentation_up" },
 					["<C-d>"] = { "scroll_documentation_down" },
-					["<Tab>"] = { "snippet_forward", "fallback" },
-					["<S-Tab>"] = { "snippet_backward", "fallback" },
 				},
 			},
 
