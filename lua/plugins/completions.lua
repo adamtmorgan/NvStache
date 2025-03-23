@@ -84,8 +84,6 @@ return {
 					preset = "enter",
 					["<C-k>"] = { "select_prev" },
 					["<C-j>"] = { "select_next" },
-					["<C-u>"] = { "scroll_documentation_up" },
-					["<C-d>"] = { "scroll_documentation_down" },
 				},
 			},
 

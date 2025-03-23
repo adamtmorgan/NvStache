@@ -11,16 +11,12 @@ return {
 					keys = {
 						["<C-;>"] = { "close", mode = { "n" } },
 						["<C-c>"] = { "close", mode = { "i", "n" } },
-						["<C-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
-						["<C-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
 					},
 				},
 				list = {
 					keys = {
 						["<C-;>"] = { "close", mode = { "n" } },
 						["<C-c>"] = { "close", mode = { "i", "n" } },
-						["<C-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
-						["<C-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
 					},
 				},
 			},
@@ -42,11 +38,10 @@ return {
 			desc = "Find Files",
 		},
 		{
-			"<leader>e",
+			"<leader>o",
 			function()
 				Snacks.picker.explorer({
 					layout = { preset = "default", preview = true },
-					tree = false,
 					follow_file = true,
 					auto_close = true,
 					win = {
@@ -54,8 +49,6 @@ return {
 							keys = {
 								["<C-;>"] = { "close", mode = { "n" } },
 								["<C-c>"] = { "close", mode = { "i", "n" } },
-								["<C-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
-								["<C-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
 							},
 						},
 						list = {
@@ -63,38 +56,6 @@ return {
 								["<Enter>"] = "confirm",
 								["<C-;>"] = { "close", mode = { "n" } },
 								["<C-c>"] = { "close", mode = { "i", "n" } },
-								["<C-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
-								["<C-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
-							},
-						},
-					},
-				})
-			end,
-			desc = "Find Files",
-		},
-		{
-			"<leader>o",
-			function()
-				Snacks.picker.explorer({
-					layout = { preset = "default", preview = true },
-					follow_file = false,
-					auto_close = true,
-					win = {
-						input = {
-							keys = {
-								["<C-;>"] = { "close", mode = { "n" } },
-								["<C-c>"] = { "close", mode = { "i", "n" } },
-								["<C-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
-								["<C-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
-							},
-						},
-						list = {
-							keys = {
-								["<Enter>"] = "confirm",
-								["<C-;>"] = { "close", mode = { "n" } },
-								["<C-c>"] = { "close", mode = { "i", "n" } },
-								["<C-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
-								["<C-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
 							},
 						},
 					},
