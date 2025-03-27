@@ -21,6 +21,15 @@ vim.opt.scrolloff = 50
 -- Makes it so status bar is shared across panes
 vim.opt.laststatus = 3
 
+-- Makes hover windows rounded
+vim.o.winborder = "rounded"
+
+-- Renders inline errors and warnings on separate lines
+vim.diagnostic.config({
+	virtual_text = true,
+	-- virtual_lines = true
+})
+
 ------------------------------------------
 -- Ignore certain dirs in search
 ------------------------------------------

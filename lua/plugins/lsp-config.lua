@@ -219,21 +219,6 @@ return {
 			-- Check in on this later:
 			-- lspconfig.terraform_ls.setup({})
 
-			-- Add borders to our hover windows
-			local _border = "rounded"
-
-			local windowSettings = {
-				border = _border,
-			}
-
-			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, windowSettings)
-			vim.lsp.handlers["textDocument/signatureHelp"] =
-				vim.lsp.with(vim.lsp.handlers.signature_help, windowSettings)
-			vim.diagnostic.config({
-				float = { border = _border },
-			})
-			require("lspconfig.ui.windows").default_options = windowSettings
-
 			-- Setup key bindings for lsp
 			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
 			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {})
