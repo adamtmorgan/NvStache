@@ -26,33 +26,8 @@ return {
 					align = "bottom", -- How to align the notification window
 					relative = "editor", -- What the notification window position is relative to
 				},
+				override_vim_notify = true,
 			},
 		},
-	},
-	{
-		"rcarriga/nvim-notify",
-		config = function()
-			local notify = require("notify")
-
-			notify.setup({
-				render = "wrapped-compact",
-				fps = 60,
-			})
-
-			vim.notify = function(msg, level)
-				-- Define a list of messages or patterns to silence
-				local silenced_patterns = {
-					-- "No information available",
-				}
-
-				for _, pattern in ipairs(silenced_patterns) do
-					if msg:match(pattern) then
-						return
-					end
-				end
-
-				notify(msg, level)
-			end
-		end,
 	},
 }

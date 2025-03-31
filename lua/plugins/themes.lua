@@ -36,6 +36,9 @@ return {
 						NormalFloat = { bg = "none" },
 						FloatBorder = { bg = "none" },
 						FloatTitle = { bg = "none" },
+						Visual = { bg = "#363646" },
+						-- TODO: Below not working for some reason
+						-- VertSplit = { fg = "#54546D", bg = "none" },
 
 						-- Save an hlgroup with dark background and dimmed foreground
 						-- so that you can use it where your still want darker windows.
@@ -53,6 +56,12 @@ return {
 						TelescopeResultsBorder = { fg = theme.ui.fg_dim, bg = "none" },
 						TelescopePreviewNormal = { bg = "none" },
 						TelescopePreviewBorder = { bg = "none", fg = theme.ui.fg_dim },
+
+						-- Blink.cmp
+						BlinkCmpMenu = { fg = "#54546D", bg = "none" },
+						BlinkCmpMenuBorder = { fg = "#54546D", bg = "none" },
+						BlinkCmpMenuSelection = { fg = "#DBD7BA", bg = "#363646" },
+						BlinkCmpScrollBarThumb = { fg = "#54546D", bg = "#54546D" },
 					}
 				end,
 				theme = "wave", -- Load "wave" theme when 'background' option is not set
@@ -73,15 +82,6 @@ return {
 				  highlight Normal guibg=#191E25
 				]])
 			end
-
-			-- Overriding visual mode highlight color to match row highlight
-			vim.api.nvim_set_hl(0, "Visual", { bg = "#363646" })
-
-			-- Set Blink CMP colors
-			vim.api.nvim_set_hl(0, "BlinkCmpMenu", { bg = "none" })
-			vim.api.nvim_set_hl(0, "BlinkCmpMenuBorder", { fg = "#54546D", bg = "none" })
-			vim.api.nvim_set_hl(0, "BlinkCmpMenuSelection", { fg = "#DBD7BA", bg = "#363646" })
-			vim.api.nvim_set_hl(0, "BlinkCmpScrollBarThumb", { fg = "#54546D", bg = "#54546D" })
 		end,
 	},
 }
