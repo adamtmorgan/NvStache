@@ -118,7 +118,6 @@ return {
 					"vue",
 				},
 				settings = {
-					single_file_support = false,
 					tsserver_plugins = {
 						"@vue/typescript-plugin",
 					},
@@ -170,6 +169,15 @@ return {
 				},
 			})
 
+			lspconfig.volar.setup({
+				filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+				init_options = {
+						hybridMode = true,
+					vue = {
+					},
+				},
+			})
+
 			lspconfig.graphql.setup({
 				root_dir = lspconfig.util.root_pattern(".graphqlconfig", ".graphqlrc", "package.json", ".git"),
 				filetypes = { "graphql", "graphqlrc", "graphqlconfig" },
@@ -179,7 +187,7 @@ return {
 			lspconfig.sourcekit.setup({})
 			lspconfig.eslint.setup({})
 			lspconfig.cssls.setup({
-				filetypes = { "css", "scss", "less"},
+				filetypes = { "css", "scss", "less" },
 			})
 			lspconfig.html.setup({
 				filetypes = { "html" },
