@@ -59,6 +59,13 @@ return {
 		end,
 	},
 
+	-- For highlighting todo, fix and other tags in comments
+	{
+		"folke/todo-comments.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		opts = {},
+	},
+
 	-- Adds comment formatting features
 	{
 		"numToStr/Comment.nvim",
