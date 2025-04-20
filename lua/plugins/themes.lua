@@ -34,11 +34,12 @@ return {
 					local theme = colors.theme
 					return {
 						NormalFloat = { bg = "none" },
+						Pmenu = { bg = "none" },
 						FloatBorder = { bg = "none" },
 						FloatTitle = { bg = "none" },
+						FloatFooter = { bg = "none" },
+						WinSeparator = { fg = "#3F3B4F", bg = "none" },
 						Visual = { bg = "#363646" },
-						-- TODO: Below not working for some reason
-						-- VertSplit = { fg = "#54546D", bg = "none" },
 
 						-- Save an hlgroup with dark background and dimmed foreground
 						-- so that you can use it where your still want darker windows.
