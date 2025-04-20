@@ -139,19 +139,7 @@ return {
 			"MunifTanjim/nui.nvim",
 			--- The below dependencies are optional,
 			"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-			{
-				"zbirenbaum/copilot.lua", -- for providers='copilot'
-				config = function()
-					---@diagnostic disable-next-line: redundant-parameter
-					require("copilot").setup({
-						suggestion = { enabled = false }, -- Disable if using avante for suggestions
-						panel = { enabled = false }, -- Disable panel if not needed
-						filetypes = {
-							["*"] = true, -- Enable Copilot for all filetypes, or specify as needed
-						},
-					})
-				end,
-			},
+			"zbirenbaum/copilot.lua", -- for providers='copilot'
 			{
 				-- support for image pasting
 				"HakonHarnes/img-clip.nvim",
