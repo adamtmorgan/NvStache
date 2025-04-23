@@ -8,7 +8,7 @@ return {
 				suggestion = { enabled = false }, -- Disable if using avante for suggestions
 				panel = { enabled = false }, -- Disable panel if not needed
 				filetypes = {
-					["*"] = true, -- Enable Copilot for all filetypes, or specify as needed
+					["*"] = false, -- Enable Copilot for all filetypes, or specify as needed
 				},
 			})
 		end,
@@ -60,7 +60,7 @@ return {
 			provider = "copilot",
 			copilot = {
 				endpoint = "https://api.githubcopilot.com", -- Copilot API endpoint
-				model = "gemini-2.5-pro", -- Specify the desired model
+				model = "claude-3.7-sonnet", -- Specify the desired model
 				-- Options:
 				-- gpt-4o
 				-- gpt-4.1
