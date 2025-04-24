@@ -59,8 +59,6 @@ return {
 			-- "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
 			provider = "copilot",
 			copilot = {
-				endpoint = "https://api.githubcopilot.com", -- Copilot API endpoint
-				model = "claude-3.7-sonnet", -- Specify the desired model
 				-- Options:
 				-- gpt-4o
 				-- gpt-4.1
@@ -73,9 +71,13 @@ return {
 				-- o3
 				-- o3-mini
 				-- o4-mini
-				timeout = 30000, -- Timeout in milliseconds
+				model = "gpt-4o",
+				endpoint = "https://api.githubcopilot.com",
+				allow_insecure = false,
+				timeout = 10 * 60 * 1000,
 				temperature = 0,
-				max_tokens = 4096, -- Maximum tokens for response
+				max_completion_tokens = 1000000,
+				reasoning_effort = "high",
 			},
 			-- openai = {
 			-- 	endpoint = "https://api.openai.com/v1",
