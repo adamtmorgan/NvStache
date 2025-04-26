@@ -1,3 +1,18 @@
+local llm_instructions = {
+	general_coding = [[
+		Important user preferences:
+
+		- Never add or remove code comments unless I ask for it. Instead, make
+		  your code self-explanatory using good variable names and semantics.
+		- If the language allows it, make full use of static typing and
+		  inference.
+		- If you need to provide a summary of what we've done, make it
+		  extremely concise regardless of what you've been asked to do before.
+		- Never spend any words to say why your solution is good at the end of
+		  your response.
+	  ]],
+}
+
 return {
 	-- Required to use copilot as provider
 	{
@@ -119,16 +134,6 @@ return {
 				},
 			},
 			-- system_prompt = [[
-			-- 	Important user preferences:
-			--
-			-- 	- Never add or remove code comments unless I ask for it. Instead, make
-			-- 	  your code self-explanatory using good variable names and semantics.
-			-- 	- If the language allows it, make full use of static typing and
-			-- 	  inference.
-			-- 	- If you need to provide a summary of what we've done, make it
-			-- 	  extremely concise regardless of what you've been asked to do before.
-			-- 	- Never spend any words to say why your solution is good at the end of
-			-- 	  your response.
 			-- ]],
 		},
 		-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
@@ -173,8 +178,6 @@ return {
 			-- fix the border highlights
 			vim.api.nvim_set_hl(0, "AvanteSidebarWinSeparator", { link = "WinSeparator" })
 			vim.api.nvim_set_hl(0, "AvanteSidebarWinHorizontalSeparator", { link = "WinSeparator" })
-			-- vim.api.nvim_set_hl(0, "AvantePromptInput", { link = "WinSeparator" })
-			-- vim.api.nvim_set_hl(0, "AvantePromptInputBorder", { link = "FloatBorder" })
 		end,
 	},
 }
