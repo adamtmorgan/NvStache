@@ -26,8 +26,8 @@ vim.o.winborder = "rounded"
 
 -- Renders inline errors and warnings on separate lines
 vim.diagnostic.config({
-	virtual_text = true,
-	-- virtual_lines = true
+	-- virtual_text = true,
+	virtual_lines = true
 })
 
 ------------------------------------------
@@ -75,10 +75,10 @@ vim.keymap.set("n", "<leader>bd", ":bd<CR>", { noremap = true, silent = true })
 
 -- Toggle diagnostics text
 vim.api.nvim_create_user_command("ToggleDiagnosticsText", function()
-	if vim.diagnostic.config().virtual_text then
-		vim.diagnostic.config({ virtual_text = false })
+	if vim.diagnostic.config().virtual_lines then
+		vim.diagnostic.config({ virtual_lines = false })
 	else
-		vim.diagnostic.config({ virtual_text = true })
+		vim.diagnostic.config({ virtual_lines = true })
 	end
 end, {})
 vim.keymap.set("n", "<leader>td", ":ToggleDiagnosticsText<CR>", { noremap = true, silent = true })
