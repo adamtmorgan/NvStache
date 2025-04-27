@@ -129,6 +129,7 @@ return {
 	{
 		"windwp/nvim-ts-autotag",
 		config = function()
+			---@diagnostic disable-next-line: missing-fields
 			require("nvim-ts-autotag").setup({
 				opts = {
 					-- Defaults
