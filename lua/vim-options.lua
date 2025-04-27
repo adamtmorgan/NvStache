@@ -73,6 +73,7 @@ vim.keymap.set("n", "<leader>l", ":bnext<CR>", { noremap = true, silent = true }
 vim.keymap.set("n", "<leader>h", ":bprevious<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>bd", ":bd<CR>", { noremap = true, silent = true })
 
+-- Toggle diagnostics text
 vim.api.nvim_create_user_command("ToggleDiagnosticsText", function()
 	if vim.diagnostic.config().virtual_text then
 		vim.diagnostic.config({ virtual_text = false })
