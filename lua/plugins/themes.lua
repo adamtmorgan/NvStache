@@ -11,12 +11,12 @@ return {
 				undercurl = true, -- enable undercurls
 				commentStyle = { italic = false },
 				functionStyle = {},
-				keywordStyle = { italic = false },
-				statementStyle = { bold = true },
+				statementStyle = { italic = true },
+				keywordStyle = { italic = true },
 				typeStyle = {},
 				transparent = not vim.g.neovide, -- bg is not set uniless neovide
 				dimInactive = false, -- dim inactive window `:h hl-NormalNC`
-				terminalColors = true, -- define vim.g.terminal_color_{0,17}
+				terminalColors = false, -- define vim.g.terminal_color_{0,17}
 				colors = { -- add/modify theme and palette colors
 					palette = {},
 					theme = {
@@ -51,12 +51,12 @@ return {
 						LazyNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
 						MasonNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
 
-						TelescopePromptNormal = { bg = "none" },
-						TelescopePromptBorder = { fg = theme.ui.fg_dim, bg = "none" },
-						TelescopeResultsNormal = { fg = theme.ui.fg_dim, bg = "none" },
-						TelescopeResultsBorder = { fg = theme.ui.fg_dim, bg = "none" },
-						TelescopePreviewNormal = { bg = "none" },
-						TelescopePreviewBorder = { bg = "none", fg = theme.ui.fg_dim },
+						-- TelescopePromptNormal = { bg = "none" },
+						-- TelescopePromptBorder = { fg = theme.ui.fg_dim, bg = "none" },
+						-- TelescopeResultsNormal = { fg = theme.ui.fg_dim, bg = "none" },
+						-- TelescopeResultsBorder = { fg = theme.ui.fg_dim, bg = "none" },
+						-- TelescopePreviewNormal = { bg = "none" },
+						-- TelescopePreviewBorder = { bg = "none", fg = theme.ui.fg_dim },
 
 						-- Blink.cmp
 						BlinkCmpMenu = { fg = "#54546D", bg = "none" },
