@@ -79,6 +79,10 @@ return {
 	-- a variety of languages.
 	{
 		"kkoomen/vim-doge",
+		-- run `:call doge#install()` on first run
+		config = function()
+			vim.keymap.set('n', '<Leader>D', '<Plug>(doge-generate)<CR>')
+		end
 	},
 
 	-- Enhances crate composing in cargo.toml files
