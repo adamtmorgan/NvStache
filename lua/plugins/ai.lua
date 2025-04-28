@@ -133,6 +133,18 @@ return {
 					close_from_input = { normal = "<C-c>", insert = "<C-c>" },
 				},
 			},
+			-- cursor_applying_provider = "groq",
+			-- behaviour = {
+			-- 	enable_cursor_planning_mode = true,
+			-- },
+			-- vendors = {
+			-- 	groq = {
+			-- 		__inherited_from = "openai",
+			-- 		endpoint = "https://api.groq.com/openai/v1/",
+			-- 		model = "llama-3.3-70b-versatile",
+			-- 		max_tokens = 32768, -- remember to increase this value, otherwise it will stop generating halfway
+			-- 	},
+			-- },
 			-- system_prompt = [[
 			-- ]],
 		},
@@ -141,7 +153,7 @@ return {
 		-- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
-			-- "stevearc/dressing.nvim",
+			"stevearc/dressing.nvim",
 			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",
 			--- The below dependencies are optional,
