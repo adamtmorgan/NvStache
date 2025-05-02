@@ -1,18 +1,5 @@
 local llm_instructions = {
-	general_coding = [[
-		Important user preferences:
-
-		- Never add or remove code comments unless I ask for it. Instead, make
-		  your code self-explanatory using good variable names and semantics.
-		- If the language allows it, make full use of static typing and
-		  inference.
-		- If you need to provide a summary of what we've done, make it
-		  extremely concise regardless of what you've been asked to do before.
-		- Never spend any words to say why your solution is good at the end of
-		  your response.
-	  ]],
-	-- Taken from Cursor AI workshop
-	coding_mdoes = [[
+	modes = [[
 		## META-INSTRUCTION: MODE DECLARATION REQUIREMENT
 
 		**YOU MUST BEGIN EVERY SINGLE RESPONSE WITH YOUR CURRENT MODE IN BRACKETS. NO EXCEPTIONS.** **Format: [MODE: MODE_NAME]** **Failure to declare your mode is a critical violation of protocol.**
@@ -311,8 +298,7 @@ return {
 			-- 		max_tokens = 32768, -- remember to increase this value, otherwise it will stop generating halfway
 			-- 	},
 			-- },
-			-- system_prompt = [[
-			-- ]],
+			system_prompt = llm_instructions.modes,
 		},
 		-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
 		build = "make",
