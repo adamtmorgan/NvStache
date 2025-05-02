@@ -81,8 +81,8 @@ return {
 		"kkoomen/vim-doge",
 		-- run `:call doge#install()` on first run
 		config = function()
-			vim.keymap.set('n', '<Leader>D', '<Plug>(doge-generate)<CR>')
-		end
+			vim.keymap.set("n", "<Leader>D", "<Plug>(doge-generate)<CR>")
+		end,
 	},
 
 	-- Enhances crate composing in cargo.toml files
@@ -114,7 +114,15 @@ return {
 	-- 's' is used as an object reference. Just as if you'd say `ciw` to
 	-- change inside word, you'd say `cs{[` to change a surrounding `{` to a `[`
 	{
-		"tpope/vim-surround",
+		-- "tpope/vim-surround",
+		"kylechui/nvim-surround",
+		version = "^3.0.0",
+		event = "VeryLazy",
+		config = function()
+			require("nvim-surround").setup({
+				-- Configuration here, or leave empty to use defaults
+			})
+		end,
 	},
 
 	-- Used to quickly align text vertically across rows.

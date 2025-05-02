@@ -129,8 +129,9 @@ return {
 			},
 			mappings = {
 				sidebar = {
-					close = { "<C-c>" },
-					close_from_input = { normal = "<C-c>", insert = "<C-c>" },
+					close = { "q" },
+					-- close_from_input = { normal = "q", insert = "<C-c>" },
+					close_from_input = { normal = "q" },
 				},
 			},
 			-- cursor_applying_provider = "groq",
