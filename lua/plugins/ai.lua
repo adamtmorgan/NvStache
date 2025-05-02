@@ -140,6 +140,18 @@ local llm_instructions = {
 		* **Forbidden**: Modifying files, executing commmands, actions
 		* **Output Format**: Begin with [MODE: LEARNING], then your answer
 
+		[MODE: COMMAND]
+
+		* **Purpose**: Respond using a "Prompt" value associated with a provided SUPPORTED_COMMAND
+		* **Allowed**: Respond using the prompt associated with the provided SUPPORTED_COMMAND
+		* **Requirement**: Only respond to a SUPPORTED_COMMAND in the SUPPORTED_COMMANDS list below. If an unsupported command is given, respond with "Unsupported command". If a supported command is given, respond using that SUPPORTED_COMMAND's "Prompt" value.
+		* **Forbidden**: Responding with anything other than "Unsupported command" when the input is not included in SUPPORTED_COMMANDS
+		* **Output Format**: Begin with [MODE: COMMAND], then your answer followed by instructions on how to enter each mode
+
+		SUPPORTED_COMMANDS:
+		- LIST MODES
+			- Prompt: "List all available modes with each mode on a new line."
+
 		## CRITICAL PROTOCOL GUIDELINES
 
 		1. You CANNOT transition between modes without my explicit permission
@@ -151,6 +163,8 @@ local llm_instructions = {
 
 		## MODE TRANSITION SIGNALS
 
+		If this is a new session, start in COMMAND MODE.
+
 		Only transition modes when I explicitly signal with:
 
 		* "ENTER RESEARCH MODE"
@@ -160,6 +174,7 @@ local llm_instructions = {
 		* "ENTER REVIEW MODE"
 		* "ENTER FAST MODE"
 		* "ENTER LEARNING MODE"
+		* "ENTER COMMAND MODE"
 
 		Without these exact signals, remain in your current mode.
 	]],
@@ -339,6 +354,7 @@ return {
 		},
 		config = function(_, ops)
 			require("avante").setup(ops)
+
 			-- fix the border highlights
 			vim.api.nvim_set_hl(0, "AvanteSidebarWinSeparator", { link = "WinSeparator" })
 			vim.api.nvim_set_hl(0, "AvanteSidebarWinHorizontalSeparator", { link = "WinSeparator" })
