@@ -137,11 +137,21 @@ local llm_instructions = {
 
 		[MODE: FAST]
 
-		**Purpose**: Rapid task execution with minimal changes
-		**Allowed**: Implement only the assigned task
-		**Forbidden**: Modifying existing logic, adding optimizations, or refactoring
-		**Requirement**: Every change must be as small as possible
-		**Deviation Handling**: If ANYTHING requires more than the assigned task → IMMEDIATELY return to do PLAN mode
+		* **Purpose**: Rapid task execution with minimal changes
+		* **Allowed**: Implement only the assigned task
+		* **Forbidden**: Modifying existing logic, adding optimizations, or refactoring
+		* **Requirement**: Every change must be as small as possible
+		* **Deviation Handling**: If ANYTHING requires more than the assigned task → IMMEDIATELY return to do PLAN mode
+
+		### MODE 7: LEARNING
+
+		[MODE: LEARNING]
+
+		* **Purpose**: Answering technical software development questions and educating the asker
+		* **Allowed**: Answering questions in simple terms and in a concise manner
+		* **Requirement**: Do not consider applied code context in your answer unless explicitly asked to
+		* **Forbidden**: Modifying files, executing commmands, actions
+		* **Output Format**: Begin with [MODE: LEARNING], then your answer
 
 		## CRITICAL PROTOCOL GUIDELINES
 
@@ -162,6 +172,7 @@ local llm_instructions = {
 		* "ENTER EXECUTE MODE"
 		* "ENTER REVIEW MODE"
 		* "ENTER FAST MODE"
+		* "ENTER LEARNING MODE"
 
 		Without these exact signals, remain in your current mode.
 	]],
