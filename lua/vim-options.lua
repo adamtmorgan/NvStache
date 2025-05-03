@@ -81,7 +81,7 @@ vim.api.nvim_create_user_command("ToggleDiagnosticsLines", function()
 		vim.diagnostic.config({ virtual_text = false, virtual_lines = true })
 	end
 end, {})
-vim.keymap.set("n", "<leader>tl", ":ToggleDiagnosticsLines<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>tD", ":ToggleDiagnosticsLines<CR>", { noremap = true, silent = true })
 
 vim.api.nvim_create_user_command("ToggleDiagnosticsText", function()
 	if vim.diagnostic.config().virtual_text then
@@ -90,7 +90,7 @@ vim.api.nvim_create_user_command("ToggleDiagnosticsText", function()
 		vim.diagnostic.config({ virtual_text = true, virtual_lines = false })
 	end
 end, {})
-vim.keymap.set("n", "<leader>tt", ":ToggleDiagnosticsText<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>td", ":ToggleDiagnosticsText<CR>", { noremap = true, silent = true })
 
 -- Clears all buffers except for the currently open one
 vim.keymap.set("n", "<leader>!", ":Clean<CR>", { noremap = true, silent = true })

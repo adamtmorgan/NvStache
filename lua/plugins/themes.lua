@@ -9,7 +9,7 @@ return {
 			require("kanagawa").setup({
 				compile = false, -- enable compiling the colorscheme
 				undercurl = true, -- enable undercurls
-				commentStyle = { italic = false },
+				commentStyle = { italic = true },
 				functionStyle = {},
 				statementStyle = { italic = true },
 				keywordStyle = { italic = true },
@@ -40,6 +40,7 @@ return {
 						FloatFooter = { bg = "none" },
 						WinSeparator = { fg = "#3F3B4F", bg = "none" },
 						Visual = { bg = "#363646" },
+						Comment = { fg = "#7F7E7C" }, -- Slightly brighter than default
 
 						-- Save an hlgroup with dark background and dimmed foreground
 						-- so that you can use it where your still want darker windows.
@@ -50,13 +51,6 @@ return {
 						-- set their background accordingly if you wish to keep them dark and borderless
 						LazyNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
 						MasonNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
-
-						-- TelescopePromptNormal = { bg = "none" },
-						-- TelescopePromptBorder = { fg = theme.ui.fg_dim, bg = "none" },
-						-- TelescopeResultsNormal = { fg = theme.ui.fg_dim, bg = "none" },
-						-- TelescopeResultsBorder = { fg = theme.ui.fg_dim, bg = "none" },
-						-- TelescopePreviewNormal = { bg = "none" },
-						-- TelescopePreviewBorder = { bg = "none", fg = theme.ui.fg_dim },
 
 						-- Blink.cmp
 						BlinkCmpMenu = { fg = "#54546D", bg = "none" },
