@@ -53,14 +53,12 @@ return {
 			registry.refresh(function()
 				for _, name in pairs(ensure_installed) do
 					local package = registry.get_package(name)
+					local current_version = package:get_installed_version()
+					local latest_version = package:get_latest_version()
 					if not registry.is_installed(name) then
 						package:install()
-					else
-						package:check_new_version(function(success, result_or_err)
-							if success then
-								package:install({ version = result_or_err.latest_version })
-							end
-						end)
+					elseif current_version ~= latest_version then
+						package:install({ version = latest_version })
 					end
 				end
 			end)
@@ -172,9 +170,8 @@ return {
 			lspconfig.volar.setup({
 				filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
 				init_options = {
-						hybridMode = true,
-					vue = {
-					},
+					hybridMode = true,
+					vue = {},
 				},
 			})
 
