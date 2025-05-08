@@ -21,6 +21,30 @@ return {
 				},
 			},
 		},
+		input = { enabled = true },
+
+		-- Tested below and I prefer indent-blankline, as it's
+		-- more robust at time of writing.
+
+		-- indent = {
+		-- 	indent = {
+		-- 		enabled = true,
+		-- 		char = "▏",
+		-- 		hl = "FloatBorder",
+		-- 	},
+		-- 	scope = {
+		-- 		enabled = true,
+		-- 		underline = false,
+		-- 		char = "▏",
+		-- 		only_current = true,
+		-- 		-- hl = "@tag.delimiter", -- assuming kanagawa
+		-- 		hl = "@variable.parameter", -- assuming kanagawa
+		-- 	},
+		-- 	animate = {
+		-- 		enabled = false,
+		-- 	},
+		-- },
+		-- scope = { enabled = true }
 	},
 	keys = {
 		{
