@@ -240,41 +240,45 @@ return {
 			-- for example
 			-- "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
 			provider = "copilot",
-			copilot = {
-				-- Options:
-				-- gpt-4o
-				-- gpt-4.1
-				-- claude-3.5-sonnet
-				-- claude-3.7-sonnet
-				-- gemini-2.0-flash
-				-- gemini-2.5-pro
-				-- o1
-				-- o2
-				-- o3
-				-- o3-mini
-				-- o4-mini
-				model = "gpt-4o",
-				endpoint = "https://api.githubcopilot.com",
-				allow_insecure = false,
-				timeout = 10 * 60 * 1000,
-				temperature = 0,
-				max_completion_tokens = 1000000,
-				reasoning_effort = "high",
+			providers = {
+				copilot = {
+					-- Options:
+					-- gpt-4o
+					-- gpt-4.1
+					-- claude-3.5-sonnet
+					-- claude-3.7-sonnet
+					-- gemini-2.0-flash
+					-- gemini-2.5-pro
+					-- o1
+					-- o2
+					-- o3
+					-- o3-mini
+					-- o4-mini
+					model = "gpt-4o",
+					endpoint = "https://api.githubcopilot.com",
+					allow_insecure = false,
+					timeout = 10 * 60 * 1000,
+					max_completion_tokens = 1000000,
+					reasoning_effort = "high",
+					extra_request_body = {
+						temperature = 0,
+					},
+				},
+				-- openai = {
+				-- 	endpoint = "https://api.openai.com/v1",
+				-- 	model = "gpt-4o", -- your desired model (or use gpt-4o, etc.)
+				-- 	timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
+				-- 	temperature = 0,
+				-- 	max_completion_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
+				-- 	--reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+				-- },
+				-- claude = {
+				-- 	endpoint = "https://api.anthropic.com",
+				-- 	model = "claude-3-5-sonnet-20241022",
+				-- 	temperature = 0,
+				-- 	max_tokens = 4096,
+				-- },
 			},
-			-- openai = {
-			-- 	endpoint = "https://api.openai.com/v1",
-			-- 	model = "gpt-4o", -- your desired model (or use gpt-4o, etc.)
-			-- 	timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
-			-- 	temperature = 0,
-			-- 	max_completion_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
-			-- 	--reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
-			-- },
-			-- claude = {
-			-- 	endpoint = "https://api.anthropic.com",
-			-- 	model = "claude-3-5-sonnet-20241022",
-			-- 	temperature = 0,
-			-- 	max_tokens = 4096,
-			-- },
 			selector = {
 				provider = "snacks",
 			},
