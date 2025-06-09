@@ -15,7 +15,8 @@ return {
 			local registry = require("mason-registry")
 
 			-- These are package names sourced from the Mason registry,
-			-- and may not necessarily match the server names used in lspconfig
+			-- and may not necessarily match the server names used in lspconfig.
+			-- Apply version property if a specific version is desired.
 			local ensure_installed = {
 				-- LSPs
 				{ name = "codelldb" }, -- Debugging for Rust/C/C++/Zig
@@ -206,7 +207,7 @@ return {
 
 			vim.lsp.enable({
 				"lua_ls",
-				-- "ts_ls",
+				-- "ts_ls", -- Disable when hybrid mode for vue_ls is disabled or if using typescript_tools
 				"vtsls",
 				"vue_ls",
 				"eslint",
