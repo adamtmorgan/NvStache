@@ -18,47 +18,51 @@ return {
 			-- and may not necessarily match the server names used in lspconfig
 			local ensure_installed = {
 				-- LSPs
-				"codelldb", -- Debugging for Rust/C/C++/Zig
-				"cpptools", -- Debugging for Rust/C/C++
-				"lua-language-server", -- lua
-				"typescript-language-server", -- typescript
-				"vue-language-server", -- aka "volar" - vue
-				"eslint-lsp", -- javascript
-				"json-lsp", -- json
-				"yaml-language-server", -- yaml
-				"html-lsp", -- html
-				"css-lsp", -- css
-				"intelephense", -- php
-				"pyright", -- python
-				"rust-analyzer", -- rust
-				"clangd", -- C, C++
-				"taplo", -- toml
-				"sqlls", -- sql
-				"bash-language-server", -- bash
-				"dockerfile-language-server", -- docker
-				"docker-compose-language-service", -- docker compose
-				"terraform-ls", -- terraform
-				"rnix-lsp", -- nix
-				"graphql-language-service-cli", -- graphql
-				"buf", -- gRPC/Protobuf
-				"glsl_analyzer", -- webgl
-				"wgsl-analyzer", -- webgpu
+				{ name = "codelldb" }, -- Debugging for Rust/C/C++/Zig
+				{ name = "cpptools" }, -- Debugging for Rust/C/C++
+				{ name = "lua-language-server" }, -- lua
+				{ name = "typescript-language-server" }, -- typescript
+				{ name = "vue-language-server", version = "3.0.0-alpha.10" }, -- aka "volar" - vue
+				{ name = "vtsls" },
+				{ name = "eslint-lsp" }, -- javascript
+				{ name = "json-lsp" }, -- json
+				{ name = "yaml-language-server" }, -- yaml
+				{ name = "html-lsp" }, -- html
+				{ name = "css-lsp" }, -- css
+				{ name = "intelephense" }, -- php
+				{ name = "pyright" }, -- python
+				{ name = "rust-analyzer" }, -- rust
+				{ name = "clangd" }, -- C, C++
+				{ name = "taplo" }, -- toml
+				{ name = "sqlls" }, -- sql
+				{ name = "bash-language-server" }, -- bash
+				{ name = "dockerfile-language-server" }, -- docker
+				{ name = "docker-compose-language-service" }, -- docker compose
+				{ name = "terraform-ls" }, -- terraform
+				{ name = "rnix-lsp" }, -- nix
+				{ name = "graphql-language-service-cli" }, -- graphql
+				{ name = "buf" }, -- gRPC/Protobuf
+				{ name = "glsl_analyzer" }, -- webgl
+				{ name = "wgsl-analyzer" }, -- webgpu
 
 				-- Formatting
-				"prettierd", -- Formatting for various common filetypes
-				"clang-format", -- Formatting C, C++
+				{ name = "prettierd" }, -- Formatting for various common filetypes
+				{ name = "clang-format" }, -- Formatting C, C++
 			}
 
 			-- Ensure packages are installed and up to date
 			registry.refresh(function()
-				for _, name in pairs(ensure_installed) do
-					local package = registry.get_package(name)
+				for _, package_details in pairs(ensure_installed) do
+					local package = registry.get_package(package_details.name)
 					local current_version = package:get_installed_version()
-					local latest_version = package:get_latest_version()
-					if not registry.is_installed(name) then
-						package:install()
-					elseif current_version ~= latest_version then
-						package:install({ version = latest_version })
+					local install_version = package:get_latest_version()
+					if package_details.version ~= nil then
+						install_version = package_details.version
+					end
+					local updated = current_version == install_version
+					local installed = registry.is_installed(package_details.name)
+					if not installed or not updated then
+						package:install({ version = install_version })
 					end
 				end
 			end)
@@ -125,9 +129,7 @@ return {
 	},
 
 	--------------------------------------------------------
-	-- Nvim LSP Config
-	-- Wires up LSPs that have been installed via Mason
-	-- (or manually) to the LSP features in Neovim.
+	-- Nvim LSP Config. Provides decent default LSP configs.
 	-- https://github.com/neovim/nvim-lspconfig
 	--------------------------------------------------------
 	{
@@ -136,15 +138,9 @@ return {
 		-- overrides the select menu for code actions.
 		dependencies = { "Fildo7525/pretty_hover", "folke/snacks.nvim" },
 		config = function()
-			-- Note: Wiring up `capabilities` is not necessary anymore
-			-- ever since migrating to blink.cmp, which is smart enough
-			-- to auto-detect lsp setups.
-
 			local lspconfig = require("lspconfig")
 
-			-- Any particular LSP configurations
-			-- Go here. Otherwise, defaults are used.
-			lspconfig.lua_ls.setup({
+			vim.lsp.config("lua_ls", {
 				settings = {
 					Lua = {
 						runtime = {
@@ -167,26 +163,19 @@ return {
 				},
 			})
 
-			lspconfig.volar.setup({
-				filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+			-- IMPORTANT: It is crucial to ensure that @vue/typescript-plugin and @vue/language-server
+			vim.lsp.config("vue_ls", {
 				init_options = {
-					hybridMode = true,
-					vue = {},
+					vue = {
+						hybridMode = false,
+					},
 				},
 			})
 
-			lspconfig.graphql.setup({
-				root_dir = lspconfig.util.root_pattern(".graphqlconfig", ".graphqlrc", "package.json", ".git"),
-				filetypes = { "graphql", "graphqlrc", "graphqlconfig" },
+			vim.lsp.config("clangd", {
+				filetypes = { "c", "cpp", "objc", "cuda" },
 			})
-
-			lspconfig.buf_ls.setup({})
-			lspconfig.sourcekit.setup({})
-			lspconfig.eslint.setup({})
-			lspconfig.cssls.setup({
-				filetypes = { "css", "scss", "less" },
-			})
-			lspconfig.html.setup({
+			vim.lsp.config("html", {
 				filetypes = { "html" },
 				on_attach = function(client, bufnr)
 					-- Was having weird attachment issues with Vue, so forced
@@ -196,33 +185,54 @@ return {
 					end
 				end,
 			})
-			lspconfig.intelephense.setup({})
-			lspconfig.jsonls.setup({})
-			lspconfig.yamlls.setup({})
-			lspconfig.taplo.setup({})
-			lspconfig.sqlls.setup({})
-			lspconfig.dockerls.setup({})
-			lspconfig.docker_compose_language_service.setup({})
-			lspconfig.bashls.setup({
+			vim.lsp.config("cssls", {
+				filetypes = { "css", "scss", "less" },
+			})
+
+			vim.lsp.config("graphql", {
+				root_dir = lspconfig.util.root_pattern(".graphqlconfig", ".graphqlrc", "package.json", ".git"),
+				filetypes = { "graphql", "graphqlrc", "graphqlconfig" },
+			})
+			vim.lsp.config("bufls", {
+				cmd = { "buf" },
+			})
+			vim.lsp.config("bashls", {
 				filetypes = { "zsh", "sh", "bash" },
 			})
-			lspconfig.rnix.setup({})
-			-- No longer needed since using rustacianvim
-			-- to manage rust features. Keeping here
-			-- as reference just in case.
-			-- lspconfig.rust_analyzer.setup({
-			-- 	capabilities = capabilities,
-			-- })
-			lspconfig.clangd.setup({
-				filetypes = { "c", "cpp", "objc", "cuda" },
+
+			vim.lsp.config("wgsl_analyzer", {
+				cmd = { "wgsl_analyzer" },
 			})
-			lspconfig.pyright.setup({})
-			lspconfig.glsl_analyzer.setup({})
-			lspconfig.wgsl_analyzer.setup({})
-			-- Terraform requires a separate config
-			-- that I don't have set up right now.
-			-- Check in on this later:
-			-- lspconfig.terraform_ls.setup({})
+
+			vim.lsp.enable({
+				"lua_ls",
+				-- "ts_ls",
+				"vtsls",
+				"vue_ls",
+				"eslint",
+				"intelephense",
+				"clangd",
+				"pyright",
+				"html",
+				"cssls",
+				"jsonls",
+				"yamlls",
+				"taplo",
+				"sqlls",
+				"dockerls",
+				"docker_compose_language_service",
+				"graphql",
+				"bufls",
+				"sourcekit",
+				"bashls",
+				"rnix",
+
+				-- Terraform requires a separate config
+				-- that I don't have set up right now.
+				--"terraform_ls",
+				"glsl_analyzer",
+				"wgsl_analyzer",
+			})
 
 			-- Setup key bindings for lsp
 			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})

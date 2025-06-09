@@ -4,9 +4,37 @@
 
 # 👉 Say When...
 
-NvStache is a my personal Neovim configuration, tailored for speed and workflow with a carefully-curated plugin selection.
-This config is great for web programming (ts, js, css, html, etc.), Rust programming, and general-purpose config editing (xml, yaml, toml, etc.)
-I tweak this config as new circumstances arise.
+NvStache is a my personal Neovim configuration, tailored for speed and workflow with a carefully-curated plugin selection. This acts as my daily
+driver for pretty much everything except for JVM langauges (Kotlin is gatekept). I tweak this config as new circumstances arise.
+
+## Language Integrations
+
+- Lua (obviously)
+- HTML
+- CSS
+- JavaScript/TypeScript
+- Vue
+- PHP
+- Rust
+- C/C++
+- Swift (via sourcekit)
+- Python (via pyright)
+- Nix
+- Bash
+- SQL
+- GraphQL
+- JSON
+- Markdown
+- TOML
+- YAML
+- Protobuf
+- Dockerfile/Docker-compose
+- GLSL/WGSL
+
+## AI Integrations
+
+I'm currently experimenting with [Avante](https://github.com/yetone/avante.nvim), but it's still in the early stages and is not optimized.
+Avante undergoes breaking changes constantly at time of writing, so this will likely be unstable for a while.
 
 # 👨‍💻 Setup
 
@@ -53,43 +81,8 @@ Open Neovim and run:
 
 ## LSP, Linting, and Formatting Servers
 
-You shouldn't have to manually install LSP, linting, and formatting, as the `lsp-config.lua` file checks for a list of Mason registers on Neovim startup. Just in case you require manual intervention, I have listed the Mason dependencies here. You can manually manage these by opening the Mason interface inside of Neovim by running `:Mason`. Just note that if you remove a registered package manually and do not remove it from the `ensure_installed` table in `lsp-config.lua`, the package will be re-installed the next time you open Neovim, so make sure you uninstall via Mason UI as well as removing the item from the `ensure_installed` table. The following are all supported in this config:
-
-#### LSPs
-
-- **bash-language-server**: (keywords: bash)
-- **codelldb**: (keywords: c, c++, rust, zig)
-- **cpptools**: (keywords: c, c++, rust)
-- **css-lsp**: (keywords: css, scss, less)
-- **docker-compose-language-service**: (keywords: docker)
-- **dockerfile-language-server**: (keywords: docker)
-- **eslint-lsp**: (keywords: javascript, typescript)
-- **glsl_analyzer**: (keywords: opengl)
-- **graphql-language-service-cli**: (keywords: graphql)
-- **html-lsp**: (keywords: html)
-- **intelephense**: (keywords: php)
-- **json-lsp**: (keywords: json)
-- **lua-language-server**: (keywords: lua)
-- **luau-lsp**: (keywords: luau)
-- **prettierd**: (keywords: angular, css, flow, graphql, html, json, jsx, javascript, less, markdown, scss, typescript, vue, yaml)
-- **pyright**: (keywords: python)
-- **rnix-lsp**: (keywords: nix)
-- **rust-analyzer**: (keywords: rust)
-- **shfmt**: (keywords: bash, mksh, shell)
-- **sqlls**: (keywords: sql)
-- **stylua**: (keywords: lua, luau)
-- **taplo**: (keywords: toml)
-- **terraform-ls**: (keywords: terraform)
-- **typescript-language-server**: (keywords: typescript, javascript)
-- **vetur-vls**: (keywords: vue)
-- **wgsl-analyzer**: (keywords: wgsl)
-- **yaml-language-server**: (keywords: yaml)
-
-If you don't want to use some of these LSPs/formatters, you can disable
-them by visiting the LSP section of the config found in
-`lua/plugins/lsp-config.lua`. Keep in mind that you will need to
-disable parts in the Mason, nvim-lspconfig, linting, and formatting
-sections of that file.
+You shouldn't have to manually install LSP, linting, and formatting, as the `lsp-config.lua` file checks for a list of Mason registers on Neovim startup and installs them automatically. If you wish omit a language server,
+modify the `ensure_installed` table in `lsp-config.lua`.
 
 ## ⌨️ Notable Custom Bindings and Features
 
