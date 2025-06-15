@@ -23,8 +23,8 @@ return {
 				{ name = "cpptools" }, -- Debugging for Rust/C/C++
 				{ name = "lua-language-server" }, -- lua
 				{ name = "typescript-language-server" }, -- typescript
-				{ name = "vue-language-server", version = "3.0.0-alpha.10" }, -- aka "volar" - vue
-				{ name = "vtsls" },
+				{ name = "vue-language-server", version = "3.0.0-beta.1" }, -- aka "volar" - vue
+				{ name = "vtsls" }, -- ts_server wraper that grants vs code features
 				{ name = "eslint-lsp" }, -- javascript
 				{ name = "json-lsp" }, -- json
 				{ name = "yaml-language-server" }, -- yaml
@@ -105,30 +105,6 @@ return {
 	-- 	end,
 	-- },
 
-	-- TypeScript
-	{
-		"pmizio/typescript-tools.nvim",
-		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-		-- Vue plugin must be installed for vue to work
-		-- `npm i -g @vue/typescript-plugin`
-		config = function()
-			require("typescript-tools").setup({
-				filetypes = {
-					"javascript",
-					"javascriptreact",
-					"typescript",
-					"typescriptreact",
-					"vue",
-				},
-				settings = {
-					tsserver_plugins = {
-						"@vue/typescript-plugin",
-					},
-				},
-			})
-		end,
-	},
-
 	--------------------------------------------------------
 	-- Nvim LSP Config. Provides decent default LSP configs.
 	-- https://github.com/neovim/nvim-lspconfig
@@ -137,6 +113,7 @@ return {
 		"neovim/nvim-lspconfig",
 		-- Picker is a dependency to ensure that it loads prior to lsp startup, as it
 		-- overrides the select menu for code actions.
+		event = "VeryLazy",
 		dependencies = { "Fildo7525/pretty_hover", "folke/snacks.nvim" },
 		config = function()
 			local lspconfig = require("lspconfig")
@@ -164,13 +141,74 @@ return {
 				},
 			})
 
-			-- IMPORTANT: It is crucial to ensure that @vue/typescript-plugin and @vue/language-server
-			vim.lsp.config("vue_ls", {
-				init_options = {
-					vue = {
-						hybridMode = false,
+			local vue_language_server_path =
+				vim.fn.expand("$MASON/packages/vue-language-server/node_modules/@vue/language-server")
+			vim.lsp.config("vtsls", {
+				-- cmd = { "vtsls", "--stdio" },
+				filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+				-- root_markers = { "package.json", "tsconfig.json" },
+				settings = {
+					vtsls = {
+						tsserver = {
+							globalPlugins = {
+								{
+									name = "@vue/typescript-plugin",
+									location = vue_language_server_path,
+									languages = { "vue" },
+									configNamespace = "typescript",
+									enableForWorkspaceTypeScriptVersions = true,
+								},
+							},
+						},
+						enableMoveToFileCodeAction = true,
+						autoUseWorkspaceTsdk = true,
+						experimental = {
+							completion = {
+								enableServerSideFuzzyMatch = true,
+							},
+						},
 					},
 				},
+			})
+
+			vim.lsp.config("vue_ls", {
+				cmd = { "vue-language-server", "--stdio" },
+				filetypes = { "vue" },
+				init_options = {
+					vue = {
+						hybridMode = true,
+					},
+					typescript = {
+						tsserverRequestCommand = "tsserverRequest",
+					},
+				},
+				on_init = function(client)
+					client.handlers["tsserver/request"] = function(_, result, context)
+						local clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = "vtsls" })
+						if #clients == 0 then
+							vim.notify(
+								"Could not found `vtsls` lsp client, vue_lsp would not work without it.",
+								vim.log.levels.ERROR
+							)
+							return
+						end
+						local ts_client = clients[1]
+
+						local param = unpack(result)
+						local id, command, payload = unpack(param)
+						ts_client:exec_cmd({
+							command = "typescript.tsserverRequest",
+							arguments = {
+								command,
+								payload,
+							},
+						}, { bufnr = context.bufnr }, function(_, r)
+							local response_data = { { id, r.body } }
+							---@diagnostic disable-next-line: param-type-mismatch
+							client:notify("tsserver/response", response_data)
+						end)
+					end
+				end,
 			})
 
 			vim.lsp.config("clangd", {
@@ -207,7 +245,6 @@ return {
 
 			vim.lsp.enable({
 				"lua_ls",
-				-- "ts_ls", -- Disable when hybrid mode for vue_ls is disabled or if using typescript_tools
 				"vtsls",
 				"vue_ls",
 				"eslint",
