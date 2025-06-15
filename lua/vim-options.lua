@@ -104,6 +104,12 @@ vim.api.nvim_create_user_command("Clean", function()
 	end
 end, {})
 
+-- Allow clipboard copy paste in neovim
+vim.api.nvim_set_keymap("", "<D-v>", "+p<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("!", "<D-v>", "<C-R>+", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("t", "<D-v>", "<C-R>+", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<D-v>", "<C-R>+", { noremap = true, silent = true })
+
 ------------------------------------------
 -- Dynamic behavior (auto commands)
 ------------------------------------------
@@ -116,7 +122,38 @@ vim.cmd("autocmd CmdlineEnter * :set cmdheight=1")
 vim.opt.cmdheight = 0
 vim.cmd("autocmd CmdlineLeave * :set cmdheight=0")
 
--- Neovide-specific config
+------------------------------------------
+-- LSP Wiring
+------------------------------------------
+
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(args)
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		if client then
+			if client:supports_method("textDocument/inlayHint") and vim.g.auto_inlay_hint then
+				vim.lsp.inlay_hint.enable()
+			end
+			-- -@see doc :h vim.lsp.document_color
+			if client:supports_method("textDocument/documentColor") then
+				if vim.lsp.document_color then
+					vim.lsp.document_color.enable(true, args.buf, {
+						style = "virtual",
+					})
+				end
+			end
+		end
+
+		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { noremap = true })
+		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { noremap = true })
+		vim.keymap.set("n", "gh", vim.lsp.buf.hover, { noremap = true })
+		vim.keymap.set("n", "ge", vim.diagnostic.open_float, { noremap = true })
+		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { noremap = true })
+	end,
+})
+
+------------------------------------------
+-- Neovide-specific settigns
+------------------------------------------
 if vim.g.neovide then
 	-- Cursorline has bugs in Neovide
 	vim.opt.cursorline = false
@@ -167,9 +204,3 @@ if vim.g.neovide then
 	vim.keymap.set("c", "<D-v>", "<C-R>+") -- Paste command mode
 	vim.keymap.set("i", "<D-v>", '<ESC>l"+Pli') -- Paste insert mode
 end
-
--- Allow clipboard copy paste in neovim
-vim.api.nvim_set_keymap("", "<D-v>", "+p<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("!", "<D-v>", "<C-R>+", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("t", "<D-v>", "<C-R>+", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "<D-v>", "<C-R>+", { noremap = true, silent = true })
