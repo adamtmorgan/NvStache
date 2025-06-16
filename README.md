@@ -5,7 +5,8 @@
 # 👉 Say When...
 
 NvStache is a my personal Neovim configuration, tailored for speed and workflow with a carefully-curated plugin selection. This acts as my daily
-driver for pretty much everything except for JVM langauges (Kotlin is gatekept). I tweak this config as new circumstances arise.
+driver for pretty much everything except for debugging and JVM langauges (Waiting for [Kotlin LSP](https://github.com/Kotlin/kotlin-lsp) +
+[Kotlin in Mason](https://github.com/mason-org/mason-registry/pull/10300)). I tweak this config as new circumstances arise.
 
 ## Language Integrations
 
