@@ -18,7 +18,6 @@ driver for pretty much everything except for debugging and JVM langauges (Waitin
 - PHP
 - Rust
 - C/C++
-- Swift (via sourcekit)
 - Python (via pyright)
 - Nix
 - Bash
