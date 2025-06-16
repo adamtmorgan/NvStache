@@ -19,6 +19,31 @@ vim.opt.rtp:prepend(lazypath)
 -- Include our vim options
 require("vim-options")
 
+-- Enabled LSPs
+vim.lsp.enable({
+	"bashls",
+	"bufls",
+	"clangd",
+	"cssls",
+	"docker_compose_language_service",
+	"dockerls",
+	"glsl_analyzer",
+	"graphql",
+	"html",
+	"intelephense",
+	"jsonls",
+	"lua_ls",
+	"pyright",
+	"rnix",
+	"sqlls",
+	"taplo",
+	"terraformls",
+	"vtsls",
+	"vue_ls",
+	"wgsl_analyzer",
+	"yamlls",
+})
+
 -- Runs Lazy. Takes export from lua/plugins.lua
 require("lazy").setup("plugins")
 
