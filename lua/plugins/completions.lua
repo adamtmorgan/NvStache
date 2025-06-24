@@ -134,29 +134,6 @@ return {
 					"path",
 					"snippets",
 					"buffer",
-					"avante_commands",
-					"avante_mentions",
-					"avante_files",
-				},
-				providers = {
-					avante_commands = {
-						name = "avante_commands",
-						module = "blink.compat.source",
-						score_offset = 90, -- show at a higher priority than lsp
-						opts = {},
-					},
-					avante_files = {
-						name = "avante_files",
-						module = "blink.compat.source",
-						score_offset = 100, -- show at a higher priority than lsp
-						opts = {},
-					},
-					avante_mentions = {
-						name = "avante_mentions",
-						module = "blink.compat.source",
-						score_offset = 1000, -- show at a higher priority than lsp
-						opts = {},
-					},
 				},
 			},
 		},
@@ -171,26 +148,4 @@ return {
 		-- make sure to set opts so that lazy.nvim calls blink.compat's setup
 		opts = {},
 	},
-	--------------------------------------------------
-	-- Handles LSP as source for completions
-	--------------------------------------------------
-	-- NOTE: keep this in mind for later:
-	-- https://cmp.saghen.dev/configuration/signature.html#signature
-	-- Testing blink.cmp to see if it can replace this. Keeping details
-	-- here in the meantime just in case I need to revert.
-	-- {
-	-- 	"ray-x/lsp_signature.nvim",
-	-- 	config = function()
-	-- 		require("lsp_signature").setup({
-	-- 			bind = true, -- This is mandatory, otherwise border config won't get registered.
-	-- 			handler_opts = {
-	-- 				border = "rounded",
-	-- 			},
-	-- 			floating_window = true, -- show hint in a floating window, set to false for virtual text only mode
-	-- 			hint_enable = true, -- virtual hint enable
-	-- 			hint_prefix = "󰛨 ", -- Panda for parameter hint
-	-- 			hi_parameter = "Search", -- Highlight for current parameter
-	-- 		})
-	-- 	end,
-	-- },
 }

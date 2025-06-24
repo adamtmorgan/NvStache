@@ -7,6 +7,11 @@ return {
 	},
 	config = function()
 		local Terminal = require("toggleterm.terminal").Terminal
+		vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, silent = true })
+
+		-- --------------------------------------------------
+		-- Lazygit
+		-- --------------------------------------------------
 		local lazygit = Terminal:new({
 			cmd = "lazygit",
 			hidden = true,
@@ -28,12 +33,11 @@ return {
 			shading_factor = 0,
 			shading_ratio = 0,
 			persist_size = false,
+			close_on_exit = true,
 		})
-
-		function _lazygit_toggle()
+		function Lazygit_toggle()
 			lazygit:toggle()
 		end
-
-		vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, silent = true })
+		vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua Lazygit_toggle()<CR>", { noremap = true, silent = true })
 	end,
 }
