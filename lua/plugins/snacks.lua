@@ -62,7 +62,7 @@ return {
 			desc = "Find Files",
 		},
 		{
-			"<leader>o",
+			"<leader>O",
 			function()
 				Snacks.picker.explorer({
 					layout = { preset = "default", preview = true },
