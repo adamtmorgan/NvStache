@@ -1,6 +1,6 @@
 # 〰️ NvStache - My personal Neovim configuration.
 
-![screenshot](screenshot.png)
+![screenshot](screenshot.jpg)
 
 # 👉 Say When...
 
@@ -115,9 +115,13 @@ This is because this config relies on LSPs instead.
 
 - Clear search - `<leader>/` aka `:noh<CR>` (normal mode)
 
-- Open CWD in [Oil](https://github.com/stevearc/oil.nvim) - `<leader>o`
+- Open CWD in [Oil](https://github.com/stevearc/oil.nvim) - `<leader>e`
 
-- Open most recent buffer directory in [Oil](https://github.com/stevearc/oil.nvim) - `<leader>e`
+- Open most recent buffer directory in [Oil](https://github.com/stevearc/oil.nvim) - `<leader>o`
+
+- Discard changes in [Oil](https://github.com/stevearc/oil.nvim) - `<C-x>`
+
+- Open most recent buffer directory in [Snacks Explorer/Picker](https://github.com/folke/snacks.nvim/blob/main/docs/explorer.md) - `<leader>O`
 
 - Find Files - `<leader>ff` (normal mode)
 

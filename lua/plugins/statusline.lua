@@ -56,14 +56,14 @@ end
 local colors = {
 	background = "#1c2129",
 	gray = "#60687e",
-	dark_gray = "#0D1117",
+	dark_gray = "#3b3d4e",
 	white = "#E2DCC0",
 	blue = "#80A7E0",
 	green = "#9DC472",
 	yellow = "#EEC789",
 	orange = "#FFA570",
 	red = "#F76880",
-	purple = "#A289C2",
+	purple = "#b196d4",
 }
 
 local normal_string = "󱗞 NORMAL"
@@ -73,6 +73,7 @@ local visual_row_string = "󰡭 VISROW"
 local select_string = "󰒅 SELECT"
 local insert_string = " INSERT"
 local replace_string = "󰯍 REPLACE"
+local terminal = "  TERM "
 local command_string = " COMMAND"
 local ex_string = " EXECUTE"
 local debug_string = " DEBUG"
@@ -93,9 +94,6 @@ local mode_colors = {
 	["!"] = colors.red,
 	t = colors.red,
 }
-
--- local statusline_bg = "#2f323c"
-local statusline_bg = "none"
 
 local mode_names = { -- change the strings if you like it vvvvverbose!
 	-- Normal
@@ -132,7 +130,33 @@ local mode_names = { -- change the strings if you like it vvvvverbose!
 	rm = debug_string,
 	["r?"] = "?",
 	["!"] = "!",
-	t = "T",
+	t = terminal,
+}
+
+local SpecialBuffers = {
+	snacks_picker_input = {
+		icon = " ",
+		name = "Snacks Picker",
+		color = colors.blue,
+	},
+	snacks_picker_list = {
+		icon = " ",
+		name = "Snacks Picker",
+		color = colors.blue,
+	},
+	oil = {
+		icon = " ",
+		name = "Oil",
+		color = colors.blue,
+	},
+	toggleterm = {
+		icon = " ",
+		name = "Terminal",
+		color = colors.red,
+	},
+	unknown = {
+		icon = " ",
+	},
 }
 
 return {
@@ -149,6 +173,34 @@ return {
 		local utils = require("heirline.utils")
 		local conditions = require("heirline.conditions")
 		local web_devicons = require("nvim-web-devicons")
+
+		----------------------------------------------------
+		--- Main Segments
+		----------------------------------------------------
+
+		local function CreateSection(component, direction, is_end, condition)
+			local surrounds = { "█", "█" }
+			if direction == "right" then
+				surrounds = { "█", "█" }
+			end
+			if is_end and direction == "right" then
+				surrounds[2] = ""
+			elseif is_end then
+				surrounds[1] = ""
+			end
+
+			return {
+				condition = condition,
+				utils.surround(surrounds, function(self)
+					return self.section_background
+				end, {
+					hl = function(self)
+						return { fg = self.bg_color, bg = self.section_background, bold = true }
+					end,
+					component,
+				}),
+			}
+		end
 
 		----------------------------------------------------
 		--- Vim Mode Components
@@ -185,9 +237,9 @@ return {
 					end,
 				},
 				{
-					provider = "█",
+					provider = "█",
 					hl = function(self)
-						return { fg = self.color_primpary, bg = statusline_bg }
+						return { fg = self.color_primpary }
 					end,
 				},
 			},
@@ -225,7 +277,6 @@ return {
 		----------------------------------------------------
 
 		local Git = {
-			condition = conditions.is_git_repo,
 			init = function(self)
 				self.status_dict = vim.b.gitsigns_status_dict
 				self.has_changes = self.status_dict.added ~= 0
@@ -234,12 +285,12 @@ return {
 			end,
 
 			hl = function(self)
-				return { fg = self.color_primpary, bg = statusline_bg }
+				return { fg = self.color_primpary }
 			end,
 
 			{ -- git branch name
 				provider = function(self)
-					return "   " .. self.status_dict.head
+					return " " .. self.status_dict.head
 				end,
 				hl = { bold = true },
 			},
@@ -297,7 +348,7 @@ return {
 			},
 		}
 
-		local Align = { provider = "%=", hl = { bg = statusline_bg } }
+		local Align = { provider = "%=" }
 
 		----------------------------------------------------
 		--- Make buffer list
@@ -307,15 +358,18 @@ return {
 			init = function(self)
 				local filename = self.file_name_path
 				local extension = vim.fn.fnamemodify(filename, ":e")
-				self.icon, self.icon_color =
-					web_devicons.get_icon_color(filename, extension, { default = true, variant = "light" })
+				if self.override_icon == nil then
+					self.icon, self.icon_color =
+						web_devicons.get_icon_color(filename, extension, { default = true, variant = "light" })
+				end
 			end,
 			provider = function(self)
-				return self.icon and (" " .. self.icon .. " ")
+				local rendered_icon = self.override_icon or self.icon
+				return rendered_icon and (rendered_icon .. " ")
 			end,
 			hl = function(self)
 				if self.mode_cat == "n" then
-					return { fg = self.icon_color }
+					return { fg = self.override_icon_color or self.icon_color }
 				else
 					return { fg = self.color_primary }
 				end
@@ -324,14 +378,25 @@ return {
 
 		local BufferFileName = {
 			provider = function(self)
-				return self.file_name .. " "
+				return self.file_name
 			end,
 		}
 
 		local ActiveBuffer = {
 			init = function(self)
+				self.buff_type = string.lower(vim.bo.filetype)
 				self.file_name_path = vim.api.nvim_buf_get_name(0)
-				self.file_name = compute_buffer_path_name(self.file_name_path)
+
+				local special_buffer = SpecialBuffers[string.lower(vim.bo.filetype)]
+				if special_buffer ~= nil then
+					self.file_name = special_buffer.name
+					self.override_icon = special_buffer.icon
+					self.override_icon_color = special_buffer.color
+				else
+					self.file_name = compute_buffer_path_name(self.file_name_path)
+					self.override_icon = nil
+					self.override_icon_color = nil
+				end
 
 				if self.file_name == nil then
 					self.file_name = vim.api.nvim_buf_get_option(self.file_name_path, "buftype")
@@ -356,7 +421,7 @@ return {
 			{
 				provider = function()
 					local count = buffer_count()
-					return "  " .. count .. " "
+					return " " .. count
 				end,
 				hl = function(self)
 					return { fg = self.color_primpary }
@@ -370,23 +435,45 @@ return {
 					"ModeChanged",
 				},
 			},
-			{
-				provider = "",
-				hl = { fg = statusline_bg, bg = "none" },
-				condition = function()
-					return statusline_bg ~= "none"
-				end,
-			},
+		}
+
+		local FileType = {
+			provider = function()
+				return string.lower(vim.bo.filetype)
+			end,
+
+			hl = function(self)
+				return { fg = self.color_primpary }
+			end,
+		}
+
+		local LSPActive = {
+			condition = conditions.lsp_attached,
+			-- You can keep it simple,
+			-- provider = " [LSP]",
+
+			-- Or complicate things a bit and get the servers names
+			provider = function()
+				local names = {}
+				for i, server in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
+					table.insert(names, server.name)
+				end
+				return " [" .. table.concat(names, ",") .. "]"
+			end,
+
+			hl = function(self)
+				return { fg = self.color_primpary, bold = false }
+			end,
+		}
+
+		local FileTypeLsp = {
+			FileType,
+			LSPActive,
 		}
 
 		----------------------------------------------------
 		--- Cursor position and scrollbar
 		----------------------------------------------------
-
-		local LeftArrow = {
-			provider = "   ",
-			hl = { fg = colors.gray, bg = statusline_bg },
-		}
 
 		local Position = {
 			-- %l = current line number
@@ -395,7 +482,7 @@ return {
 			-- %P = percentage through file of displayed window
 			provider = "%7(%l/%3L%):%2c  %P ",
 			hl = function(self)
-				return { fg = self.color_primpary, bg = statusline_bg }
+				return { fg = self.color_primpary }
 			end,
 			update = {
 				"ModeChanged",
@@ -407,18 +494,22 @@ return {
 		----------------------------------------------------
 
 		local Left = {
+			init = function(self)
+				self.section_background = colors.dark_gray
+			end,
 			ViModeSection,
-			Git,
-			LeftArrow,
-			ActiveBuffer,
-			hl = { bg = statusline_bg },
+			CreateSection(Git, "left", false, conditions.is_git_repo),
+			CreateSection(ActiveBuffer),
 		}
 
 		local Right = {
-			Position,
-			OpenBuffersCount,
-			hl = { bg = statusline_bg },
-			update = { "BufEnter", "BufLeave", "ModeChanged" },
+			init = function(self)
+				self.section_background = colors.dark_gray
+			end,
+			CreateSection(FileTypeLsp, "right"),
+			CreateSection(Position, "right"),
+			CreateSection(OpenBuffersCount, "right", true),
+			update = { "BufEnter", "BufLeave", "ModeChanged", "LspAttach", "LspDetach" },
 		}
 
 		-- Main line computes colors based on mode for child
@@ -430,8 +521,6 @@ return {
 				self.color_primpary = mode_colors[self.mode_cat]
 			end,
 			Left,
-			-- Align,
-			-- Center,
 			Align,
 			Right,
 			-- NOTE: Might need to optimize later, but for now updating on every change seems to be performant enough.

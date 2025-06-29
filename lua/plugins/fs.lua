@@ -9,7 +9,8 @@ return {
 				border = "rounded",
 			}
 
-			require("oil").setup({
+			local oil = require("oil")
+			oil.setup({
 				default_file_explorer = true,
 				columns = {
 					-- "size",
@@ -27,9 +28,10 @@ return {
 					},
 					["-"] = "actions.parent", -- '-' to go up one directory level
 					["_"] = "actions.open_cwd", -- opens current working dir
-					["<C-c>"] = { callback = "actions.close", mode = "n" }, -- 'q' to close the oil window
-					["<leader>o"] = { callback = "actions.close", mode = "n" }, -- 'Escape' to close the oil window without saving changes
-					["<leader>e"] = { callback = "actions.close", mode = "n" }, -- 'Escape' to close the oil window without saving changes
+					["<C-c>"] = { callback = "actions.close", mode = "n" },
+					["<leader>o"] = { callback = "actions.close", mode = "n" },
+					["<leader>e"] = { callback = "actions.close", mode = "n" },
+					["<C-x>"] = { callback = oil.discard_all_changes, mode = "n" },
 					["<C-r>"] = "actions.refresh", -- Ctrl+r to refresh the directory
 				},
 				view_options = {
