@@ -1,9 +1,29 @@
 return {
-	-- {
-	-- 	"Fildo7525/pretty_hover",
-	-- 	event = "LspAttach",
-	-- 	opts = {},
-	-- },
+	{
+		"nvim-tree/nvim-web-devicons",
+		opts = {
+			variant = "dark",
+			-- Some defaults were a bit too dark for my taste, so overriding
+			-- to something with better contrast.
+			override_by_extension = {
+				["tsx"] = {
+					icon = "",
+					color = "#62d5e9",
+					name = "React",
+				},
+				["jsx"] = {
+					icon = "",
+					color = "#62d5e9",
+					name = "React",
+				},
+				["css"] = {
+					icon = "",
+					color = "#a568e4",
+					name = "CSS",
+				},
+			},
+		},
+	},
 	{
 		"norcalli/nvim-colorizer.lua",
 		config = function()
