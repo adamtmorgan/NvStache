@@ -23,7 +23,7 @@ return {
 			{ name = "cpptools" }, -- Debugging for Rust/C/C++
 			{ name = "lua-language-server" }, -- lua
 			{ name = "typescript-language-server" }, -- typescript
-			{ name = "vue-language-server", version = "3.0.0-beta.2" }, -- aka "volar" - vue
+			{ name = "vue-language-server", version = "3.0.0-beta.5" },
 			{ name = "vtsls" },
 			{ name = "eslint-lsp" }, -- javascript
 			{ name = "json-lsp" }, -- json
@@ -32,6 +32,7 @@ return {
 			{ name = "css-lsp" }, -- css
 			{ name = "intelephense" }, -- php
 			{ name = "pyright" }, -- python
+			{ name = "kotlin-lsp" }, -- kotlin
 			{ name = "rust-analyzer" }, -- rust
 			{ name = "clangd" }, -- C, C++
 			{ name = "taplo" }, -- toml
