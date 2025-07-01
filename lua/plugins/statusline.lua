@@ -438,21 +438,36 @@ return {
 		}
 
 		local FileType = {
-			provider = function()
-				return string.lower(vim.bo.filetype)
+			init = function(self)
+				self.filetype = string.lower(vim.bo.filetype)
+				self.icon, self.icon_color = web_devicons.get_icon_colors_by_filetype(self.filetype)
+				self.color_primary = self.color_primary
 			end,
+			{
+				provider = function(self)
+					return self.icon and (self.icon .. " ")
+				end,
+				hl = function(self)
+					if self.mode_cat == "n" then
+						return { fg = self.icon_color }
+					else
+						return { fg = self.color_primary }
+					end
+				end,
+			},
+			{
+				provider = function(self)
+					return self.filetype
+				end,
 
-			hl = function(self)
-				return { fg = self.color_primpary }
-			end,
+				hl = function(self)
+					return { fg = self.color_primary }
+				end,
+			},
 		}
 
 		local LSPActive = {
 			condition = conditions.lsp_attached,
-			-- You can keep it simple,
-			-- provider = " [LSP]",
-
-			-- Or complicate things a bit and get the servers names
 			provider = function()
 				local names = {}
 				for i, server in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
@@ -469,6 +484,9 @@ return {
 		local FileTypeLsp = {
 			FileType,
 			LSPActive,
+			hl = function(self)
+				return { fg = self.color_primpary }
+			end,
 		}
 
 		----------------------------------------------------
