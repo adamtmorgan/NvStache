@@ -23,7 +23,7 @@ return {
 			{ name = "cpptools" }, -- Debugging for Rust/C/C++
 			{ name = "lua-language-server" }, -- lua
 			{ name = "typescript-language-server" }, -- typescript
-			{ name = "vue-language-server", version = "3.0.0-beta.5" },
+			{ name = "vue-language-server" },
 			{ name = "vtsls" },
 			{ name = "eslint-lsp" }, -- javascript
 			{ name = "json-lsp" }, -- json
