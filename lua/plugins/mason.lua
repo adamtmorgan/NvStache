@@ -25,7 +25,6 @@ return {
 			{ name = "typescript-language-server" }, -- typescript
 			{ name = "vue-language-server" },
 			{ name = "vtsls" },
-			{ name = "eslint-lsp" }, -- javascript
 			{ name = "json-lsp" }, -- json
 			{ name = "yaml-language-server" }, -- yaml
 			{ name = "html-lsp" }, -- html
@@ -50,6 +49,10 @@ return {
 			-- Formatting
 			{ name = "prettierd" }, -- Formatting for various common filetypes
 			{ name = "clang-format" }, -- Formatting C, C++
+
+			-- Linting
+			{ name = "eslint_d" }, -- JS/TS linting
+			{ name = "ktlint" }, -- kotlin linting
 		}
 
 		-- Ensure packages are installed and up to date
