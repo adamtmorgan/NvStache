@@ -51,7 +51,7 @@ return {
 			{ name = "clang-format" }, -- Formatting C, C++
 
 			-- Linting
-			{ name = "eslint_d" }, -- JS/TS linting
+			{ name = "eslint-lsp" }, -- JS/TS linting
 			{ name = "ktlint" }, -- kotlin linting
 		}
 
