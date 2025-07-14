@@ -39,6 +39,7 @@ vim.lsp.enable({
 	"taplo",
 	"terraformls",
 	"vtsls",
+	"eslint",
 	"vue_ls",
 	"wgsl_analyzer",
 	"yamlls",
