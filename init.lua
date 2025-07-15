@@ -34,6 +34,7 @@ vim.lsp.enable({
 	"jsonls",
 	"lua_ls",
 	"pyright",
+	"kotlin_lsp",
 	"rnix",
 	"sqlls",
 	"taplo",
