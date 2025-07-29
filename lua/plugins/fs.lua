@@ -3,20 +3,23 @@ return {
         "stevearc/oil.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function()
-            local float_options = {
-                max_width = 120,
-                max_height = 40,
-                border = "rounded",
-            }
-
             local oil = require("oil")
+            local util = require("oil.util")
+
             oil.setup({
                 default_file_explorer = true,
                 columns = {
                     -- "size",
                     "icon",
                 },
-                float = float_options,
+                float = {
+                    max_width = 190,
+                    max_height = 50,
+                    border = "rounded",
+                    win_options = {
+                        number = true,
+                    },
+                },
                 -- Custom key bindings
                 use_default_keymaps = false,
                 keymaps = {
@@ -28,6 +31,7 @@ return {
                     },
                     ["-"] = "actions.parent", -- '-' to go up one directory level
                     ["_"] = "actions.open_cwd", -- opens current working dir
+                    ["<C-p>"] = "actions.preview",
                     ["<C-c>"] = { callback = "actions.close", mode = "n" },
                     ["<leader>o"] = { callback = "actions.close", mode = "n" },
                     ["<leader>e"] = { callback = "actions.close", mode = "n" },
@@ -35,9 +39,25 @@ return {
                     ["<C-r>"] = "actions.refresh", -- Ctrl+r to refresh the directory
                     ["<leader>O"] = "actions.open_external",
                 },
+                preview_win = {
+                    -- Whether the preview window is automatically updated when the cursor is moved
+                    update_on_cursor_moved = true,
+                    -- How to open the preview window "load"|"scratch"|"fast_scratch"
+                    preview_method = "fast_scratch",
+                    -- A function that returns true to disable preview on a file e.g. to avoid lag
+                    disable_preview = function(filename)
+                        return false
+                    end,
+                    -- Window-local options to use for preview window buffers
+                    win_options = {
+                        relativenumber = true,
+                    },
+                },
                 view_options = {
                     -- Show files and directories that start with "."
                     show_hidden = true,
+                    -- preview_split: Split direction: "auto", "left", "right", "above", "below".
+                    preview_split = "right",
                     -- This function defines what is considered a "hidden" file
                     is_hidden_file = function(name, bufnr)
                         return vim.startswith(name, ".")
@@ -58,9 +78,22 @@ return {
                 },
             })
 
+            function OpenOilCustom(dir)
+                local oil_local = require("oil")
+                local util_local = require("oil.util")
+                oil_local.open_float(dir)
+                util_local.run_after_load(0, function()
+                    oil_local.open_preview()
+                end)
+            end
+
             -- Set keymaps
-            vim.keymap.set("n", "<leader>e", ":Oil ./ --float<CR>", { silent = true })
-            vim.keymap.set("n", "<leader>o", ":Oil --float<CR>", { silent = true })
+            vim.keymap.set("n", "<leader>e", function()
+                OpenOilCustom("./")
+            end, { silent = true })
+            vim.keymap.set("n", "<leader>o", function()
+                OpenOilCustom()
+            end, { silent = true })
         end,
     },
 }
