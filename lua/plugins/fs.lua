@@ -33,6 +33,7 @@ return {
                     ["<leader>e"] = { callback = "actions.close", mode = "n" },
                     ["<C-x>"] = { callback = oil.discard_all_changes, mode = "n" },
                     ["<C-r>"] = "actions.refresh", -- Ctrl+r to refresh the directory
+                    ["<leader>O"] = "actions.open_external",
                 },
                 view_options = {
                     -- Show files and directories that start with "."
