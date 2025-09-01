@@ -66,13 +66,25 @@ return {
         opts = {},
     },
 
-    -- Adds comment formatting features
+    -- Allows typescript context support for commenting.
+    -- This makes commenting in TSX blocks much more convenient.
     {
-        "numToStr/Comment.nvim",
+        "JoosepAlviste/nvim-ts-context-commentstring",
         opts = {
             -- add any options here
         },
-        lazy = false,
+        config = function()
+            require("ts_context_commentstring").setup({
+                enable_autocmd = false,
+            })
+
+            local get_option = vim.filetype.get_option
+            vim.filetype.get_option = function(filetype, option)
+                return option == "commentstring"
+                        and require("ts_context_commentstring.internal").calculate_commentstring()
+                    or vim.filetype.get_option(filetype, option)
+            end
+        end,
     },
 
     -- Adds support for documentation generation for
