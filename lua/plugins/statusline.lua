@@ -9,39 +9,30 @@
 ----------------------------------------------------
 
 local function compute_buffer_path_name(full_path)
-    -- Get the current working directory
     local cwd = vim.fn.getcwd()
+    local relative_path = full_path:gsub("^" .. vim.pesc(cwd) .. "/", ""):gsub("^/", "")
 
-    -- Make the path relative to the CWD
-    local relative_path = full_path:gsub("^" .. vim.pesc(cwd), ""):gsub("^/", "")
-
-    -- Split the relative path into components (directories and file name)
     local path_components = {}
     for component in string.gmatch(relative_path, "[^/]+") do
         table.insert(path_components, component)
     end
 
-    -- If the path has more than 3 components, trim it
     local max_path_size = 3
     local trimmed_path = ""
+
     if #path_components > max_path_size then
         trimmed_path = ".../"
     end
 
-    if #path_components > 1 then
-        if #path_components < max_path_size then
-            max_path_size = #path_components
-        end
-        for i = max_path_size - 1, 1, -1 do
-            if i > #path_components then
-                break
-            end
-            trimmed_path = trimmed_path .. path_components[i] .. "/"
-            return trimmed_path, path_components[#path_components]
-        end
-    else
-        return trimmed_path, relative_path
+    local start_index = math.max(1, #path_components - max_path_size + 1)
+
+    for i = start_index, #path_components - 1 do
+        trimmed_path = trimmed_path .. path_components[i] .. "/"
     end
+
+    local filename = path_components[#path_components] or relative_path
+
+    return trimmed_path, filename
 end
 
 local function buffer_count()
