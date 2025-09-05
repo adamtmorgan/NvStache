@@ -185,11 +185,11 @@ return {
 
         local function CreateSection(component, direction, is_end, condition)
             local surrounds = { "█", "█" }
-            if direction == "right" then
-                surrounds = { "█", "█" }
-            elseif direction == "center" then
-                surrounds = { "█", "█" }
-            elseif direction == "standalone" then
+            -- if direction == "right" then
+            --     surrounds = { "█", "█" }
+            -- elseif direction == "center" then
+            --     surrounds = { "█", "█" }
+            if direction == "standalone" then
                 surrounds = { "", "" }
             end
 
@@ -495,7 +495,7 @@ return {
             condition = conditions.lsp_attached,
             provider = function()
                 local names = {}
-                for i, server in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
+                for _, server in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
                     table.insert(names, server.name)
                 end
                 return " [" .. table.concat(names, ",") .. "]"
@@ -549,7 +549,7 @@ return {
             init = function(self)
                 self.section_background = colors.dark_gray
             end,
-            CreateSection(FileTypeLsp, "center"),
+            CreateSection(FileTypeLsp, "center", false, conditions.lsp_attached),
             CreateSection(Position, "right"),
             CreateSection(OpenBuffersCount, "right", true),
             update = { "BufEnter", "BufLeave", "ModeChanged", "LspAttach", "LspDetach" },
@@ -624,10 +624,14 @@ return {
             opts = {
                 colors = colors,
                 disable_winbar_cb = function(args)
-                    return conditions.buffer_matches({
-                        buftype = { "nofile", "acwrite", "prompt", "help", "quickfix", "terminal", "oil" },
-                        filetype = { "^git.*", "fugitive", "Trouble", "dashboard" },
-                    }, args.buf)
+                    if vim.api.nvim_buf_is_valid(args.buf) then
+                        return conditions.buffer_matches({
+                            buftype = { "index", "nofile", "acwrite", "prompt", "help", "quickfix", "terminal", "oil" },
+                            filetype = { "^git.*", "fugitive", "Trouble", "dashboard" },
+                        }, args.buf)
+                    else
+                        return true
+                    end
                 end,
             },
         })
