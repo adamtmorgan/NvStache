@@ -118,10 +118,10 @@ vim.cmd("autocmd InsertEnter * :set norelativenumber")
 vim.cmd("autocmd InsertLeave * :set relativenumber")
 
 -- Show command line below status bar rather than
--- replacing it completely.
-vim.cmd("autocmd CmdlineEnter * :set cmdheight=1")
+-- replacing it completely. (disabled since using noice)
 vim.opt.cmdheight = 0
-vim.cmd("autocmd CmdlineLeave * :set cmdheight=0")
+-- vim.cmd("autocmd CmdlineEnter * :set cmdheight=1")
+-- vim.cmd("autocmd CmdlineLeave * :set cmdheight=0")
 
 ------------------------------------------
 -- LSP Wiring
