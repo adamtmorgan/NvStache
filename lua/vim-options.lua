@@ -20,6 +20,7 @@ vim.opt.scrolloff = 50
 
 -- Makes it so status bar is shared across panes
 vim.opt.laststatus = 3
+-- vim.opt.winbar = "%f"
 
 -- Makes hover windows rounded
 vim.o.winborder = "rounded"

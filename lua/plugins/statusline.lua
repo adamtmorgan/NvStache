@@ -22,21 +22,26 @@ local function compute_buffer_path_name(full_path)
     end
 
     -- If the path has more than 3 components, trim it
-    local trimmed_path
-    if #path_components > 3 then
-        trimmed_path = "..."
-            .. "/"
-            .. table.concat({
-                path_components[#path_components - 2],
-                path_components[#path_components - 1],
-                path_components[#path_components],
-            }, "/")
-    else
-        -- If not, return the full relative path as is
-        trimmed_path = relative_path
+    local max_path_size = 3
+    local trimmed_path = ""
+    if #path_components > max_path_size then
+        trimmed_path = ".../"
     end
 
-    return trimmed_path
+    if #path_components > 1 then
+        if #path_components < max_path_size then
+            max_path_size = #path_components
+        end
+        for i = max_path_size - 1, 1, -1 do
+            if i > #path_components then
+                break
+            end
+            trimmed_path = trimmed_path .. path_components[i] .. "/"
+            return trimmed_path, path_components[#path_components]
+        end
+    else
+        return trimmed_path, relative_path
+    end
 end
 
 local function buffer_count()
@@ -182,7 +187,12 @@ return {
             local surrounds = { "█", "█" }
             if direction == "right" then
                 surrounds = { "█", "█" }
+            elseif direction == "center" then
+                surrounds = { "█", "█" }
+            elseif direction == "standalone" then
+                surrounds = { "", "" }
             end
+
             if is_end and direction == "right" then
                 surrounds[2] = ""
             elseif is_end then
@@ -276,25 +286,7 @@ return {
         --- Git
         ----------------------------------------------------
 
-        local Git = {
-            init = function(self)
-                self.status_dict = vim.b.gitsigns_status_dict
-                self.has_changes = self.status_dict.added ~= 0
-                    or self.status_dict.removed ~= 0
-                    or self.status_dict.changed ~= 0
-            end,
-
-            hl = function(self)
-                return { fg = self.color_primpary }
-            end,
-
-            { -- git branch name
-                provider = function(self)
-                    return " " .. self.status_dict.head
-                end,
-                hl = { bold = true },
-            },
-            -- You could handle delimiters, icons and counts similar to Diagnostics
+        local GitChanges = {
             {
                 condition = function(self)
                     return self.has_changes
@@ -348,6 +340,27 @@ return {
             },
         }
 
+        local Git = {
+            init = function(self)
+                self.status_dict = vim.b.gitsigns_status_dict
+                self.has_changes = self.status_dict.added ~= 0
+                    or self.status_dict.removed ~= 0
+                    or self.status_dict.changed ~= 0
+            end,
+
+            hl = function(self)
+                return { fg = self.color_primpary }
+            end,
+
+            { -- git branch name
+                provider = function(self)
+                    return " " .. self.status_dict.head
+                end,
+                hl = { bold = true },
+            },
+            GitChanges,
+        }
+
         local Align = { provider = "%=" }
 
         ----------------------------------------------------
@@ -376,10 +389,21 @@ return {
             end,
         }
 
+        local BufferPathname = {
+            condition = function(self)
+                return self.path_name ~= nil
+            end,
+            provider = function(self)
+                return self.path_name
+            end,
+            hl = { bold = false },
+        }
+
         local BufferFileName = {
             provider = function(self)
                 return self.file_name
             end,
+            hl = { bold = true },
         }
 
         local ActiveBuffer = {
@@ -393,7 +417,7 @@ return {
                     self.override_icon = special_buffer.icon
                     self.override_icon_color = special_buffer.color
                 else
-                    self.file_name = compute_buffer_path_name(self.file_name_path)
+                    self.path_name, self.file_name = compute_buffer_path_name(self.file_name_path)
                     self.override_icon = nil
                     self.override_icon_color = nil
                 end
@@ -406,6 +430,7 @@ return {
             -- 	return self.file_name ~= nil
             -- end,
             FileIcon,
+            BufferPathname,
             BufferFileName,
             hl = function(self)
                 return { fg = self.color_primpary }
@@ -517,14 +542,14 @@ return {
             end,
             ViModeSection,
             CreateSection(Git, "left", false, conditions.is_git_repo),
-            CreateSection(ActiveBuffer),
+            -- CreateSection(ActiveBuffer),
         }
 
         local Right = {
             init = function(self)
                 self.section_background = colors.dark_gray
             end,
-            CreateSection(FileTypeLsp, "right"),
+            CreateSection(FileTypeLsp, "center"),
             CreateSection(Position, "right"),
             CreateSection(OpenBuffersCount, "right", true),
             update = { "BufEnter", "BufLeave", "ModeChanged", "LspAttach", "LspDetach" },
@@ -538,9 +563,10 @@ return {
                 self.mode_cat = self.mode:sub(1, 1) -- first char only
                 self.color_primpary = mode_colors[self.mode_cat]
             end,
-            Left,
             Align,
+            Left,
             Right,
+            Align,
             -- NOTE: Might need to optimize later, but for now updating on every change seems to be performant enough.
             -- update = { "BufEnter", "BufLeave", "ModeChanged", "TextChanged", "TextYankPost" },
         }
@@ -548,12 +574,62 @@ return {
         -- Full Status line
         local StatusLine = { hl = { bg = "none" }, { MacroRec, MainLine } }
 
+        -- Winbar (shows at top of each split)
+        local WinBar = {
+            -- fallthrough = false,
+            update = { "BufEnter", "BufLeave", "ModeChanged" },
+            init = function(self)
+                self.section_background = colors.dark_gray
+                self.mode = vim.fn.mode(1) -- :h mode()
+                self.mode_cat = self.mode:sub(1, 1) -- first char only
+                self.color_primpary = mode_colors[self.mode_cat]
+            end,
+            hl = { bg = "none" },
+            -- Inactive buffers
+            Align,
+            {
+                condition = function()
+                    return not conditions.is_active()
+                end,
+                CreateSection({
+                    ActiveBuffer,
+                    {
+                        condition = function()
+                            return not vim.bo.modifiable or vim.bo.readonly
+                        end,
+                        provider = "",
+                        hl = { fg = "orange" },
+                    },
+                }, "standalone"),
+            },
+            -- Active buffer
+            {
+                condition = function()
+                    return conditions.is_active()
+                end,
+                CreateSection(ActiveBuffer, "standalone"),
+            },
+            Align,
+        }
+
         -- Make status line background transparent so heirline can take over.
         vim.cmd([[
 		  highlight StatusLine ctermbg=NONE guibg=NONE
 		  highlight StatusLineNC ctermbg=NONE guibg=NONE
 		]])
 
-        heirline.setup({ statusline = StatusLine, ops = { colors = colors } })
+        heirline.setup({
+            statusline = StatusLine,
+            winbar = WinBar,
+            opts = {
+                colors = colors,
+                disable_winbar_cb = function(args)
+                    return conditions.buffer_matches({
+                        buftype = { "nofile", "acwrite", "prompt", "help", "quickfix", "terminal", "oil" },
+                        filetype = { "^git.*", "fugitive", "Trouble", "dashboard" },
+                    }, args.buf)
+                end,
+            },
+        })
     end,
 }
