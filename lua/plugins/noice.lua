@@ -8,6 +8,23 @@ return {
         popupmenu = {
             enabled = false,
         },
+        lsp = {
+            progress = {
+                enabled = false,
+            },
+            hover = {
+                enabled = false,
+            },
+            signature = {
+                enabled = false,
+            },
+            message = {
+                enabled = false,
+            },
+            documentation = {
+                enabled = false,
+            },
+        },
     },
     dependencies = {
         -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
