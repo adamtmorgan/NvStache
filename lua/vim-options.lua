@@ -7,7 +7,6 @@ vim.cmd("set nowrap")
 
 vim.opt.autoindent = true
 vim.opt.smartindent = true
-vim.opt.cursorline = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.number = true
@@ -17,6 +16,41 @@ vim.opt.scrolloff = 50
 ------------------------------------------
 -- Visual behavior
 ------------------------------------------
+
+-- Conditionally show cursorline per buffer
+vim.api.nvim_create_autocmd({ "WinEnter", "WinLeave" }, {
+    group = vim.api.nvim_create_augroup("CursorLine", { clear = true }),
+    callback = function(event)
+        local buftype_exclusions = {
+            "nofile",
+            "quickfix",
+            "terminal",
+            "prompt",
+            "help",
+        }
+        local filetype_exclusions = {
+            "dashboard",
+            "startify",
+            "qf",
+            "help",
+            "man",
+            "neo-tree",
+            "nvim-tree",
+            "nerdtree",
+            "telescope",
+            "fzf",
+            "aerial",
+        }
+        if
+            not vim.tbl_contains(buftype_exclusions, vim.bo.buftype)
+            and not vim.tbl_contains(filetype_exclusions, vim.bo.filetype)
+        then
+            vim.wo.cursorline = (event.event == "WinEnter")
+        else
+            vim.wo.cursorline = false
+        end
+    end,
+})
 
 -- Makes it so status bar is shared across panes
 vim.opt.laststatus = 3
@@ -68,6 +102,12 @@ vim.keymap.set("n", "<C-t>n", ":tabnew<CR>", { noremap = true, silent = true }) 
 vim.keymap.set("n", "<C-t>c", ":tabclose<CR>", { noremap = true, silent = true }) -- overrites ctag (idc since we use lsp)
 vim.keymap.set("n", "<C-t>l", ":+tabnext<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-t>h", ":-tabnext<CR>", { noremap = true, silent = true })
+
+-- Larger resize interval
+vim.keymap.set("n", "<C-w><", ":vertical resize +12<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-w>>", ":vertical resize -12<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-w>+", ":resize 15<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-w>-", ":res=ze -15<CR>", { noremap = true, silent = true })
 
 -- Switch between buffers quickly
 vim.keymap.set("n", "<leader>l", ":bnext<CR>", { noremap = true, silent = true })
