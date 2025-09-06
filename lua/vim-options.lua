@@ -18,7 +18,7 @@ vim.opt.scrolloff = 50
 ------------------------------------------
 
 -- Conditionally show cursorline per buffer
-vim.api.nvim_create_autocmd({ "WinEnter", "WinLeave" }, {
+vim.api.nvim_create_autocmd({ "WinEnter", "WinLeave", "BufEnter" }, {
     group = vim.api.nvim_create_augroup("CursorLine", { clear = true }),
     callback = function(event)
         local buftype_exclusions = {
@@ -45,7 +45,7 @@ vim.api.nvim_create_autocmd({ "WinEnter", "WinLeave" }, {
             not vim.tbl_contains(buftype_exclusions, vim.bo.buftype)
             and not vim.tbl_contains(filetype_exclusions, vim.bo.filetype)
         then
-            vim.wo.cursorline = (event.event == "WinEnter")
+            vim.wo.cursorline = (event.event == "WinEnter" or event.event == "BufEnter")
         else
             vim.wo.cursorline = false
         end
