@@ -176,18 +176,16 @@ return {
 
         local function CreateSection(component, direction, is_end, condition)
             local surrounds = { "█", "█" }
-            -- if direction == "right" then
-            --     surrounds = { "█", "█" }
-            -- elseif direction == "center" then
-            --     surrounds = { "█", "█" }
-            if direction == "standalone" then
-                surrounds = { "", "" }
-            end
-
             if is_end and direction == "right" then
-                surrounds[2] = ""
-            elseif is_end then
-                surrounds[1] = ""
+                surrounds = { "█", "" }
+            elseif is_end and direction == "left" then
+                surrounds = { "", "█" }
+            elseif direction == "right" then
+                surrounds = { "█", "█" }
+            elseif direction == "center" then
+                surrounds = { "█", "█" }
+            elseif direction == "standalone" then
+                surrounds = { "", "" }
             end
 
             return {
@@ -437,7 +435,7 @@ return {
             {
                 provider = function()
                     local count = buffer_count()
-                    return " " .. count
+                    return " " .. count .. " "
                 end,
                 hl = function(self)
                     return { fg = self.color_primpary }
@@ -540,8 +538,8 @@ return {
             init = function(self)
                 self.section_background = colors.dark_gray
             end,
-            CreateSection(FileTypeLsp, "center", false, conditions.lsp_attached),
-            CreateSection(Position, "right"),
+            CreateSection(FileTypeLsp, "left", false, conditions.lsp_attached),
+            CreateSection(Position, "center"),
             CreateSection(OpenBuffersCount, "right", true),
             update = { "BufEnter", "BufLeave", "ModeChanged", "LspAttach", "LspDetach" },
         }
