@@ -21,6 +21,9 @@ return {
         ---@type blink.cmp.Config
         opts = {
             completion = {
+                accept = {
+                    auto_brackets = { enabled = false },
+                },
                 list = {
                     selection = {
                         preselect = true,
