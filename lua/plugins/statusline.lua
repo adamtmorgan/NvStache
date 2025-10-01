@@ -8,6 +8,8 @@
 
 local function compute_buffer_path_name(full_path)
     local cwd = vim.fn.getcwd()
+    local cwd_dir_name = cwd:match("([^/\\]+)[/\\]?$")
+
     local relative_path = full_path:gsub("^" .. vim.pesc(cwd) .. "/", ""):gsub("^/", "")
 
     local path_components = {}
@@ -15,17 +17,27 @@ local function compute_buffer_path_name(full_path)
         table.insert(path_components, component)
     end
 
-    local max_path_size = 4
+    local max_path_size = 3
     local trimmed_path = ""
 
-    if #path_components > max_path_size then
-        trimmed_path = ".../"
+    -- Filter paths to max path size
+    local filter_start_index = math.max(1, #path_components - max_path_size + 1)
+    local trimmed_path_components = {}
+    for i = filter_start_index, #path_components - 1 do
+        table.insert(trimmed_path_components, path_components[i])
     end
 
-    local start_index = math.max(1, #path_components - max_path_size + 1)
-
-    for i = start_index, #path_components - 1 do
-        trimmed_path = trimmed_path .. path_components[i] .. "/"
+    local root_check_length = #trimmed_path_components + 1
+    -- If the cwd root is directly behind the max trimmed path, then simply add it without ellispis.
+    if #path_components == root_check_length then
+        trimmed_path = cwd_dir_name .. "/"
+    -- Append ellipsis if cwd root is outside of trimmed path
+    elseif #path_components > root_check_length then
+        trimmed_path = cwd_dir_name .. "/…/"
+    end
+    -- Bulid trimmed path
+    for i = 1, #trimmed_path_components do
+        trimmed_path = trimmed_path .. trimmed_path_components[i] .. "/"
     end
 
     local filename = path_components[#path_components] or relative_path
