@@ -150,10 +150,10 @@ This is because this config relies on LSPs instead.
 - Sessions
   - If a session is saved, it will automatically save current state on Neovim close.
   - Saved sessions are tied to CWD. If a directory is opened and has a saved session, that session will load in automatically.
-  - Save session - `<C-s>s`
-  - Find session - `<C-s>f`
-  - Load session - `<C-s>r`
-  - Delete session - `<C-s>d` (when hovering in Find Session window)
+  - Save session - `<leader>ws`
+  - Find session - `<leader>fs`
+  - Restore session - `<leader>wr`
+  - Delete session - `<C-d>` (when hovering in session picker)
 
 ## ⚡Neovide Support
 
