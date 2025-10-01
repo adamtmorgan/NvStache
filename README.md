@@ -148,12 +148,12 @@ This is because this config relies on LSPs instead.
 - Open marks in current buffer using [Arrow](https://github.com/otavioschwanck/arrow.nvim) - `m` - close with `q`
 
 - Sessions
-  - If a session is saved, it will automatically save current state on Neovim close.
+  - Sessions are automatically saved and restored based on opened CWD and are automatically deleted if older than 30 days.
   - Saved sessions are tied to CWD. If a directory is opened and has a saved session, that session will load in automatically.
   - Save session - `<leader>ws`
   - Find session - `<leader>fs`
   - Restore session - `<leader>wr`
-  - Delete session - `<C-d>` (when hovering in session picker)
+  - Delete session - `<C-x>` (when hovering in session picker)
 
 ## ⚡Neovide Support
 

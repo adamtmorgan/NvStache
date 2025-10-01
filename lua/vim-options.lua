@@ -65,6 +65,9 @@ vim.diagnostic.config({
     -- virtual_lines = true
 })
 
+-- Set session options
+vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+
 ------------------------------------------
 -- Ignore certain dirs in search
 ------------------------------------------
