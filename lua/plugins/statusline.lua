@@ -17,7 +17,7 @@ local function compute_buffer_path_name(full_path)
         table.insert(path_components, component)
     end
 
-    local max_path_size = 3
+    local max_path_size = 4
     local trimmed_path = ""
 
     if #path_components > max_path_size then
