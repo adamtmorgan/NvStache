@@ -1,8 +1,6 @@
 ----------------------------------------------------
---Defines custom status line
+--Defines custom status line and buffer line
 ----------------------------------------------------
-
--- Config vars that apply to all versions
 
 ----------------------------------------------------
 --- Utility functions
@@ -66,7 +64,7 @@ local colors_dimmed = {
     background = "#1c2129",
     gray = "#4C505C",
     dark_gray = "#3b3d4e",
-    white= "#A6A28B",
+    white = "#A6A28B",
     blue = "#77859E",
     green = "#8AA170",
     yellow = "#C2AF88",
@@ -414,7 +412,9 @@ return {
             provider = function(self)
                 return self.path_name
             end,
-            hl = { bold = false, fg = colors_dimmed.white },
+            hl = function(self)
+                return { bold = false, fg = self.color_dimmed }
+            end,
         }
 
         local BufferFileName = {
@@ -520,7 +520,7 @@ return {
             end,
 
             hl = function(self)
-                return { fg = self.color_primpary, bold = false }
+                return { fg = self.color_dimmed, bold = false }
             end,
         }
 
@@ -580,6 +580,7 @@ return {
                 self.mode = vim.fn.mode(1) -- :h mode()
                 self.mode_cat = self.mode:sub(1, 1) -- first char only
                 self.color_primpary = mode_colors[self.mode_cat]
+                self.color_dimmed = mode_colors_dimmed[self.mode_cat]
             end,
             Align,
             Left,
@@ -601,6 +602,7 @@ return {
                 self.mode = vim.fn.mode(1) -- :h mode()
                 self.mode_cat = self.mode:sub(1, 1) -- first char only
                 self.color_primpary = mode_colors[self.mode_cat]
+                self.color_dimmed = mode_colors_dimmed[self.mode_cat]
             end,
             hl = { bg = "none" },
             -- Inactive buffers
