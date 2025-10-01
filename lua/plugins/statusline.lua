@@ -62,6 +62,19 @@ local colors = {
     purple = "#b196d4",
 }
 
+local colors_dimmed = {
+    background = "#1c2129",
+    gray = "#4C505C",
+    dark_gray = "#3b3d4e",
+    white= "#A6A28B",
+    blue = "#77859E",
+    green = "#8AA170",
+    yellow = "#C2AF88",
+    orange = "#CC9474",
+    red = "#BD6479",
+    purple = "#847C91",
+}
+
 local normal_string = "󱗞 NORMAL"
 local visual_string = "󰈈 VISUAL"
 local visual_block_string = "󰡫 VBLOCK"
@@ -89,6 +102,22 @@ local mode_colors = {
     r = colors.orange,
     ["!"] = colors.red,
     t = colors.red,
+}
+
+local mode_colors_dimmed = {
+    n = colors_dimmed.white,
+    i = colors_dimmed.green,
+    v = colors_dimmed.purple,
+    V = colors_dimmed.purple,
+    ["\22"] = colors_dimmed.purple,
+    c = colors_dimmed.orange,
+    s = colors_dimmed.purple,
+    S = colors_dimmed.purple,
+    ["\19"] = colors_dimmed.purple,
+    R = colors_dimmed.orange,
+    r = colors_dimmed.orange,
+    ["!"] = colors_dimmed.red,
+    t = colors_dimmed.red,
 }
 
 local mode_names = { -- change the strings if you like it vvvvverbose!
@@ -385,7 +414,7 @@ return {
             provider = function(self)
                 return self.path_name
             end,
-            hl = { bold = false },
+            hl = { bold = false, fg = colors_dimmed.white },
         }
 
         local BufferFileName = {
