@@ -96,15 +96,15 @@ return {
             -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
             -- See the full "keymap" documentation for information on defining your own keymap.
             keymap = {
-                preset = "none",
+                preset = "enter",
                 ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
                 ["<C-e>"] = { "hide", "fallback" },
                 ["<Tab>"] = {
                     function(cmp)
                         if cmp.snippet_active() then
                             return cmp.accept()
-                        else
-                            return cmp.select_and_accept()
+                        -- else
+                        --     return cmp.select_and_accept()
                         end
                     end,
                     "snippet_forward",
