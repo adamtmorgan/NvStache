@@ -151,5 +151,12 @@ return {
             end,
             desc = "LSP Symbols",
         },
+        {
+            "<leader>fj",
+            function()
+                Snacks.picker.jumps()
+            end,
+            desc = "Find Jumps",
+        },
     },
 }
