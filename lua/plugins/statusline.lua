@@ -62,7 +62,7 @@ end
 local colors = {
     background = "#1c2129",
     gray = "#60687e",
-    dark_gray = "#3b3d4e",
+    dark_gray = "#40404F",
     white = "#E2DCC0",
     blue = "#80A7E0",
     green = "#9DC472",
@@ -76,7 +76,7 @@ local colors_dimmed = {
     background = "#1c2129",
     gray = "#4C505C",
     dark_gray = "#3b3d4e",
-    white = "#A6A28B",
+    white = "#B0ADA7",
     blue = "#77859E",
     green = "#8AA170",
     yellow = "#C2AF88",
