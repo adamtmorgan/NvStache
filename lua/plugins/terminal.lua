@@ -62,5 +62,16 @@ return {
             k9s:toggle()
         end
         vim.api.nvim_set_keymap("n", "<leader>3", "<cmd>lua K9s_toggle()<CR>", { noremap = true, silent = true })
+
+        -- --------------------------------------------------
+        -- Bat lsp logfile
+        -- --------------------------------------------------
+        local bat_logfile = new_float_term("bat " .. vim.lsp.get_log_path() .. ' --pager="less +G"')
+        function Logfile_toggle()
+            bat_logfile:toggle()
+        end
+        vim.api.nvim_create_user_command("LspLogs", function()
+            Logfile_toggle()
+        end, { desc = "Open lsp logs via bat" })
     end,
 }
