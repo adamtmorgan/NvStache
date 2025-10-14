@@ -4,9 +4,9 @@ local esc = vim.api.nvim_replace_termcodes("<Esc>", true, true, true)
 -- JavaScript/Typescript Macros
 --------------------------------------------------
 
-vim.api.nvim_create_augroup("JSLogMacro", { clear = true })
+vim.api.nvim_create_augroup("JsMacros", { clear = true })
 vim.api.nvim_create_autocmd("BufEnter", {
-    group = "JSLogMacro",
+    group = "JsMacros",
     pattern = { "*.js", "*.ts", "*.jsx", "*.tsx" },
     callback = function()
         -- Creates a console.log line with selected text as the log value.
