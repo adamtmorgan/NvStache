@@ -47,7 +47,14 @@ vim.lsp.enable({
 })
 
 -- Runs Lazy. Takes export from lua/plugins.lua
-require("lazy").setup("plugins")
+require("lazy").setup({
+    spec = {
+        { import = "plugins" },
+    },
+    ui = {
+        border = "rounded"
+    }
+})
 
 -- Adds connections for dadbod
 -- attempts to pull them from root. if not found, set to empty.
