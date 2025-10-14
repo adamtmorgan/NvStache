@@ -13,9 +13,8 @@ vim.api.nvim_create_autocmd("BufEnter", {
         vim.fn.setreg("l", 'yoconsole.log("' .. esc .. 'pa", ' .. esc .. "pa);" .. esc)
     end,
 })
--- Cleanup:
 vim.api.nvim_create_autocmd("BufLeave", {
-    group = "JSLogMacro",
+    group = "JsMacros",
     pattern = { "*.js", "*.ts", "*.jsx", "*.tsx" },
     callback = function()
         vim.fn.setreg("l", "")
