@@ -48,6 +48,7 @@ return {
 
                         -- Syntax customizations
                         Identifier = { fg = palette.fujiWhite },
+                        -- Identifier = { fg = "#ff0000" }, -- for issue example in github
                         ["@variable.parameter"] = { fg = palette.surimiOrange },
                         ["@variable"] = { fg = palette.carpYellow },
                         Constant = { fg = palette.carpYellow },
@@ -81,9 +82,9 @@ return {
             -- background, so I override it here, if neovide
             if vim.g.neovide then
                 vim.cmd([[
-				  colorscheme kanagawa
-				  highlight Normal guibg=#191E25
-				]])
+                    colorscheme kanagawa
+                    highlight Normal guibg=#191E25
+                ]])
             end
         end,
     },
