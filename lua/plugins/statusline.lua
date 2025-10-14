@@ -55,155 +55,155 @@ local function buffer_count()
     return count
 end
 
-----------------------------------------------------
---- Define Tables for colors and vim modes
-----------------------------------------------------
-
-local colors = {
-    background = "#1c2129",
-    gray = "#60687e",
-    dark_gray = "#40404F",
-    white = "#E2DCC0",
-    blue = "#80A7E0",
-    green = "#9DC472",
-    yellow = "#EEC789",
-    orange = "#FFA570",
-    red = "#F76880",
-    purple = "#b196d4",
-}
-
-local colors_dimmed = {
-    background = "#1c2129",
-    gray = "#4C505C",
-    dark_gray = "#3b3d4e",
-    white = "#B0ADA7",
-    blue = "#77859E",
-    green = "#8AA170",
-    yellow = "#C2AF88",
-    orange = "#CC9474",
-    red = "#BD6479",
-    purple = "#847C91",
-}
-
-local normal_string = "󱗞 NORMAL"
-local visual_string = "󰈈 VISUAL"
-local visual_block_string = "󰡫 VBLOCK"
-local visual_row_string = "󰡭 VISROW"
-local select_string = "󰒅 SELECT"
-local insert_string = " INSERT"
-local replace_string = "󰯍 REPLACE"
-local terminal = "  TERM "
-local command_string = " COMMAND"
-local ex_string = " EXECUTE"
-local debug_string = " DEBUG"
-
--- Mode colors map
-local mode_colors = {
-    n = colors.white,
-    i = colors.green,
-    v = colors.purple,
-    V = colors.purple,
-    ["\22"] = colors.purple,
-    c = colors.orange,
-    s = colors.purple,
-    S = colors.purple,
-    ["\19"] = colors.purple,
-    R = colors.orange,
-    r = colors.orange,
-    ["!"] = colors.red,
-    t = colors.red,
-}
-
-local mode_colors_dimmed = {
-    n = colors_dimmed.white,
-    i = colors_dimmed.green,
-    v = colors_dimmed.purple,
-    V = colors_dimmed.purple,
-    ["\22"] = colors_dimmed.purple,
-    c = colors_dimmed.orange,
-    s = colors_dimmed.purple,
-    S = colors_dimmed.purple,
-    ["\19"] = colors_dimmed.purple,
-    R = colors_dimmed.orange,
-    r = colors_dimmed.orange,
-    ["!"] = colors_dimmed.red,
-    t = colors_dimmed.red,
-}
-
-local mode_names = { -- change the strings if you like it vvvvverbose!
-    -- Normal
-    n = normal_string,
-    no = normal_string,
-    nov = normal_string,
-    noV = normal_string,
-    ["no\22"] = normal_string,
-    niI = normal_string,
-    niR = normal_string,
-    niV = normal_string,
-    nt = normal_string,
-    v = visual_string,
-    vs = visual_string,
-    V = visual_row_string,
-    Vs = visual_string,
-    ["\22"] = visual_block_string,
-    ["\22s"] = visual_string,
-    s = select_string,
-    S = select_string,
-    ["\19"] = select_string,
-    i = insert_string,
-    ic = insert_string,
-    ix = insert_string,
-    R = replace_string,
-    Rc = replace_string,
-    Rx = replace_string,
-    Rv = replace_string,
-    Rvc = replace_string,
-    Rvx = replace_string,
-    c = command_string,
-    cv = ex_string,
-    r = debug_string,
-    rm = debug_string,
-    ["r?"] = "?",
-    ["!"] = "!",
-    t = terminal,
-}
-
-local SpecialBuffers = {
-    snacks_picker_input = {
-        icon = " ",
-        name = "Snacks Picker",
-        color = colors.blue,
-    },
-    snacks_picker_list = {
-        icon = " ",
-        name = "Snacks Picker",
-        color = colors.blue,
-    },
-    oil = {
-        icon = " ",
-        name = "Oil",
-        color = colors.blue,
-    },
-    toggleterm = {
-        icon = " ",
-        name = "Terminal",
-        color = colors.red,
-    },
-    unknown = {
-        icon = " ",
-    },
-}
-
 return {
     "rebelot/heirline.nvim",
     dependencies = {
         { "nvim-tree/nvim-web-devicons" },
         { "lewis6991/gitsigns.nvim" },
+        { "rebelot/kanagawa.nvim" },
     },
     -- You can optionally lazy-load heirline on UiEnter
     -- to make sure all required plugins and colorschemes are loaded before setup
     -- event = "UiEnter",
     config = function()
+        local kanagawa = require("kanagawa.colors").setup()
+        local palette = kanagawa.palette
+
+        local colors = {
+            background = "#1c2129",
+            gray = palette.sumiInk6,
+            dark_gray = palette.sumiInk5,
+            white = palette.fujiWhite,
+            blue = palette.crystalBlue,
+            green = palette.springGreen,
+            yellow = palette.carpYellow,
+            orange = palette.surimiOrange,
+            red = palette.waveRed,
+            purple = palette.oniViolet,
+        }
+
+        local colors_dimmed = {
+            background = "#1c2129",
+            gray = "#4C505C",
+            dark_gray = "#3b3d4e",
+            white = "#B0ADA7",
+            blue = "#77859E",
+            green = "#8AA170",
+            yellow = "#C2AF88",
+            orange = "#CC9474",
+            red = "#BD6479",
+            purple = "#847C91",
+        }
+
+        local normal_string = "󱗞 NORMAL"
+        local visual_string = "󰈈 VISUAL"
+        local visual_block_string = "󰡫 VBLOCK"
+        local visual_row_string = "󰡭 VISROW"
+        local select_string = "󰒅 SELECT"
+        local insert_string = " INSERT"
+        local replace_string = "󰯍 REPLACE"
+        local terminal = "  TERM "
+        local command_string = " COMMAND"
+        local ex_string = " EXECUTE"
+        local debug_string = " DEBUG"
+
+        -- Mode colors map
+        local mode_colors = {
+            n = colors.white,
+            i = colors.green,
+            v = colors.purple,
+            V = colors.purple,
+            ["\22"] = colors.purple,
+            c = colors.orange,
+            s = colors.purple,
+            S = colors.purple,
+            ["\19"] = colors.purple,
+            R = colors.orange,
+            r = colors.orange,
+            ["!"] = colors.red,
+            t = colors.red,
+        }
+
+        local mode_colors_dimmed = {
+            n = colors_dimmed.white,
+            i = colors_dimmed.green,
+            v = colors_dimmed.purple,
+            V = colors_dimmed.purple,
+            ["\22"] = colors_dimmed.purple,
+            c = colors_dimmed.orange,
+            s = colors_dimmed.purple,
+            S = colors_dimmed.purple,
+            ["\19"] = colors_dimmed.purple,
+            R = colors_dimmed.orange,
+            r = colors_dimmed.orange,
+            ["!"] = colors_dimmed.red,
+            t = colors_dimmed.red,
+        }
+
+        local mode_names = { -- change the strings if you like it vvvvverbose!
+            -- Normal
+            n = normal_string,
+            no = normal_string,
+            nov = normal_string,
+            noV = normal_string,
+            ["no\22"] = normal_string,
+            niI = normal_string,
+            niR = normal_string,
+            niV = normal_string,
+            nt = normal_string,
+            v = visual_string,
+            vs = visual_string,
+            V = visual_row_string,
+            Vs = visual_string,
+            ["\22"] = visual_block_string,
+            ["\22s"] = visual_string,
+            s = select_string,
+            S = select_string,
+            ["\19"] = select_string,
+            i = insert_string,
+            ic = insert_string,
+            ix = insert_string,
+            R = replace_string,
+            Rc = replace_string,
+            Rx = replace_string,
+            Rv = replace_string,
+            Rvc = replace_string,
+            Rvx = replace_string,
+            c = command_string,
+            cv = ex_string,
+            r = debug_string,
+            rm = debug_string,
+            ["r?"] = "?",
+            ["!"] = "!",
+            t = terminal,
+        }
+
+        local SpecialBuffers = {
+            snacks_picker_input = {
+                icon = " ",
+                name = "Snacks Picker",
+                color = colors.blue,
+            },
+            snacks_picker_list = {
+                icon = " ",
+                name = "Snacks Picker",
+                color = colors.blue,
+            },
+            oil = {
+                icon = " ",
+                name = "Oil",
+                color = colors.blue,
+            },
+            toggleterm = {
+                icon = " ",
+                name = "Terminal",
+                color = colors.red,
+            },
+            unknown = {
+                icon = " ",
+            },
+        }
+
         local heirline = require("heirline")
         local utils = require("heirline.utils")
         local conditions = require("heirline.conditions")
