@@ -97,16 +97,21 @@ return {
             -- See the full "keymap" documentation for information on defining your own keymap.
             keymap = {
                 preset = "enter",
+                ["<C-s>"] = {
+                    function(cmp)
+                        cmp.show({ providers = { "snippets" } })
+                    end,
+                },
                 ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
                 ["<C-e>"] = { "hide", "fallback" },
                 ["<Tab>"] = {
-                    function(cmp)
-                        if cmp.snippet_active() then
-                            return cmp.accept()
-                        -- else
-                        --     return cmp.select_and_accept()
-                        end
-                    end,
+                    -- function(cmp)
+                    --     if cmp.snippet_active() then
+                    --         return cmp.accept()
+                    --         -- else
+                    --         --     return cmp.select_and_accept()
+                    --     end
+                    -- end,
                     "snippet_forward",
                     "fallback",
                 },
@@ -114,7 +119,7 @@ return {
                 ["<C-j>"] = { "select_next" },
                 ["<C-b>"] = { "scroll_documentation_up" },
                 ["<C-f>"] = { "scroll_documentation_down" },
-                ["<C-s>"] = { "show_signature", "hide_signature", "fallback" },
+                ["<C-h>"] = { "show_signature", "hide_signature", "fallback" },
                 ["<S-Tab>"] = { "snippet_backward", "fallback" },
             },
 
