@@ -1,5 +1,3 @@
-require("macros")
-
 ------------------------------------------
 -- Misc default settings
 ------------------------------------------
@@ -250,3 +248,6 @@ if vim.g.neovide then
     vim.keymap.set("c", "<D-v>", "<C-R>+") -- Paste command mode
     vim.keymap.set("i", "<D-v>", '<ESC>l"+Pli') -- Paste insert mode
 end
+
+-- Call after main config has been set
+require("custom_shortcuts")
