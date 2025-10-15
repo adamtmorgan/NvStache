@@ -166,6 +166,10 @@ vim.opt.cmdheight = 0
 -- vim.cmd("autocmd CmdlineEnter * :set cmdheight=1")
 -- vim.cmd("autocmd CmdlineLeave * :set cmdheight=0")
 
+-- Use ripgrep instead of grep as default
+vim.opt.grepprg = "rg --vimgrep --smart-case --follow"
+vim.opt.grepformat = "%f:%l:%c:%m"
+
 ------------------------------------------
 -- LSP Wiring
 ------------------------------------------
