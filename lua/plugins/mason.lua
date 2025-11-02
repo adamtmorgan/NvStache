@@ -22,9 +22,8 @@ return {
             { name = "codelldb" }, -- Debugging for Rust/C/C++/Zig
             { name = "cpptools" }, -- Debugging for Rust/C/C++
             { name = "lua-language-server" }, -- lua
-            { name = "typescript-language-server" }, -- typescript
             { name = "vue-language-server" },
-            { name = "vtsls" },
+            { name = "vtsls" }, -- typescript
             { name = "json-lsp" }, -- json
             { name = "yaml-language-server" }, -- yaml
             { name = "html-lsp" }, -- html
