@@ -21,6 +21,8 @@ return {
                 "lua",
                 "wgsl",
                 "glsl",
+                "qmljs",
+                "qmldir",
                 "php",
                 "python",
                 "kotlin",
