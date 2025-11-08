@@ -27,6 +27,7 @@ return {
                 typescriptreact = { "prettierd" },
                 javascriptreact = { "prettierd" },
                 vue = { "prettierd" },
+                python = { "ruff_format" },
                 json = { "prettierd" },
                 yaml = { "prettierd" },
                 graphql = { "prettierd" },

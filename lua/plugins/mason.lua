@@ -24,6 +24,7 @@ return {
             { name = "lua-language-server" }, -- lua
             { name = "vue-language-server" },
             { name = "vtsls" }, -- typescript
+            { name = "ty" }, -- python
             { name = "json-lsp" }, -- json
             { name = "yaml-language-server" }, -- yaml
             { name = "html-lsp" }, -- html
@@ -53,6 +54,9 @@ return {
             -- Linting
             { name = "eslint-lsp" }, -- JS/TS linting
             { name = "ktlint" }, -- kotlin linting
+
+            -- Hybrid
+            { name = "ruff" }, -- Python linting and formatting
         }
 
         -- Ensure packages are installed and up to date

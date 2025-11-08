@@ -33,7 +33,7 @@ vim.lsp.enable({
     "intelephense",
     "jsonls",
     "lua_ls",
-    "pyright",
+    "ty",
     "kotlin_lsp",
     "rnix",
     "sqlls",
