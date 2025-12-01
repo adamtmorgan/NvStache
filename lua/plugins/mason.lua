@@ -30,7 +30,6 @@ return {
             { name = "html-lsp" }, -- html
             { name = "css-lsp" }, -- css
             { name = "intelephense" }, -- php
-            { name = "pyright" }, -- python
             { name = "kotlin-lsp" }, -- kotlin
             { name = "rust-analyzer" }, -- rust
             { name = "clangd" }, -- C, C++
