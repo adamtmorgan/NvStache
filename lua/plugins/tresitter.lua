@@ -79,7 +79,17 @@ return {
                 separator = nil,
                 -- separator = nil,
                 zindex = 20, -- The Z-index of the context window
-                on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
+                on_attach = function(bufnr)
+                    local bufname = vim.api.nvim_buf_get_name(bufnr)
+                    local filetype = vim.bo[bufnr].filetype
+                    if vim.startswith(bufname, "oil://") or filetype == "oil" then
+                        return false
+                    end
+                    if filetype == "snacks" or vim.bo[bufnr].buftype == "nofile" and bufname:find("snacks") then
+                        return false
+                    end
+                    return true
+                end,
             })
 
             vim.api.nvim_set_hl(0, "TreesitterContext", { background = "none" })
