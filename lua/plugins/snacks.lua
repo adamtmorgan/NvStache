@@ -97,7 +97,7 @@ return {
             desc = "Find Buffers",
         },
         {
-            "<leader>fg",
+            "<leader>/",
             function()
                 Snacks.picker.grep({
                     hidden = true,
@@ -106,13 +106,44 @@ return {
             desc = "Live Grep",
         },
         {
-            "<leader>fG",
+            "<leader>fw",
             function()
                 Snacks.picker.grep_word({
-                    hidden = true
+                    hidden = true,
                 })
             end,
             desc = "Live Grep",
+        },
+        -- https://github.com/folke/snacks.nvim/discussions/1069
+        -- Allows searching of a dir to then grep inside of
+        {
+            "<leader>f/",
+            function()
+                Snacks.picker({
+                    finder = "proc",
+                    cmd = "fd",
+                    args = { "--type", "d", "--exclude", ".git" },
+                    title = "Select directory to grep",
+                    layout = {
+                        preset = "select",
+                    },
+                    actions = {
+                        confirm = function(picker, item)
+                            picker:close()
+                            vim.schedule(function()
+                                Snacks.picker.grep({
+                                    cwd = item.file,
+                                })
+                            end)
+                        end,
+                    },
+                    transform = function(item)
+                        item.file = item.text
+                        item.dir = true
+                    end,
+                })
+            end,
+            desc = "Search in dir",
         },
         {
             "gd",
