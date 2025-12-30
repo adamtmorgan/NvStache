@@ -66,6 +66,9 @@ return {
                         BlinkCmpMenuBorder = { fg = palette.sumiInk6, bg = "none" },
                         BlinkCmpMenuSelection = { fg = "#DBD7BA", bg = "#363646" },
                         BlinkCmpScrollBarThumb = { fg = palette.sumiInk6, bg = palette.lotusInk1 },
+
+                        -- Multicursor colors
+                        VM_Insert = { link = "CursorLine" }
                     }
                 end,
                 theme = "wave", -- Load "wave" theme when 'background' option is not set

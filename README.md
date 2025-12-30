@@ -113,7 +113,7 @@ This is because this config relies on LSPs instead.
 
 - Delete all buffers except current - `:Clean` or `<leader>!`
 
-- Clear search - `<leader>/` aka `:noh<CR>` (normal mode)
+- Clear search - `<C-/>` aka `:noh<CR>` (normal mode)
 
 - Open CWD in [Oil](https://github.com/stevearc/oil.nvim) - `<leader>e`
 
@@ -125,9 +125,9 @@ This is because this config relies on LSPs instead.
 
 - Find Files - `<leader>ff` (normal mode)
 
-- Live Grep - `<leader>fg` (normal mode)
+- Live Grep - `<leader>/` (normal mode)
 
-- Live Grep Word - `<leader>fG` (normal mode)
+- Live Grep Word - `<leader>fw` (normal mode)
 
 - Find Buffer - `<leader>fb` (normal mode)
 

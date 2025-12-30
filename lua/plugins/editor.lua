@@ -173,27 +173,6 @@ return {
         end,
     },
 
-    -- Adds line guides to indents
-    {
-        "lukas-reineke/indent-blankline.nvim",
-        main = "ibl",
-        opts = {
-            use_treesitter = true,
-        },
-        config = function()
-            local highlight = { "blankLineDim" }
-            local hooks = require("ibl.hooks")
-
-            hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-                vim.api.nvim_set_hl(0, "blankLineDim", { fg = "#3f3b50" })
-            end)
-
-            require("ibl").setup({
-                indent = { highlight = highlight, char = "▏" },
-            })
-        end,
-    },
-
     -- Highlights symbol under the caret throughout the
     -- document
     {

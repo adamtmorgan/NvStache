@@ -16,35 +16,11 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Include our vim options
+-- Include config settings that live outside of plugins
 require("vim-options")
-
--- Enabled LSPs
-vim.lsp.enable({
-    "bashls",
-    "bufls",
-    "clangd",
-    "cssls",
-    "docker_compose_language_service",
-    "dockerls",
-    "glsl_analyzer",
-    "graphql",
-    "html",
-    "intelephense",
-    "jsonls",
-    "lua_ls",
-    "ty",
-    "kotlin_lsp",
-    "rnix",
-    "sqlls",
-    "taplo",
-    "terraformls",
-    "vtsls",
-    "eslint",
-    "vue_ls",
-    "wgsl_analyzer",
-    "yamlls",
-})
+require("lsp-setup")
+require("custom-shortcuts")
+require("neovide")
 
 -- Runs Lazy. Takes export from lua/plugins.lua
 require("lazy").setup({
