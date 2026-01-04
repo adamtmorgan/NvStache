@@ -436,6 +436,29 @@ return {
             hl = { bold = true },
         }
 
+        local Tab = {
+            provider = function(self)
+                return " " .. self.tabnr
+            end,
+            hl = function(self)
+                if not self.is_active then
+                    return { fg = self.color_dimmed, bold = false }
+                else
+                    return { fg = self.color_primary, bold = true }
+                end
+            end,
+        }
+
+        local TabPages = {
+            {
+                provider = "󰗚 ",
+                hl = function(self)
+                    return { fg = self.color_primary }
+                end,
+            },
+            utils.make_tablist(Tab),
+        }
+
         local ActiveBuffer = {
             init = function(self)
                 self.buff_type = string.lower(vim.bo.filetype)
@@ -496,7 +519,6 @@ return {
             init = function(self)
                 self.filetype = string.lower(vim.bo.filetype)
                 self.icon, self.icon_color = web_devicons.get_icon_colors_by_filetype(self.filetype)
-                self.color_primary = self.color_primary
             end,
             {
                 provider = function(self)
@@ -572,7 +594,6 @@ return {
             end,
             ViModeSection,
             CreateSection(Git, "left", false, conditions.is_git_repo),
-            -- CreateSection(ActiveBuffer),
         }
 
         local Right = {
@@ -581,6 +602,9 @@ return {
             end,
             CreateSection(FileTypeLsp, "left", false, conditions.lsp_attached),
             CreateSection(Position, "center"),
+            CreateSection(TabPages, "right", false, function()
+                return #vim.api.nvim_list_tabpages() >= 2
+            end),
             CreateSection(OpenBuffersCount, "right", true),
             update = { "BufEnter", "BufLeave", "ModeChanged", "LspAttach", "LspDetach" },
         }
