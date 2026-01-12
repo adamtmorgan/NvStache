@@ -91,7 +91,7 @@ return {
             vim.keymap.set("n", "<leader>e", function()
                 OpenOilCustom("./")
             end, { silent = true })
-            vim.keymap.set("n", "<leader>o", function()
+            vim.keymap.set("n", "<leader>O", function()
                 OpenOilCustom()
             end, { silent = true })
         end,
