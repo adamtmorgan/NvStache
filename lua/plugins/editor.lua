@@ -87,13 +87,11 @@ return {
         end,
     },
 
-    -- Adds support for documentation generation for
-    -- a variety of languages.
     {
-        "kkoomen/vim-doge",
-        -- run `:call doge#install()` on first run
+        "danymat/neogen",
         config = function()
-            vim.keymap.set("n", "<Leader>D", "<Plug>(doge-generate)<CR>")
+            local opts = { noremap = true, silent = true }
+            vim.api.nvim_set_keymap("n", "<Leader>D", ":lua require('neogen').generate()<CR>", opts)
         end,
     },
 
