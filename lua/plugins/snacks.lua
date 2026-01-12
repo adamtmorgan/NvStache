@@ -48,14 +48,14 @@ return {
     },
     keys = {
         {
-            "<leader>fp",
+            "<leader>p",
             function()
                 Snacks.picker()
             end,
             desc = "Find Pickers",
         },
         {
-            "<leader>ff",
+            "<leader>f",
             function()
                 Snacks.picker.files({
                     hidden = true,
@@ -90,7 +90,7 @@ return {
             desc = "Find Files",
         },
         {
-            "<leader>fb",
+            "<leader>b",
             function()
                 Snacks.picker.buffers()
             end,
@@ -106,7 +106,7 @@ return {
             desc = "Live Grep",
         },
         {
-            "<leader>fw",
+            "<leader>G",
             function()
                 Snacks.picker.grep_word({
                     hidden = true,
@@ -117,7 +117,7 @@ return {
         -- https://github.com/folke/snacks.nvim/discussions/1069
         -- Allows searching of a dir to then grep inside of
         {
-            "<leader>f/",
+            "<leader>d",
             function()
                 Snacks.picker({
                     finder = "proc",
@@ -189,7 +189,7 @@ return {
             desc = "LSP Symbols",
         },
         {
-            "<leader>fj",
+            "<leader>j",
             function()
                 Snacks.picker.jumps()
             end,

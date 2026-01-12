@@ -123,13 +123,13 @@ This is because this config relies on LSPs instead.
 
 - Open most recent buffer directory in [Snacks Explorer/Picker](https://github.com/folke/snacks.nvim/blob/main/docs/explorer.md) - `<leader>O`
 
-- Find Files - `<leader>ff` (normal mode)
+- Find Files - `<leader>f` (normal mode)
 
 - Live Grep - `<leader>/` (normal mode)
 
-- Live Grep Word - `<leader>fw` (normal mode)
+- Live Grep Word - `<leader>w` (normal mode)
 
-- Find Buffer - `<leader>fb` (normal mode)
+- Find Buffer - `<leader>b` (normal mode)
 
 - Delete(remove) hovered buffer - `<C>x` (in Find Buffer results)
 
@@ -151,7 +151,7 @@ This is because this config relies on LSPs instead.
   - Sessions are automatically saved and restored based on opened CWD and are automatically deleted if older than 30 days.
   - Saved sessions are tied to CWD. If a directory is opened and has a saved session, that session will load in automatically.
   - Save session - `<leader>ws`
-  - Find session - `<leader>fs`
+  - Find session - `<leader>S`
   - Restore session - `<leader>wr`
   - Delete session - `<C-x>` (when hovering in session picker)
 

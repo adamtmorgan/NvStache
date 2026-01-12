@@ -108,8 +108,8 @@ return {
                 title = "Basic Commands",
                 margin = 5,
                 content = {
-                    { " Grep File", ":lua Snacks.picker.files()", "<leader>ff" },
-                    { "󰍉 Grep File Contents", ":lua Snacks.picker.grep()", "<leader>fg" },
+                    { " Grep File", ":lua Snacks.picker.files()", "<leader>f" },
+                    { "󰍉 Grep File Contents", ":lua Snacks.picker.grep()", "<leader>/" },
                     { " Browse Files", ":Oil ./ --float<CR>", "<leader>o" },
                 },
                 highlight = "TelescopePromptTitle",
