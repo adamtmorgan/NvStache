@@ -106,7 +106,7 @@ return {
             desc = "Live Grep",
         },
         {
-            "<leader>G",
+            "<leader>w",
             function()
                 Snacks.picker.grep_word({
                     hidden = true,
