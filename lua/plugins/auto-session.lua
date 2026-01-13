@@ -2,9 +2,9 @@ return {
     "rmagatti/auto-session",
     lazy = false, -- required to auto-restore
     keys = {
-        { "<leader>S", "<cmd>AutoSession search<CR>", desc = "Session search" },
-        { "<leader>wr", "<cmd>AutoSession restore<CR>", desc = "Session restore" },
-        { "<leader>ws", "<cmd>AutoSession save<CR>", desc = "Session save" },
+        { "<C-s>f", "<cmd>AutoSession search<CR>", desc = "Session search" },
+        { "<C-s>r", "<cmd>AutoSession restore<CR>", desc = "Session restore" },
+        { "<C-s>s", "<cmd>AutoSession save<CR>", desc = "Session save" },
     },
     opts = {
         enabled = true,

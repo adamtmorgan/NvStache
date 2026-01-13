@@ -150,9 +150,9 @@ This is because this config relies on LSPs instead.
 - Sessions
   - Sessions are automatically saved and restored based on opened CWD and are automatically deleted if older than 30 days.
   - Saved sessions are tied to CWD. If a directory is opened and has a saved session, that session will load in automatically.
-  - Save session - `<leader>ws`
-  - Find session - `<leader>S`
-  - Restore session - `<leader>wr`
+  - Save session - `<C-s>s`
+  - Find session - `<C-s>f`
+  - Restore session - `<C-s>r`
   - Delete session - `<C-x>` (when hovering in session picker)
 
 ## ⚡Neovide Support
