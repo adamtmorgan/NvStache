@@ -7,8 +7,6 @@ return {
     },
     config = function()
         local Terminal = require("toggleterm.terminal").Terminal
-        vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, silent = true })
-
         local function new_float_term(cmd)
             return Terminal:new({
                 cmd = cmd,
@@ -42,7 +40,6 @@ return {
         function Lazygit_toggle()
             lazygit:toggle()
         end
-        vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua Lazygit_toggle()<CR>", { noremap = true, silent = true })
         vim.api.nvim_set_keymap("n", "<leader>1", "<cmd>lua Lazygit_toggle()<CR>", { noremap = true, silent = true })
 
         -- --------------------------------------------------

@@ -116,7 +116,7 @@ vim.keymap.set("n", "<C-w>-", ":res=ze -15<CR>", { noremap = true, silent = true
 -- Switch between buffers quickly
 vim.keymap.set("n", "<leader>l", ":bnext<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>h", ":bprevious<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>C", ":bd<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>d", ":bd<CR>", { noremap = true, silent = true })
 
 -- Toggle diagnostics text
 vim.api.nvim_create_user_command("ToggleDiagnosticsLines", function()

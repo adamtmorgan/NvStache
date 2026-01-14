@@ -117,7 +117,7 @@ return {
         -- https://github.com/folke/snacks.nvim/discussions/1069
         -- Allows searching of a dir to then grep inside of
         {
-            "<leader>d",
+            "<leader>?",
             function()
                 Snacks.picker({
                     finder = "proc",
@@ -186,7 +186,7 @@ return {
             function()
                 Snacks.picker.actions()
             end,
-            desc = "LSP Symbols",
+            desc = "LSP Actions",
         },
         {
             "<leader>j",

@@ -133,7 +133,11 @@ This is because this config relies on LSPs instead.
 
 - Delete(remove) hovered buffer - `<C>x` (in Find Buffer results)
 
-- [Lazygit](https://github.com/jesseduffield/lazygit) (Git client) - `<leader>g`
+- [Lazygit](https://github.com/jesseduffield/lazygit) (Git client) - `<leader>1`
+
+- [Lazydocker](https://github.com/jesseduffield/lazydocker) (Docker client) - `<leader>2`
+
+- [jk9s](https://github.com/derailed/k9s) (Kubernetes client) - `<leader>3`
 
 - Preview `.md` files in browser - `:MarkdownPreview`
 
