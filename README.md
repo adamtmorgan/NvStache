@@ -109,19 +109,19 @@ This is because this config relies on LSPs instead.
 
 - Previous buffer - `<leader>h` (normal mode)
 
-- Delete buffer - `<leader>bd` (normal mode)
+- Delete buffer - `<leader>d` (normal mode)
 
 - Delete all buffers except current - `:Clean` or `<leader>!`
 
 - Clear search - `<C-/>` aka `:noh<CR>` (normal mode)
 
+- Open [Snacks Picker/Explorer](https://github.com/folke/snacks.nvim/blob/main/docs/explorer.md) - `<leader>o`
+
+- Open most recent buffer directory in [Oil](https://github.com/stevearc/oil.nvim) - `<leader>O`
+
 - Open CWD in [Oil](https://github.com/stevearc/oil.nvim) - `<leader>e`
 
-- Open most recent buffer directory in [Oil](https://github.com/stevearc/oil.nvim) - `<leader>o`
-
 - Discard changes in [Oil](https://github.com/stevearc/oil.nvim) - `<C-x>`
-
-- Open most recent buffer directory in [Snacks Explorer/Picker](https://github.com/folke/snacks.nvim/blob/main/docs/explorer.md) - `<leader>O`
 
 - Find Files - `<leader>f` (normal mode)
 
@@ -129,9 +129,13 @@ This is because this config relies on LSPs instead.
 
 - Live Grep Word - `<leader>w` (normal mode)
 
+- Live Grep Directory - `<leader>?` (normal mode)
+
 - Find Buffer - `<leader>b` (normal mode)
 
 - Delete(remove) hovered buffer - `<C>x` (in Find Buffer results)
+
+- Generate signature docs for hovered function - `<leader>g`
 
 - [Lazygit](https://github.com/jesseduffield/lazygit) (Git client) - `<leader>1`
 
@@ -152,7 +156,7 @@ This is because this config relies on LSPs instead.
 - Open marks in current buffer using [Arrow](https://github.com/otavioschwanck/arrow.nvim) - `m` - close with `q`
 
 - Sessions
-  - Sessions are automatically saved and restored based on opened CWD and are automatically deleted if older than 30 days.
+  - Sessions are automatically saved and restored based on opened CWD and active git branch. They are automatically deleted if older than 30 days.
   - Saved sessions are tied to CWD. If a directory is opened and has a saved session, that session will load in automatically.
   - Save session - `<C-s>s`
   - Find session - `<C-s>f`
