@@ -1,6 +1,8 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
+         -- WARN: Keep an eye on this. nvim-treesitter had a rewrite recently but all parsers are incompatible at time of writing
+        branch = "master",
         --dependencies = { "windwp/nvim-ts-autotag" },
         build = ":TSUpdate",
         config = function()
