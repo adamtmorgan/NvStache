@@ -45,6 +45,10 @@ I did some experimenting with [Avante](https://github.com/yetone/avante.nvim), b
 
 I use [mise](https://github.com/jdx/mise) for cli dependencies whenever possible.
 
+#### Nodejs
+
+Nodejs must be globally installed for this config to work. This is because Node is required to run some LSPs, linters, formatters, etc. [Mason](https://github.com/mason-org/mason.nvim) manages these automatically, but they still won't run unless Node is available.
+
 #### ripgrep and fd
 
 Do yourself a favor and install [ripgrep](https://github.com/BurntSushi/ripgrep) (for live-grep) and [fd](https://github.com/sharkdp/fd) (for file searching).
