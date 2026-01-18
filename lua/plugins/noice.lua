@@ -1,3 +1,4 @@
+-- Provides a variety of UI enhancements
 return {
     "folke/noice.nvim",
     event = "VeryLazy",
@@ -10,10 +11,10 @@ return {
         },
         lsp = {
             progress = {
-                enabled = false,
+                enabled = true,
             },
             hover = {
-                enabled = false,
+                enabled = true,
             },
             signature = {
                 enabled = false,
