@@ -5,40 +5,45 @@
 # 👉 Say When...
 
 NvStache is a my personal Neovim configuration, tailored for speed and workflow with a carefully-curated plugin selection. This acts as my daily
-driver for pretty much everything except for debugging and JVM langauges (Waiting for [Kotlin LSP](https://github.com/Kotlin/kotlin-lsp) +
-[Kotlin in Mason](https://github.com/mason-org/mason-registry/pull/10300)). I tweak this config as new circumstances arise.
+driver for pretty much everything except for debugging and JVM langauges ([Kotlin LSP](https://github.com/Kotlin/kotlin-lsp) is in preview). I tweak this config as new circumstances arise.
 
 ## Language Integrations
+
+### Fully supported
 
 - Lua (obviously)
 - HTML
 - CSS
 - JavaScript/TypeScript
 - Vue
-- PHP
 - Rust
-- C/C++
-- Python (via pyright)
-- Nix
-- Bash
+- Python (ty)
 - SQL
 - GraphQL
-- JSON
 - Markdown
 - TOML
 - YAML
 - Protobuf
 - Dockerfile/Docker-compose
 - GLSL/WGSL
+- Bash
+- JSON
+
+### Somewhat supported (don't use often)
+
+- C/C++
+- PHP
+- Nix
 
 ## AI Integrations
 
-I'm currently experimenting with [Avante](https://github.com/yetone/avante.nvim), but it's still in the early stages and is not optimized.
-Avante undergoes breaking changes constantly at time of writing, so this will likely be unstable for a while.
+I did some experimenting with [Avante](https://github.com/yetone/avante.nvim), but ultimately found it cumbersome. Looking into [OpenCode](https://opencode.ai/) in the future but work pays for Cursor, so I've been using that alongside Neovim for the time being.
 
 # 👨‍💻 Setup
 
 ### 📦 Dependencies
+
+I use [mise](https://github.com/jdx/mise) for cli dependencies whenever possible.
 
 #### ripgrep and fd
 
@@ -46,19 +51,9 @@ Do yourself a favor and install [ripgrep](https://github.com/BurntSushi/ripgrep)
 They are cli search utilities that will DRASTICALLY increase performance inside of [picker](https://github.com/folke/snacks.nvim/blob/main/docs/picker.md).
 [picker](https://github.com/folke/snacks.nvim/blob/main/docs/picker.md) automatically uses `fd` and `rg` if they are installed and available.
 
-Install them both separately:
-
-```bash
-brew install ripgrep \ fd
-```
-
 #### Git ([Lazygit](https://github.com/jesseduffield/lazygit))
 
 This config utilizes Lazygit as the Git client TUI of choice. [lazygit.nvim](https://github.com/kdheepak/lazygit.nvim) (plugin) simply opens a terminal inside of Neovim and opens Lazygit inside of it. For this to work, naturally, you'll need Lazygit installed separately. I highly recommend checking it out if you haven't already.
-
-```bash
-brew install jesseduffield/lazygit/lazygit
-```
 
 ### 🚚 Cloning and Moving Config
 
@@ -71,13 +66,6 @@ $ ln -s [your_desired_directory]/NvStache [full_path_to_home]/.config/nvim
 ```
 
 Alternatively, you can move the repo contents to your `~/.config/nvim` directory, if you don't like linking.
-
-### 1️⃣ One-Time Setups
-
-This config uses [vim-doge](https://github.com/kkoomen/vim-doge) for documentation generation in comments. The first time you run Neovim, you'll have to run the following to install it (per the vim-doge README):
-
-Open Neovim and run:
-`:call doge#install()`
 
 ## LSP, Linting, and Formatting Servers
 
