@@ -1,7 +1,8 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
-         -- WARN: Keep an eye on this. nvim-treesitter had a rewrite recently but all parsers are incompatible at time of writing
+        -- WARN: Keep an eye on this. nvim-treesitter had a rewrite recently but all parsers are incompatible at time of writing.
+        -- Keep an eye on these to see when updating to the rewrite is worth it: https://github.com/nvim-treesitter/nvim-treesitter/blob/main/SUPPORTED_LANGUAGES.md
         branch = "master",
         --dependencies = { "windwp/nvim-ts-autotag" },
         build = ":TSUpdate",
