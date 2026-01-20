@@ -14,7 +14,7 @@ return {
                 enabled = true,
             },
             hover = {
-                enabled = true,
+                enabled = false,
             },
             signature = {
                 enabled = false,
