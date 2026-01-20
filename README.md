@@ -101,7 +101,9 @@ This is because this config relies on LSPs instead.
 
 - Previous buffer - `<leader>h` (normal mode)
 
-- Delete buffer - `<leader>d` (normal mode)
+- Delete buffer - `<leader>D` (normal mode)
+
+- Delete buffer and switch to last (preserves window/pane layout) - `<leader>C` (normal mode)
 
 - Delete all buffers except current - `:Clean` or `<leader>!`
 

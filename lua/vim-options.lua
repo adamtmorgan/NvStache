@@ -116,7 +116,20 @@ vim.keymap.set("n", "<C-w>-", ":res=ze -15<CR>", { noremap = true, silent = true
 -- Switch between buffers quickly
 vim.keymap.set("n", "<leader>l", ":bnext<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>h", ":bprevious<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>d", ":bd<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>D", ":bd<CR>", { noremap = true, silent = true })
+-- Switches to a new buffer before it deletes the current one. That way pane layout is preserved.
+vim.keymap.set("n", "<leader>C", function()
+    local alt = vim.fn.bufnr("#")
+    local curr = vim.api.nvim_get_current_buf()
+
+    if alt > 0 and vim.fn.buflisted(alt) == 1 and alt ~= curr then
+        vim.cmd("buffer " .. alt)
+    else
+        vim.cmd("enew")
+    end
+
+    vim.cmd("bdelete " .. curr)
+end, { noremap = true, silent = true })
 
 -- Toggle diagnostics text
 vim.api.nvim_create_user_command("ToggleDiagnosticsLines", function()
