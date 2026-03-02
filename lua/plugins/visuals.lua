@@ -6,8 +6,6 @@ return {
         "nvim-tree/nvim-web-devicons",
         opts = {
             variant = "dark",
-            -- Some defaults were a bit too dark for my taste, so overriding
-            -- to something with better contrast.
             override_by_extension = {
                 ["tsx"] = {
                     icon = "",
@@ -28,25 +26,24 @@ return {
         },
     },
 
-    -- Detects hex colors in-editor and sets background highlight to match
     {
-        "norcalli/nvim-colorizer.lua",
+        "brenoprata10/nvim-highlight-colors",
+        event = { "BufReadPre", "BufNewFile" },
         config = function()
-            require("colorizer").setup()
+            require("nvim-highlight-colors").setup({})
         end,
     },
 
-    -- Highlights todo, fix ,warn, and other tags in comments
     {
         "folke/todo-comments.nvim",
+        event = { "BufReadPre", "BufNewFile" },
         dependencies = { "nvim-lua/plenary.nvim" },
         opts = {},
     },
 
-    -- For scrollbar. Use with gitsigns to show git changes
-    -- in project.
     {
         "petertriho/nvim-scrollbar",
+        event = { "BufReadPre", "BufNewFile" },
         dependencies = { "lewis6991/gitsigns.nvim", "kevinhwang91/nvim-hlslens" },
         config = function()
             require("scrollbar").setup({
@@ -70,9 +67,9 @@ return {
                 handlers = {
                     cursor = true,
                     diagnostic = true,
-                    gitsigns = false, -- Requires gitsigns
+                    gitsigns = true,
                     handle = true,
-                    search = true, -- Requires hlslens
+                    search = true,
                 },
                 handle = {
                     color = "#56576f",
@@ -84,7 +81,7 @@ return {
                         gui = nil,
                         color = nil,
                         cterm = nil,
-                        color_nr = nil, -- cterm
+                        color_nr = nil,
                         highlight = "Normal",
                     },
                 },
@@ -92,35 +89,28 @@ return {
         end,
     },
 
-    -- For better glancing at matched info in searches
     {
         "kevinhwang91/nvim-hlslens",
+        event = { "BufReadPre", "BufNewFile" },
         config = function()
-            -- require('hlslens').setup() is not required
-            require("scrollbar.handlers.search").setup({
-                -- hlslens config overrides
-            })
+            require("scrollbar.handlers.search").setup({})
         end,
     },
 
-    -- Highlights symbol under the caret throughout the
-    -- document
     {
         "RRethy/vim-illuminate",
+        event = { "BufReadPre", "BufNewFile" },
         config = function()
             require("illuminate").configure({
-                -- providers: provider used to get references in the buffer, ordered by priority
                 providers = {
                     "lsp",
                     "treesitter",
-                    --	"regex",
                 },
                 delay = 180,
                 filetype_overrides = {},
                 filetypes_denylist = {
                     "dirbuf",
                     "dirvish",
-                    "fugitive",
                 },
                 under_cursor = true,
             })

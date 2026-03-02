@@ -1,9 +1,9 @@
 ------------------------------------------
 -- Misc default settings
 ------------------------------------------
-vim.cmd("set expandtab")
-vim.cmd("set splitright")
-vim.cmd("set nowrap")
+vim.opt.expandtab = true
+vim.opt.splitright = true
+vim.opt.wrap = false
 
 vim.opt.autoindent = true
 vim.opt.smartindent = true
@@ -31,16 +31,15 @@ vim.api.nvim_create_autocmd({ "WinEnter", "WinLeave", "BufEnter" }, {
         }
         local filetype_exclusions = {
             "dashboard",
-            "startify",
+            "startup",
             "qf",
             "help",
             "man",
-            "neo-tree",
-            "nvim-tree",
-            "nerdtree",
-            "telescope",
-            "fzf",
-            "aerial",
+            "oil",
+            "snacks_picker_input",
+            "snacks_picker_list",
+            "toggleterm",
+            "Trouble",
         }
         if
             not vim.tbl_contains(buftype_exclusions, vim.bo.buftype)
@@ -89,14 +88,14 @@ vim.keymap.set("v", "<C-;>", "<esc>", { noremap = true, silent = true })
 vim.keymap.set("i", "<C-;>", "<esc>", { noremap = true, silent = true })
 vim.keymap.set("c", "<C-;>", "<C-c>", { noremap = true, silent = true })
 
--- Allow clipboard copy/paste
+-- Move lines up/down (overrides J=join and K=help in normal mode)
 vim.keymap.set("n", "<S-j>", ":move .+1<CR>", { silent = true })
 vim.keymap.set("n", "<S-k>", ":move .-2<CR>", { silent = true })
 vim.keymap.set("v", "<S-j>", ":move '>+1<CR> gv", { silent = true })
-vim.keymap.set("v", "<C-c>", '"+y', { noremap = true, silent = true })
-
--- Mapping for shifting lines up or down
 vim.keymap.set("v", "<S-k>", ":move '<-2<CR> gv", { silent = true })
+
+-- Clipboard yank in visual mode
+vim.keymap.set("v", "<C-c>", '"+y', { noremap = true, silent = true })
 
 -- Clear search
 vim.keymap.set("n", "<C-/>", ":noh<CR>", { silent = true })
@@ -111,7 +110,7 @@ vim.keymap.set("n", "<C-t>h", ":-tabnext<CR>", { noremap = true, silent = true }
 vim.keymap.set("n", "<C-w><", ":vertical resize +12<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-w>>", ":vertical resize -12<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-w>+", ":resize 15<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<C-w>-", ":res=ze -15<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-w>-", ":resize -15<CR>", { noremap = true, silent = true })
 
 -- Switch between buffers quickly
 vim.keymap.set("n", "<leader>l", ":bnext<CR>", { noremap = true, silent = true })
@@ -163,16 +162,27 @@ vim.api.nvim_create_user_command("Clean", function()
 end, {})
 
 -- Allow clipboard copy paste in neovim
-vim.api.nvim_set_keymap("", "<D-v>", "+p<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("!", "<D-v>", "<C-R>+", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("t", "<D-v>", "<C-R>+", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "<D-v>", "<C-R>+", { noremap = true, silent = true })
+vim.keymap.set("", "<D-v>", "+p<CR>", { noremap = true, silent = true })
+vim.keymap.set("!", "<D-v>", "<C-R>+", { noremap = true, silent = true })
+vim.keymap.set("t", "<D-v>", "<C-R>+", { noremap = true, silent = true })
+vim.keymap.set("v", "<D-v>", "<C-R>+", { noremap = true, silent = true })
 
 ------------------------------------------
 -- Dynamic behavior (auto commands)
 ------------------------------------------
-vim.cmd("autocmd InsertEnter * :set norelativenumber")
-vim.cmd("autocmd InsertLeave * :set relativenumber")
+local relnum_group = vim.api.nvim_create_augroup("RelativeNumber", { clear = true })
+vim.api.nvim_create_autocmd("InsertEnter", {
+    group = relnum_group,
+    callback = function()
+        vim.opt.relativenumber = false
+    end,
+})
+vim.api.nvim_create_autocmd("InsertLeave", {
+    group = relnum_group,
+    callback = function()
+        vim.opt.relativenumber = true
+    end,
+})
 
 -- Show command line below status bar rather than
 -- replacing it completely. (disabled since using noice)

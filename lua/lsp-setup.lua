@@ -29,7 +29,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         local client = vim.lsp.get_client_by_id(args.data.client_id)
         if client then
             if client:supports_method("textDocument/inlayHint") and vim.g.auto_inlay_hint then
-                vim.lsp.inlay_hint.enable()
+                vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
             end
             -- -@see doc :h vim.lsp.document_color
             if client:supports_method("textDocument/documentColor") then
@@ -41,10 +41,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
             end
         end
 
-        vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { noremap = true })
-        vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { noremap = true })
-        vim.keymap.set("n", "gh", vim.lsp.buf.hover, { noremap = true })
-        vim.keymap.set("n", "ge", vim.diagnostic.open_float, { noremap = true })
-        vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { noremap = true })
+        local buf_opts = { noremap = true, buffer = args.buf }
+        vim.keymap.set("n", "gD", vim.lsp.buf.declaration, buf_opts)
+        vim.keymap.set("n", "gh", vim.lsp.buf.hover, buf_opts)
+        vim.keymap.set("n", "ge", vim.diagnostic.open_float, buf_opts)
+        vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, buf_opts)
     end,
 })

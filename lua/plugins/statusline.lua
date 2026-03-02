@@ -199,15 +199,19 @@ return {
                 name = "Terminal",
                 color = colors.red,
             },
-            unknown = {
-                icon = " ",
-            },
         }
 
         local heirline = require("heirline")
         local utils = require("heirline.utils")
         local conditions = require("heirline.conditions")
         local web_devicons = require("nvim-web-devicons")
+
+        local function init_mode_colors(self)
+            self.mode = vim.fn.mode(1)
+            self.mode_cat = self.mode:sub(1, 1)
+            self.color_primary = mode_colors[self.mode_cat]
+            self.color_dimmed = mode_colors_dimmed[self.mode_cat]
+        end
 
         ----------------------------------------------------
         --- Main Segments
@@ -233,7 +237,7 @@ return {
                     return self.section_background
                 end, {
                     hl = function(self)
-                        return { fg = self.bg_color, bg = self.section_background, bold = true }
+                        return { fg = self.section_background, bg = self.section_background, bold = true }
                     end,
                     component,
                 }),
@@ -265,19 +269,19 @@ return {
                 {
                     provider = "",
                     hl = function(self)
-                        return { fg = self.color_primpary, bg = "none" }
+                        return { fg = self.color_primary, bg = "none" }
                     end,
                 },
                 {
                     ViModeText,
                     hl = function(self)
-                        return { fg = colors.background, bg = self.color_primpary, bold = true }
+                        return { fg = colors.background, bg = self.color_primary, bold = true }
                     end,
                 },
                 {
                     provider = "█",
                     hl = function(self)
-                        return { fg = self.color_primpary }
+                        return { fg = self.color_primary }
                     end,
                 },
             },
@@ -377,7 +381,7 @@ return {
             end,
 
             hl = function(self)
-                return { fg = self.color_primpary }
+                return { fg = self.color_primary }
             end,
 
             { -- git branch name
@@ -464,7 +468,7 @@ return {
                 self.buff_type = string.lower(vim.bo.filetype)
                 self.file_name_path = vim.api.nvim_buf_get_name(0)
 
-                local special_buffer = SpecialBuffers[string.lower(vim.bo.filetype)]
+                local special_buffer = SpecialBuffers[self.buff_type]
                 if special_buffer ~= nil then
                     self.file_name = special_buffer.name
                     self.override_icon = special_buffer.icon
@@ -476,21 +480,35 @@ return {
                 end
 
                 if self.file_name == nil then
-                    self.file_name = vim.api.nvim_buf_get_option(self.file_name_path, "buftype")
+                    self.file_name = vim.bo.buftype
                 end
             end,
-            -- condition = function(self)
-            -- 	return self.file_name ~= nil
-            -- end,
             FileIcon,
             BufferPathname,
             BufferFileName,
+            {
+                condition = function()
+                    return vim.bo.modified
+                end,
+                provider = " ●",
+                hl = function(self)
+                    return { fg = self.color_primary }
+                end,
+            },
+            {
+                condition = function()
+                    return not vim.bo.modifiable or vim.bo.readonly
+                end,
+                provider = " ",
+                hl = { fg = "orange" },
+            },
             hl = function(self)
-                return { fg = self.color_primpary }
+                return { fg = self.color_primary }
             end,
             update = {
                 "BufEnter",
                 "BufLeave",
+                "BufModifiedSet",
                 "ModeChanged",
             },
         }
@@ -502,7 +520,7 @@ return {
                     return " " .. count .. " "
                 end,
                 hl = function(self)
-                    return { fg = self.color_primpary }
+                    return { fg = self.color_primary }
                 end,
                 update = {
                     "VimEnter",
@@ -547,7 +565,7 @@ return {
             condition = conditions.lsp_attached,
             provider = function()
                 local names = {}
-                for _, server in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
+                for _, server in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
                     table.insert(names, server.name)
                 end
                 return " [" .. table.concat(names, ",") .. "]"
@@ -562,7 +580,7 @@ return {
             FileType,
             LSPActive,
             hl = function(self)
-                return { fg = self.color_primpary }
+                return { fg = self.color_primary }
             end,
         }
 
@@ -577,7 +595,7 @@ return {
             -- %P = percentage through file of displayed window
             provider = "%7(%l/%3L%):%2c  %P ",
             hl = function(self)
-                return { fg = self.color_primpary }
+                return { fg = self.color_primary }
             end,
             update = {
                 "ModeChanged",
@@ -612,12 +630,7 @@ return {
         -- Main line computes colors based on mode for child
         -- components to reference via `self`
         local MainLine = {
-            init = function(self)
-                self.mode = vim.fn.mode(1) -- :h mode()
-                self.mode_cat = self.mode:sub(1, 1) -- first char only
-                self.color_primpary = mode_colors[self.mode_cat]
-                self.color_dimmed = mode_colors_dimmed[self.mode_cat]
-            end,
+            init = init_mode_colors,
             Align,
             Left,
             Right,
@@ -635,10 +648,7 @@ return {
             update = { "BufEnter", "BufLeave", "ModeChanged" },
             init = function(self)
                 self.section_background = colors.dark_gray
-                self.mode = vim.fn.mode(1) -- :h mode()
-                self.mode_cat = self.mode:sub(1, 1) -- first char only
-                self.color_primpary = mode_colors[self.mode_cat]
-                self.color_dimmed = mode_colors_dimmed[self.mode_cat]
+                init_mode_colors(self)
             end,
             hl = { bg = "none" },
             -- Inactive buffers
@@ -647,16 +657,7 @@ return {
                 condition = function()
                     return not conditions.is_active()
                 end,
-                CreateSection({
-                    ActiveBuffer,
-                    {
-                        condition = function()
-                            return not vim.bo.modifiable or vim.bo.readonly
-                        end,
-                        provider = "",
-                        hl = { fg = "orange" },
-                    },
-                }, "standalone"),
+                CreateSection(ActiveBuffer, "standalone"),
             },
             -- Active buffer
             {
@@ -668,11 +669,8 @@ return {
             Align,
         }
 
-        -- Make status line background transparent so heirline can take over.
-        vim.cmd([[
-		  highlight StatusLine ctermbg=NONE guibg=NONE
-		  highlight StatusLineNC ctermbg=NONE guibg=NONE
-		]])
+        vim.api.nvim_set_hl(0, "StatusLine", { bg = "NONE" })
+        vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "NONE" })
 
         heirline.setup({
             statusline = StatusLine,
@@ -682,8 +680,8 @@ return {
                 disable_winbar_cb = function(args)
                     if vim.api.nvim_buf_is_valid(args.buf) then
                         return conditions.buffer_matches({
-                            buftype = { "index", "nofile", "acwrite", "prompt", "help", "quickfix", "terminal", "oil" },
-                            filetype = { "^git.*", "fugitive", "Trouble", "dashboard" },
+                            buftype = { "nofile", "acwrite", "prompt", "help", "quickfix", "terminal" },
+                            filetype = { "^git.*", "Trouble", "dashboard", "oil" },
                         }, args.buf)
                     else
                         return true

@@ -1,7 +1,13 @@
 return {
     "akinsho/toggleterm.nvim",
     version = "*",
-    ops = {
+    keys = {
+        { "<leader>1", desc = "Lazygit" },
+        { "<leader>2", desc = "Lazydocker" },
+        { "<leader>3", desc = "K9s" },
+    },
+    cmd = { "LspLogs" },
+    opts = {
         shade_terminals = false,
         persist_size = false,
     },
@@ -40,7 +46,7 @@ return {
         function Lazygit_toggle()
             lazygit:toggle()
         end
-        vim.api.nvim_set_keymap("n", "<leader>1", "<cmd>lua Lazygit_toggle()<CR>", { noremap = true, silent = true })
+        vim.keymap.set("n", "<leader>1", Lazygit_toggle, { noremap = true, silent = true })
 
         -- --------------------------------------------------
         -- Lazydocker
@@ -49,7 +55,7 @@ return {
         function Lazydocker_toggle()
             lazydocker:toggle()
         end
-        vim.api.nvim_set_keymap("n", "<leader>2", "<cmd>lua Lazydocker_toggle()<CR>", { noremap = true, silent = true })
+        vim.keymap.set("n", "<leader>2", Lazydocker_toggle, { noremap = true, silent = true })
 
         -- --------------------------------------------------
         -- k9s
@@ -58,7 +64,7 @@ return {
         function K9s_toggle()
             k9s:toggle()
         end
-        vim.api.nvim_set_keymap("n", "<leader>3", "<cmd>lua K9s_toggle()<CR>", { noremap = true, silent = true })
+        vim.keymap.set("n", "<leader>3", K9s_toggle, { noremap = true, silent = true })
 
         -- --------------------------------------------------
         -- Bat lsp logfile

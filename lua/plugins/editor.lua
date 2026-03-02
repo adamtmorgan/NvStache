@@ -27,10 +27,11 @@ return {
     -- Documentation generation based on function signatures.
     {
         "danymat/neogen",
+        keys = {
+            { "<Leader>g", function() require("neogen").generate() end, desc = "Generate docs" },
+        },
         config = function()
             require("neogen").setup({})
-            local opts = { noremap = true, silent = true }
-            vim.api.nvim_set_keymap("n", "<Leader>g", ":lua require('neogen').generate()<CR>", opts)
         end,
     },
 
@@ -38,6 +39,7 @@ return {
     {
         "saecki/crates.nvim",
         tag = "stable",
+        event = "BufRead Cargo.toml",
         config = function()
             require("crates").setup({
                 lsp = {
