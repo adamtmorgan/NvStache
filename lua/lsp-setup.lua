@@ -46,5 +46,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.keymap.set("n", "gh", vim.lsp.buf.hover, buf_opts)
         vim.keymap.set("n", "ge", vim.diagnostic.open_float, buf_opts)
         vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, buf_opts)
+        vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, buf_opts)
     end,
 })

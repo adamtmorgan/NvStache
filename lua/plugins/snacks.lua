@@ -182,13 +182,6 @@ return {
             desc = "LSP Symbols",
         },
         {
-            "<leader>ca",
-            function()
-                Snacks.picker.actions()
-            end,
-            desc = "LSP Actions",
-        },
-        {
             "<leader>j",
             function()
                 Snacks.picker.jumps()
