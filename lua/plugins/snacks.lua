@@ -70,6 +70,7 @@ return {
                     layout = { preset = "default", preview = true },
                     follow_file = true,
                     auto_close = true,
+                    hidden = true,
                     win = {
                         input = {
                             keys = {
