@@ -32,13 +32,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
                 vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
             end
             -- -@see doc :h vim.lsp.document_color
-            if client:supports_method("textDocument/documentColor") then
-                if vim.lsp.document_color then
-                    vim.lsp.document_color.enable(true, args.buf, {
-                        style = "virtual",
-                    })
-                end
-            end
+            -- if client:supports_method("textDocument/documentColor") then
+            --     if vim.lsp.document_color then
+            --         vim.lsp.document_color.enable(true, args.buf, {
+            --             style = "virtual",
+            --         })
+            --     end
+            -- end
         end
 
         local buf_opts = { noremap = true, buffer = args.buf }

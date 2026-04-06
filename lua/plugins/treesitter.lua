@@ -1,66 +1,74 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
-        -- WARN: Keep an eye on this. nvim-treesitter had a rewrite recently but all parsers are incompatible at time of writing.
-        -- Keep an eye on these to see when updating to the rewrite is worth it: https://github.com/nvim-treesitter/nvim-treesitter/blob/main/SUPPORTED_LANGUAGES.md
-        branch = "master",
+        branch = "main",
         event = { "BufReadPost", "BufNewFile" },
         build = ":TSUpdate",
         config = function()
-            local treeSitterConfig = require("nvim-treesitter.configs")
-            ---@diagnostic disable-next-line: missing-fields -- Works without "required" fields
-            treeSitterConfig.setup({
-                ensure_installed = {
-                    -- Programming/styling languages
-                    "jsdoc",
-                    "javascript",
-                    "typescript",
-                    "tsx",
-                    "vue",
-                    "svelte",
-                    "html",
-                    "css",
-                    "scss",
-                    "rust",
-                    "lua",
-                    "wgsl",
-                    "glsl",
-                    "qmljs",
-                    "qmldir",
-                    "php",
-                    "python",
-                    "kotlin",
-                    "java",
-                    "arduino",
+            local ensure_installed = {
+                -- Programming/styling languages
+                "jsdoc",
+                "javascript",
+                "typescript",
+                "tsx",
+                "vue",
+                "svelte",
+                "html",
+                "css",
+                "scss",
+                "rust",
+                "lua",
+                "wgsl",
+                "glsl",
+                "qmljs",
+                "qmldir",
+                "php",
+                "python",
+                "kotlin",
+                "java",
+                "arduino",
 
-                    -- Data
-                    "sql",
-                    "graphql",
-                    "json",
-                    "proto",
-                    "csv",
-                    "tsv",
-                    "psv",
+                -- Data
+                "sql",
+                "graphql",
+                "json",
+                "proto",
+                "csv",
+                "tsv",
+                "psv",
 
-                    -- Config languages
-                    "toml",
-                    "yaml",
-                    "ron",
-                    "terraform",
-                    "dockerfile",
-                    "gitignore",
-                    "nginx",
+                -- Config languages
+                "toml",
+                "yaml",
+                "ron",
+                "terraform",
+                "dockerfile",
+                "gitignore",
+                "nginx",
 
-                    -- System scripting
-                    "bash",
-                    "nix",
+                -- System scripting
+                "bash",
+                "nix",
 
-                    -- Misc
-                    "markdown",
-                    "regex",
-                },
-                highlight = { enable = true },
-                indent = { enable = true },
+                -- Misc
+                "markdown",
+                "regex",
+            }
+            local alreadyInstalled = require("nvim-treesitter").get_installed()
+            local parsersToInstall = vim.iter(ensure_installed)
+                :filter(function(parser)
+                    return not vim.tbl_contains(alreadyInstalled, parser)
+                end)
+                :totable()
+            require("nvim-treesitter").install(parsersToInstall)
+
+            vim.api.nvim_create_autocmd("FileType", {
+                callback = function()
+                    -- Enable treesitter highlighting and disable regex syntax
+                    pcall(vim.treesitter.start)
+                    -- Enable treesitter-based indentation
+                    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                end,
             })
         end,
     },

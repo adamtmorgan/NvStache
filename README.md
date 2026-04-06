@@ -37,13 +37,17 @@ driver for pretty much everything except for debugging and JVM langauges ([Kotli
 
 ## AI Integrations
 
-I did some experimenting with [Avante](https://github.com/yetone/avante.nvim), but ultimately found it cumbersome. Looking into [OpenCode](https://opencode.ai/) in the future but work pays for Cursor, so I've been using that alongside Neovim for the time being.
+No direct AI integration in this config. I prefer to run a separate application for agent runs (Opencode, Claude Code, Cursor, etc.).
 
 # 👨‍💻 Setup
 
-### 📦 Dependencies
+### 📦 Dependencies & Prerequisites
 
 I use [mise](https://github.com/jdx/mise) for cli dependencies whenever possible.
+
+#### Treesitter CLI
+
+This is now required to be installed separately per [nvim-treesitter requirements](https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#requirements).
 
 #### Nodejs
 
