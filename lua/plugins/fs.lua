@@ -4,7 +4,6 @@ return {
         dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function()
             local oil = require("oil")
-            local util = require("oil.util")
 
             oil.setup({
                 default_file_explorer = true,
@@ -91,7 +90,7 @@ return {
             vim.keymap.set("n", "<leader>e", function()
                 OpenOilCustom("./")
             end, { silent = true })
-            vim.keymap.set("n", "<leader>O", function()
+            vim.keymap.set("n", "<leader>o", function()
                 OpenOilCustom()
             end, { silent = true })
         end,
