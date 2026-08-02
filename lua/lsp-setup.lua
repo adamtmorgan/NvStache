@@ -13,6 +13,7 @@ vim.lsp.enable({
     "lua_ls",
     "ty",
     "kotlin_lsp",
+    "qmlls",
     "rnix",
     "sqlls",
     "taplo",

@@ -44,7 +44,7 @@ return {
             { name = "buf" }, -- gRPC/Protobuf
             { name = "glsl_analyzer" }, -- webgl
             { name = "wgsl-analyzer" }, -- webgpu
-            { name = "qmlls" }, -- QML (Qt)
+            -- QML: use system qmlls6 (qt6-declarative), not Mason's nightly build
 
             -- Formatting
             { name = "prettierd" }, -- Formatting for various common filetypes
