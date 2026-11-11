@@ -43,46 +43,46 @@ return {
 
     {
         "petertriho/nvim-scrollbar",
+        branch = "refactor/v2",
         event = { "BufReadPre", "BufNewFile" },
-        dependencies = { "lewis6991/gitsigns.nvim", "kevinhwang91/nvim-hlslens" },
+        dependencies = { "lewis6991/gitsigns.nvim" },
         config = function()
             require("scrollbar").setup({
-                excluded_buftypes = {
-                    "terminal",
+                exclude = {
+                    buftypes = {
+                        terminal = true,
+                    },
+                    filetypes = {
+                        dropbar_menu = true,
+                        dropbar_menu_fzf = true,
+                        DressingInput = true,
+                        cmp_docs = true,
+                        cmp_menu = true,
+                        noice = true,
+                        prompt = true,
+                        TelescopePrompt = true,
+                        ["blink-cmp"] = true,
+                        ["blink-cmp-menu"] = true,
+                        ["blink-cmp-signature"] = true,
+                        ["blink-cmp-documentation"] = true,
+                    },
                 },
-                excluded_filetypes = {
-                    "dropbar_menu",
-                    "dropbar_menu_fzf",
-                    "DressingInput",
-                    "cmp_docs",
-                    "cmp_menu",
-                    "noice",
-                    "prompt",
-                    "TelescopePrompt",
-                    "blink-cmp",
-                    "blink-cmp-menu",
-                    "blink-cmp-signature",
-                    "blink-cmp-documentation",
-                },
-                handlers = {
+                providers = {
                     cursor = true,
                     diagnostic = true,
                     gitsigns = true,
-                    handle = true,
                     search = true,
-                },
-                handle = {
-                    color = "#56576f",
                 },
                 marks = {
                     Cursor = {
                         text = "◆",
                         priority = 0,
-                        gui = nil,
-                        color = nil,
-                        cterm = nil,
-                        color_nr = nil,
                         highlight = "Normal",
+                    },
+                },
+                scrollbar = {
+                    thumb = {
+                        highlight = { bg = "#56576f" },
                     },
                 },
             })
@@ -92,9 +92,7 @@ return {
     {
         "kevinhwang91/nvim-hlslens",
         event = { "BufReadPre", "BufNewFile" },
-        config = function()
-            require("scrollbar.handlers.search").setup({})
-        end,
+        opts = {},
     },
 
     {
